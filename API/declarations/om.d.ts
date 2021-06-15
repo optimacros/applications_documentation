@@ -28,8 +28,6 @@ export interface Cell {
     isEditable(): boolean;
 }
 
-// просто так строчка для теста. потом удалю
-
 export interface Cells {
     all(): Cell[];
 
