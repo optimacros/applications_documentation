@@ -339,7 +339,12 @@ export interface Multicubes {
     multicubesTab(): MulticubesTab;
 }
 
+export interface TimePeriodSubsetTab extends Tab {
+}
+
 export interface TimePeriodTab extends Tab {
+
+    subsetsTab(): TimePeriodSubsetTab;
 }
 
 export interface TimeOptionsTab extends Tab {
@@ -358,8 +363,12 @@ export interface VersionsTab extends Tab {
     copyVersion(from: string, to: string): any;
 }
 
+export interface VersionSubsetsTab extends Tab {
+}
+
 export interface Versions {
-    versionsTab(): VersionsTab
+    versionsTab(): VersionsTab;
+    versionSubsetsTab(): VersionSubsetsTab;
 }
 
 export interface CSVParams {
