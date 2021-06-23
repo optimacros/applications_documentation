@@ -21,6 +21,8 @@ interface WebHandlerResponse {
 }
 
 interface OM {
+    // при создании соединения с помощью connectAsync отключаются и выдают ошибку
+    // все синхронные методы всех интерфейсов API, их асинхронные пары продолжают работать
 	connectAsync(https: string, wss: string, token: string. modelId: string, env: Object): Promise<OM>;
 	connect(https: string, wss: string, token: string. modelId: string, env: Object): OM;
 	script(relativePathOrId: string, params: {}): EventPromise;
