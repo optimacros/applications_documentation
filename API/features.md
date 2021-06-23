@@ -27,6 +27,7 @@ interface OM {
 	connect(https: string, wss: string, token: string. modelId: string, env: Object): OM;
 	script(relativePathOrId: string, params: {}): EventPromise;
 	status(...args: any[]): OM;
+    // из функций callback web-обработчиков нельзя использовать OM.connect, можно только OM.connectAsync
     web(eventName, callback: (args: {}) => string | WebHandlerResponse);
 }
 ```
