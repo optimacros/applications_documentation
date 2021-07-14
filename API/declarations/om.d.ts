@@ -429,11 +429,16 @@ export interface ListImporter extends Importer {
 
 export interface ListTab extends Tab {
     listSubsetTab(): ListSubsetsTab;
+    propertiesTab(): ListPropertiesTab;
 
     importer(): ListImporter;
 }
 
 export interface ListSubsetsTab extends Tab {
+    listTab(): ListTab;
+}
+
+export interface ListPropertiesTab extends Tab {
     listTab(): ListTab;
 }
 
