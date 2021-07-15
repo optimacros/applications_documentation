@@ -428,7 +428,8 @@ export interface ListImporter extends Importer {
 }
 
 export interface ListTab extends Tab {
-    listSubsetTab(): ListSubsetsTab;
+    listSubsetTab(): ListSubsetsTab; //OBSOLETE in favor of subsetTab()
+    subsetTab(): ListSubsetsTab;
     propertiesTab(): ListPropertiesTab;
     accessModelTab(): ListAccessModelTab;
 
@@ -441,7 +442,10 @@ export interface ListChildTab extends Tab {
 
 export type ListSubsetsTab = ListChildTab;
 export type ListPropertiesTab = ListChildTab;
-export type ListAccessModelTab = ListChildTab;
+
+export interface ListAccessModelTab extends ListChildTab {
+    isEnabled(): boolean;
+}
 
 export interface ListsTab extends Tab {
     open(name: string): ListTab | undefined;
