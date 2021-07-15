@@ -430,17 +430,18 @@ export interface ListImporter extends Importer {
 export interface ListTab extends Tab {
     listSubsetTab(): ListSubsetsTab;
     propertiesTab(): ListPropertiesTab;
+    accessModelTab(): ListAccessModelTab;
 
     importer(): ListImporter;
 }
 
-export interface ListSubsetsTab extends Tab {
+export interface ListChildTab extends Tab {
     listTab(): ListTab;
 }
 
-export interface ListPropertiesTab extends Tab {
-    listTab(): ListTab;
-}
+export type ListSubsetsTab = ListChildTab;
+export type ListPropertiesTab = ListChildTab;
+export type ListAccessModelTab = ListChildTab;
 
 export interface ListsTab extends Tab {
     open(name: string): ListTab | undefined;
