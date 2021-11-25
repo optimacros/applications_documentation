@@ -424,6 +424,10 @@ max: Object
 
 ### Интерфейс Types<a name="Types"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface Types {
 	ObjectId(id?: string): Types.ObjectId;
 	regex(pattern: string, flags?: string): Object;

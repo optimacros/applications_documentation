@@ -44,6 +44,10 @@ save(name: string, charset?: string): string
 
 ### Интерфейс CsvReader<a name="CsvReader"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface CsvReader {
 	params(): CSVParams;
 	changeFileCharset(charset: string): CsvReader;
@@ -77,6 +81,10 @@ generator(): string[][]
 
 ### Интерфейс BaseConverter<a name="BaseConverter"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface BaseConverter {
 	setSource(path: string): this;
 	convert(): string;
@@ -102,6 +110,10 @@ convert(): string
 
 ### Интерфейс ExcelToCsvConverter<a name="ExcelToCsvConverter"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface ExcelToCsvConverter extends BaseConverter {
 	setSheetIdentifier(identifier: string | number): ExcelToCsvConverter;
 }
@@ -118,6 +130,10 @@ setSheetIdentifier(identifier: string | number): ExcelToCsvConverter
 &nbsp;
 
 ### Интерфейс ConverterManager<a name="ConverterManager"></a>
+```ts
+`Не реализовано`
+```
+
 ```ts
 interface ConverterManager {
 	excelToCsv(): ExcelToCsvConverter;

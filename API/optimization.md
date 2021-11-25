@@ -19,6 +19,10 @@ optimizationRequestsTab(): OptimizationRequestTab
 
 ### Интерфейс OptimizationRequestTab<a name="OptimizationRequestTab"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface OptimizationRequestTab extends Tab {
 	run(name: string): { success: boolean, error: undefined | string };
 }

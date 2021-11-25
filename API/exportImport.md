@@ -358,6 +358,10 @@ import(): Importer
 
 ### Интерфейс StorageImporter<a name="StorageImporter"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface StorageImporter extends Importer {
 	setMaxFailures(maxFailures: number): StorageImporter;
 	setIsCompressed(isCompressed: boolean): StorageImporter;

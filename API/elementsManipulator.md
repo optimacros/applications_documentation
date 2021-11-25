@@ -98,6 +98,10 @@ delete(): ElementsDeleter
 
 ### Интерфейс ElementsReorder<a name="ElementsReorder"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface ElementsReorder {
 	append(longId: number, relativeLongId?: number, position?: string): ElementsReorder;
 	reorder(): ElementsReorder;

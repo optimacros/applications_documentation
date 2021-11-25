@@ -8,6 +8,10 @@
 
 ### Интерфейс CubeCell<a name="CubeCell"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface CubeCell {
 	definitions(): number[];
 	getDimensionIds(): number[];

@@ -472,6 +472,10 @@ getStats(): Object
 
 ### Интерфейс SqlBulkCopyBuilder<a name="SqlBulkCopyBuilder"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface SqlBulkCopyBuilder {
 	setServerName(value: string): SqlBulkCopyBuilder;
 	setPort(value: number): SqlBulkCopyBuilder;
@@ -753,6 +757,10 @@ format(path: string, xml: boolean): SqlBulkCopyResult
 &nbsp;
 
 ### Интерфейс SqlBulkCopyResult<a name="SqlBulkCopyResult"></a>
+```ts
+`Не реализовано`
+```
+
 ```ts
 interface SqlBulkCopyResult {
 	hasErrors(): boolean;

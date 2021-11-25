@@ -424,6 +424,10 @@ getProtocols(): string[]
 
 ### Интерфейс HttpAuth<a name="HttpAuth"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface HttpAuth {
 	setUser(user: string): HttpAuth;
 	setPassword(password: string): HttpAuth;
@@ -464,6 +468,10 @@ setStatus(status: boolean): HttpAuth
 &nbsp;
 
 ### Интерфейс Cert<a name="Cert"></a>
+```ts
+`Не реализовано`
+```
+
 ```ts
 interface Cert {
 	setPath(path: string): Cert;

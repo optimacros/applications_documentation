@@ -21,6 +21,10 @@ smtp(channel: string): Smtp.Builder
 
 ### Интерфейс Smtp.Builder<a name="Smtp.Builder"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface Smtp.Builder {
 	setTo(to: string | string[]): this;
 	setSubject(subject: string): this;
@@ -69,6 +73,10 @@ send(): Smtp.Result
 &nbsp;
 
 ### Интерфейс Smtp.Result<a name="Smtp.Result"></a>
+```ts
+`Не реализовано`
+```
+
 ```ts
 interface Smtp.Result {
 }

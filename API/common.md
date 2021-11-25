@@ -291,6 +291,10 @@ exportObfuscationState(): ExportObfuscationState
 
 ### Интерфейс UserInfo<a name="UserInfo"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface UserInfo {
 	getEntity(): EntityInfo;
 	getEmail(): string;
@@ -398,6 +402,10 @@ getCollection(longId: number[]): EntityInfo[]
 &nbsp;
 
 ### Интерфейс CopyData<a name="CopyData"></a>
+```ts
+`Не реализовано`
+```
+
 ```ts
 interface CopyData {
 	setSourceLongId(longId: number): CopyData;

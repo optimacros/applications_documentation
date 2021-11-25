@@ -5,6 +5,10 @@ WinAgent – сервис создания отчётов MS Word и Excel, ра
 Все интерфейсы этого раздела находятся в пространстве имён `WinAgent`.
 
 ### Интерфейс WinAgentBuilder<a name="WinAgentBuilder"></a>
+```ts
+`Не реализовано`
+```
+
 ```js
 interface WinAgentBuilder {
 	setCommandUrl(url: string): this;
@@ -72,6 +76,10 @@ makeRunMacrosAction(): RunMacroAction
 
 ### Интерфейс BaseAction<a name="BaseAction"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface BaseAction {
 	run(): BaseActionResult;
 }
@@ -88,6 +96,10 @@ run(): BaseActionResult
 &nbsp;
 
 ### Интерфейс RunMacroAction<a name="RunMacroAction"></a>
+```ts
+`Не реализовано`
+```
+
 ```еs
 interface RunMacroAction extends BaseAction {
 	setMacroName(macroName: string): this;
@@ -130,6 +142,10 @@ run(): RunMacroActionResult
 
 ### Интерфейс BaseActionResult<a name="BaseActionResult"></a>
 ```ts
+`Не реализовано`
+```
+
+```ts
 interface BaseActionResult {
 
 }
@@ -139,6 +155,10 @@ interface BaseActionResult {
 &nbsp;
 
 ### Интерфейс RunMacroActionResult<a name="RunMacroActionResult"></a>
+```ts
+`Не реализовано`
+```
+
 ```ts
 interface RunMacroActionResult extends BaseActionResult {
 	getFilePaths(): string[];
