@@ -16,6 +16,10 @@ interface Environment {
 ```js
 load(name: string): Environment
 ```
+```ts
+`Не реализовано`
+```
+
 Загружает значения переменных окружения из нуль-мерного мультикуба `name`. Возвращает `this`.
 
 &nbsp;
@@ -23,6 +27,10 @@ load(name: string): Environment
 ```js
 loadFromMulticube(name: string, view?: string | null): Environment
 ```
+```ts
+`Не реализовано`
+```
+
 Загружает данные в переменную окружения `view` (или `name`, если `view` не задано) из представления `view` мультикуба `name`. Если `view` не задано, используется представление по умолчанию.   Возвращает `this`.
 
 Построение объектов переменных происходит по следующему принципу: ключом первого уровня является первый заголовок строки, ключами второго и нескольких последующих – второй, третий и последующие заголовки строки (если они есть), ключами следующих уровней являются заголовки столбцов. Ключи естественно соответствуют расположению строк и столбцов в интерфейсе Optimacros и, кроме того, располагаются в порядке их перечисления функциями [`GridDefinitionInfo.getRowDimensions()`](./views.md#GridDefinitionInfo.getRowDimensions) и [`GridDefinitionInfo.getColumnDimensions()`](./views.md#GridDefinitionInfo.getColumnDimensions). Значениями являются данные в ячейках.
