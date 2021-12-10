@@ -41,6 +41,10 @@ modelInfo(): ModelInfo
 ```js
 userInfo(): UserInfo
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает ссылку на интерфейс [`UserInfo`](#UserInfo).
 
 &nbsp;
@@ -48,6 +52,10 @@ userInfo(): UserInfo
 ```js
 resultInfo(): ResultInfo
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает ссылку на интерфейс [`ResultInfo`](#ResultInfo).
 
 &nbsp;
@@ -55,6 +63,10 @@ resultInfo(): ResultInfo
 ```js
 entitiesInfo(): EntitiesInfo
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает ссылку на интерфейс [`EntitiesInfo`](#EntitiesInfo).
 
 &nbsp;
@@ -62,6 +74,10 @@ entitiesInfo(): EntitiesInfo
 ```js
 copyData(): CopyData
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает ссылку на интерфейс [`CopyData`](#CopyData).
 
 &nbsp;
