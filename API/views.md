@@ -126,6 +126,9 @@ interface MulticubeTab extends Tab {
 ```js
 cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```
+```ts
+`Не реализовано`
+```
 
 Очищает всё содержимое кубов `cubesIdentifiers` или весь мультикуб при вызове без параметров. Возвращает `this`.
 
@@ -134,6 +137,10 @@ cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```js
 cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает интерфейс [`CubeCellSelectorBuilder`](./cubeCell.md#CubeCellSelectorBuilder) выборки клеток для куба `identifier`.
 
 &nbsp;
@@ -287,6 +294,10 @@ exporter(): Exporter
 ```js
 storageExporter(): StorageExporter
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает ссылку на интерфейс [`StorageExporter`](./exportImport.md#StorageExporter) быстрого экспорта таблицы.
 
 &nbsp;
@@ -719,6 +730,10 @@ rows(): LabelsGroup | undefined
 ```js
 dropDown(): Labels
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает набор заголовков строк [`Labels`](#Labels) выпадающего списка, который в интерфейсе пользователя Optimacros можно получить кликом по треугольнику внутри ячейки. Эта функция считается неэффективной, так как выгружает справочник целиком. Лучше зайти в нужный справочник и итерироваться по нему.
 
 &nbsp;
@@ -726,6 +741,10 @@ dropDown(): Labels
 ```js
 getFormatType(): string
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает строку с форматом клетки. Возможные значения: `'NUMBER'`, `'BOOLEAN'`, 
 `'ENTITY'`, `'TIME_ENTITY'`, `'LINE_ITEM_SUBSET'`, `'VERSION'`, `'TEXT'`, `'DATE'`, `'NONE'`.
 
@@ -764,6 +783,10 @@ first(): Cell
 ```js
 setValue(value: number | string | null)
 ```
+```ts
+`Не реализовано`
+```
+
 Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
 
 &nbsp;
