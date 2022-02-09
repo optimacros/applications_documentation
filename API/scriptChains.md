@@ -134,7 +134,7 @@ interface ResultMacrosAction extends ResultBaseAction {
 	environmentInfo(): EnvironmentInfo;
 }
 ```
-Интерфейс действия запуска скрипта. Интерфейс наследуется от [`ResultBaseAction`](#ResultBaseAction).
+Интерфейс действия запуска скрипта. Наследуется от [`ResultBaseAction`](#ResultBaseAction).
 
 &nbsp;
 
@@ -176,7 +176,7 @@ interface ResultOpenAction extends ResultBaseAction {
 	buttonInfo(): ButtonInfo;
 }
 ```
-Интерфейс действия открытия некоторого объекта Optimacros. Интерфейс наследуется от [`ResultBaseAction`](#ResultBaseAction).
+Интерфейс действия открытия некоторого объекта Optimacros. Наследуется от [`ResultBaseAction`](#ResultBaseAction).
 
 &nbsp;
 
