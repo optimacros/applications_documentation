@@ -215,6 +215,10 @@ interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 ```js
 setDriver(name: string | null): MicrosoftSqlConnectorBuilder
 ```
+```ts
+`Не реализовано`
+```
+
 Устанавливает драйвер взаимодействия с MS SQL Server. Допустимые значения: `DBLIB`, `ODBC`, `SQLSRV`. Значение по умолчанию: `DBLIB`. Возвращает `this`.
 
 Для подключения к серверу с помощью `DBLIB` в случае аутентификации по протоколу [NTLMv2](https://ru.wikipedia.org/wiki/NTLMv2) необходимо настроить SQL-соединение в манифесте администратора воркспейса. Если это невозможно, рекомендуется использовать драйвер `SQLSRV`.
@@ -228,6 +232,10 @@ setDriver(name: string | null): MicrosoftSqlConnectorBuilder
 ```js
 loadBulkCopyBuilder(): SqlBulkCopyBuilder
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает ссылку на интерфейс [`SqlBulkCopyBuilder`](#SqlBulkCopyBuilder) импорта/экспорта через файл CSV.
 
 &nbsp;

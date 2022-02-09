@@ -89,6 +89,10 @@ stringify(): string
 ```js
 setEncodingType(type: string): UrlParams
 ```
+```ts
+`Не реализовано`
+```
+
 Устанавливает стандарт кодировки параметров URL. Допустимые значения: `NONE`, `RFC1738`, `RFC3986`. Значение по умолчанию: `RFC1738`. Возвращает `this`.
 
 &nbsp;
@@ -96,6 +100,10 @@ setEncodingType(type: string): UrlParams
 ```js
 getEncodingType(): string
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает стандарт кодировки параметров URL.
 
 &nbsp;

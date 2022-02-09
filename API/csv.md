@@ -173,6 +173,10 @@ csvWriter(): CsvWriter
 ```js
 csvReader(path: PathObj): CsvReader
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает ссылку на [`CsvReader`](#CsvReader) для чтения файла `path` в формате [`PathObj`](./fs.md#PathObj).
 
 &nbsp;
@@ -180,6 +184,10 @@ csvReader(path: PathObj): CsvReader
 ```js
 converterManager(): ConverterManager
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает ссылку на [`ConverterManager`](#ConverterManager).
 
 &nbsp;

@@ -31,6 +31,10 @@ local(): Filesystem
 ```js
 sharedFolder(id: string): Filesystem
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает интерфейс [`Filesystem`](#Filesystem) доступа к shared folder – папке на сервере, которая была добавлена администратором при установке Workspace через manifest внутрь контейнера workspace.
 
 &nbsp; 
@@ -176,6 +180,10 @@ download(from: string, to: string): boolean
 ```js
 makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string
 ```
+```ts
+`Не реализовано`
+```
+
 Функция доступа *только* для [`локальной`](#local) файловой системы. Регистрирует уже существующий файл `path` в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry) под именем `{name}.{extension}`. Аргумент `copy` определяет, копировать или перемещать файл `path` в глобальный реестр; по умолчанию: `true`. Возвращает хэш файла. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
 
 &nbsp;
@@ -436,6 +444,10 @@ getPassive(): boolean
 ```js
 setIgnorePassiveAddress(ignore: boolean) : FTPAdapter
 ```
+```ts
+`Не реализовано`
+```
+
 Устанавливает режим игнорирования IP-адреса, полученного от FTP-сервера в пассивном режиме. По умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
@@ -444,6 +456,10 @@ setIgnorePassiveAddress(ignore: boolean) : FTPAdapter
 ```js
 getIgnorePassiveAddress(ignore: boolean) : boolean
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает признак игнорирования IP-адреса, полученного от FTP-сервера в пассивном режиме.
 
 &nbsp;
@@ -479,6 +495,10 @@ getTimeout(): number
 ```js
 setUseListOptions(useListOptions: boolean): FTPAdapter
 ```
+```ts
+`Не реализовано`
+```
+
 Устанавливает флаги `-aln` у FTP-команды `LIST`. FTP может быть настроен по особенному, поэтому иногда требуется передать `false`. По умолчанию: `true`. Возвращает `this`.
 
 &nbsp;
@@ -486,6 +506,10 @@ setUseListOptions(useListOptions: boolean): FTPAdapter
 ```js
 getUseListOptions(): boolean
 ```
+```ts
+`Не реализовано`
+```
+
 Возвращает признак использованися флагов `-aln` у FTP-команды `LIST`.
 
 &nbsp;

@@ -39,6 +39,10 @@ setEncoding(encoding: string): Exporter
 ```js
 setFormat(format: string): Exporter
 ```
+```ts
+`Не реализовано`
+```
+
 Устанавливает формат экспортируемого файла. Допустимые значения: `'csv', 'xls', 'xlsx', 'txt'`. По умолчанию: `'xlsx'`.
 
 &nbsp;
@@ -207,6 +211,10 @@ interface ExportResult {
 ```js
 mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
 ```
+```ts
+`Не реализовано`
+```
+
 Если экспорт был в формате `'xls'` или `'xlsx'`, создаёт в файле Excel `toFile` новый лист `toSheet` и помещает в него результат экспорта.  Данные берутся с листа `fromSheet`, по умолчанию – с первого листа. Возращает `this`.
 
 &nbsp;
@@ -221,6 +229,10 @@ getHash(): string | null
 ```js
 copyToLocal(path: string): ExportResult
 ```
+```ts
+`Не реализовано`
+```
+
 Копирует экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir). Возвращает `this`.
 
 &nbsp;
@@ -228,6 +240,10 @@ copyToLocal(path: string): ExportResult
 ```js
 moveToLocal(path: string): ExportResult
 ```
+```ts
+`Не реализовано`
+```
+
 Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) и убирает его из [`глобального реестра`](../appendix/glossary.md#globalFileRegistry). Возвращает `this`.
 
 &nbsp;
