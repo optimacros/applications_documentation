@@ -41,6 +41,4 @@ connect(https: string, wss: string, userToken: string, modelId: string, env: Obj
 
 &nbsp;
 
-[API Reference](API.md)
-
 [Оглавление](../README.md)
