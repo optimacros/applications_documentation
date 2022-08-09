@@ -1,10 +1,39 @@
 # Манипуляция элементами
 
-### Интерфейс BaseElementsCreator<a name="BaseElementsCreator"></a>
+### Интерфейс ElementsCreator<a name="ElementsCreator"></a>
+```ts
+`Не реализовано`
+```
+
+```ts
+interface ElementsCreator {
+	numeric(): NumericElementsCreator;
+	named(): NamedElementsCreator;
+}
+```
+Абстрактный интерфейс, предоставляющий конкретные интерфейсы с различными возможностями добавления элементов.
+
+&nbsp;
+
+```js
+numeric(): NumericElementsCreator
+```
+Возращает ссылку на [`NumericElementsCreator`](#NumericElementsCreator).
+
+&nbsp;
+
+```js
+named(): NamedElementsCreator
+```
+Возращает ссылку на [`NamedElementsCreator`](#NamedElementsCreator).
 
 &nbsp;
 
 ### Интерфейс NumericElementsCreator<a name="NumericElementsCreator"></a>
+```ts
+`Не реализовано`
+```
+
 ```ts
 interface NumericElementsCreator {
 	setCount(count: number): NumericElementsCreator;

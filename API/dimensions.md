@@ -21,6 +21,9 @@ listsTab(): ListsTab
 ```js
 syncList(): SyncListBuilder
 ```
+```ts
+`Не реализовано`
+```
 Возвращает интерфейс [`SyncListBuilder`](./sync.md#SyncListBuilder) синхронизации справочников.
 
 &nbsp;
@@ -45,7 +48,9 @@ open(name: string): ListTab
 ### Интерфейс ListTab<a name="ListTab"></a>
 ```ts
 interface ListTab extends Tab {
-	listSubsetTab(): ListSubsetsTab;
+	subsetTab(): ListSubsetsTab;
+	propertiesTab(): ListPropertiesTab;
+	accessModelTab(): ListAccessModelTab;
 	importer(): ListImporter;
 }
 ```
@@ -54,9 +59,21 @@ interface ListTab extends Tab {
 &nbsp;
 
 ```js
-listSubsetTab(): ListSubsetsTab
+subsetTab(): ListSubsetsTab
 ```
-Возвращает ссылку на интерфейс [`ListSubsetsTab`](#ListSubsetsTab). В интерфейсе Optimacros аналогично открытию вкладки `Выборки` справочника `name`.
+Возвращает интерфейс [`ListSubsetsTab`](#ListChildTab) доступа к вкладке выборок справочника.
+
+&nbsp;
+```js
+propertiesTab(): ListPropertiesTab
+```
+Возвращает интерфейс [`ListPropertiesTab`](#ListChildTab) доступа к вкладке свойств справочника.
+
+&nbsp;
+```js
+accessModelTab(): ListAccessModelTab
+```
+Возвращает интерфейс [`ListAccessModelTab`](#ListAccessModelTab) доступа к вкладке разграничения прав доступа по элементам справочника (МДП).
 
 &nbsp;
 
@@ -67,20 +84,40 @@ importer(): ListImporter
 
 &nbsp;
 
-### Интерфейс ListSubsetsTab<a name="ListSubsetsTab"></a>
+### Интерфейс ListSubsetsTab, ListPropertiesTab (ListChildTab)<a name="ListChildTab"></a>
 ```ts
-interface ListSubsetsTab extends Tab {
+interface ListChildTab extends Tab {
 	listTab(): ListTab;
 }
+
+interface ListSubsetsTab = ListChildTab;
+interface ListPropertiesTab = ListChildTab;
 ```
-Вкладка `Выборки` справочника. Интерфейс наследуется от [`Tab`](./views.md#Tab). В отличие от аналогичной вкладки в интерфейсе Optimacros, её [`Grid`](./views.md#Grid) не имеет ни измерений на столбцах, ни ячеек; доступ можно получить только к заголовкам строк, являющихся названиями выборок справочника.
+Интерфейс доступа к дочерним вкладкам справочника. Интерфейс наследуется от [`Tab`](./views.md#Tab).
 
 &nbsp;
 
 ```js
 listTab(): ListTab
 ```
-Возвращает интерфейс [`ListTab`](#ListTab) вкладки того справочника, чьи выборки представляет собой `this`.
+Возвращает интерфейс [`ListTab`](#ListTab) вкладки того справочника, чья дочерняя вкладка представляет собой `this`.
+
+&nbsp;
+
+### Интерфейс ListAccessModelTab<a name="ListAccessModelTab"></a>
+```ts
+interface ListAccessModelTab extends ListChildTab {
+	isEnabled(): boolean;
+}
+```
+Интерфейс доступа к вкладке `МДП` справочника. Интерфейс наследуется от [`ListChildTab`](#ListChildTab).
+
+&nbsp;
+
+```js
+isEnabled(): boolean
+```
+Возвращает признак того, что доступ по МДП включен и вкладка доступна.
 
 &nbsp;
 

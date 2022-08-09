@@ -21,6 +21,9 @@ multicubesTab(): MulticubesTab
 ```js
 syncMulticube(): SyncMulticubeBuilder
 ```
+```ts
+`Не реализовано`
+```
 Возвращает интерфейс [`SyncMulticubeBuilder`](./sync.md#SyncMulticubeBuilder) синхронизации мультикубов.
 
 &nbsp;
@@ -71,12 +74,15 @@ open(name: string): Tab
 ```js
 pivot(viewName?: string): Pivot
 ```
-Возвращает ссылку на объект [`Pivot`](#Pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах 1.0. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](../appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
+Возвращает ссылку на объект [`Pivot`](#Pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](../appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
 
 &nbsp;
 
 ```js
 elementsCreator(): ElementsCreator
+```
+```ts
+`Не реализовано`
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#ElementsCreator) для добавления элементов.
 
@@ -91,6 +97,9 @@ elementsDeleter(): ElementsDeleter
 
 ```js
 elementsReorder(): ElementsReorder
+```
+```ts
+`Не реализовано`
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#ElementsReorder) для тасования элементов.
 
@@ -294,10 +303,6 @@ exporter(): Exporter
 ```js
 storageExporter(): StorageExporter
 ```
-```ts
-`Не реализовано`
-```
-
 Возвращает ссылку на интерфейс [`StorageExporter`](./exportImport.md#StorageExporter) быстрого экспорта таблицы.
 
 &nbsp;
@@ -536,14 +541,14 @@ alias(): string | null
 
 Если `this` является сущностью элемента справочника, в настройках которого задано некоторое свойство в качестве отображаемого имени (опция `Отображение`), и для этой сущности задано значение этого свойства, то возвращает значение этого свойства.
 
-Иначе возвращает [`name()`](#Label.name).
+Иначе возвращает `null`.
 
 &nbsp;
 
 ```js
 label(): string | null
 ```
-То же, что и [`alias()`](#alias).
+То же, что и [`alias()`](#alias). Если отображаемое имя не задано, возвращает [`name()`](#Label.name).
 
 &nbsp;
 
@@ -658,12 +663,14 @@ interface Cell {
 	setValue(value: number | string | null | boolean);
 	getValue(): number | string | null | boolean;
 	getNativeValue(): number | string | null | boolean;
+	getTextValue(): number | string | null;
 	getContextValue(): string | null;
 	definitions(): number[];
 	columns(): LabelsGroup | undefined;
 	rows(): LabelsGroup | undefined;
 	dropDown(): Labels;
 	getFormatType(): string;
+	isEditable(): boolean;
 }
 ```
 Интерфейс, представляющий клетку таблицы.
@@ -693,6 +700,14 @@ getNativeValue(): number | string | null | boolean;
 Возвращает самородное значение клетки, зависящее от формата. Если клетка имеет формат справочника, то возвращается [`longId`](#longId). 
 
 В противном случае возвращает то же, что и [`getValue()`](#Cell.getValue).
+
+&nbsp;
+
+<a name="Cell.getTextValue"></a>
+```js
+getTextValue(): number | string | null;
+```
+Возвращает значение клетки, которое видит пользователь. Работает только для клеток формата `Справочник` и `Дата`, в остальных случаях возвращает `null`.
 
 &nbsp;
 
@@ -747,6 +762,13 @@ getFormatType(): string
 
 Возвращает строку с форматом клетки. Возможные значения: `'NUMBER'`, `'BOOLEAN'`, 
 `'ENTITY'`, `'TIME_ENTITY'`, `'LINE_ITEM_SUBSET'`, `'VERSION'`, `'TEXT'`, `'DATE'`, `'NONE'`.
+
+&nbsp;
+
+```js
+isEditable(): boolean
+```
+Возвращает признак возможности редактирования ячейки пользователем.
 
 &nbsp;
 
