@@ -227,7 +227,7 @@ interface Times {
 	timePeriodTab(identifier: string | number): TimePeriodTab;
 }
 ```
-Интерфейс для получения ссылки на [`TimeOptionsTab`](#TimeOptionsTab).
+Интерфейс для получения доступа к вкладкам измерения `Время`.
 
 &nbsp;
 
@@ -241,7 +241,7 @@ optionsTab(): TimeOptionsTab
 ```js
 timePeriodTab(identifier: string | number): TimePeriodTab
 ```
-Возвращает ссылку на вкладку [`TimePeriodTab`](#TimePeriodTab) периодов времени. В интерфейсе Optimacros аналогично открытию вкладки `Время` -> `Период времени`. Период времени передается параметром `identifier` в формате идентификатора вкладки или строки: 'Days', 'Weeks', 'Periods', 'Months', 'Quarters', 'Half Years', 'Years'.
+Возвращает ссылку на вкладку [`TimePeriodTab`](#TimePeriodTab) периодов времени. В интерфейсе Optimacros аналогично открытию вкладки `Время` -> `Период времени`. Период времени передается параметром `identifier` в формате идентификатора вкладки или строки: `Days`, `Weeks`, `Periods`, `Months`, `Quarters`, `Half Years`, `Years`.
 
 &nbsp;
 
