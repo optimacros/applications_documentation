@@ -52,9 +52,6 @@ userInfo(): UserInfo
 ```js
 resultInfo(): ResultInfo
 ```
-```ts
-`Не реализовано`
-```
 
 Возвращает ссылку на интерфейс [`ResultInfo`](#ResultInfo).
 
@@ -374,6 +371,9 @@ interface ResultInfo {
 ```js
 addFileHash(hash: string): ResultInfo
 ```
+```ts
+`Не реализовано`
+```
 Добавляет к ответу на запрос скрипта хэш `hash` файла, ранее зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry). Для пользователя это приведёт к тому, что файл будет скачан в браузере. Возвращает `this`.
 
 &nbsp;
@@ -381,12 +381,18 @@ addFileHash(hash: string): ResultInfo
 ```js
 actionsInfo(): ResultActionsInfo
 ```
+```ts
+`Не реализовано`
+```
 Возвращает интерфейс [`ResultActionsInfo`](./scriptChains.md#ResultActionsInfo) создания действий, которые можно автомагически осуществить после исполнения текущего скрипта.
 
 &nbsp;
 
 ```js
 setProperty(name: string, value: any): ResultInfo
+```
+```ts
+`Не реализовано`
 ```
 Устанавливает свойству `name` значение `value` в HTTP-ответе на запрос о запуске скрипта приложением-клиентом (например, web-интерфейсом Optimacros). Возвращает `this`.
 

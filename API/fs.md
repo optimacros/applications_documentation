@@ -230,6 +230,9 @@ path: string
 ```js
 visibility: string
 ```
+```ts
+`Не реализовано`
+```
 Доступность объекта: `private` или `public`.
 
 &nbsp;

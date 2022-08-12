@@ -39,10 +39,6 @@ setEncoding(encoding: string): Exporter
 ```js
 setFormat(format: string): Exporter
 ```
-```ts
-`Не реализовано`
-```
-
 Устанавливает формат экспортируемого файла. Допустимые значения: `'csv', 'xls', 'xlsx', 'txt'`. По умолчанию: `'xlsx'`.
 
 &nbsp;

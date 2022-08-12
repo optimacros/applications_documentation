@@ -497,7 +497,7 @@ columns(): Labels
 ```ts
 interface Label {
 	longId(): number;
-	name(): string;
+	name(): string | null;
 	code(): string | null;
 	alias(): string | null;
 	label(): string | null;

@@ -224,6 +224,7 @@ copyVersion(from: string, to: string): Object
 ```ts
 interface Times {
 	optionsTab(): TimeOptionsTab;
+	timePeriodTab(identifier: string | number): TimePeriodTab;
 }
 ```
 Интерфейс для получения ссылки на [`TimeOptionsTab`](#TimeOptionsTab).
@@ -237,14 +238,21 @@ optionsTab(): TimeOptionsTab
 
 &nbsp;
 
+```js
+timePeriodTab(identifier: string | number): TimePeriodTab
+```
+Возвращает ссылку на вкладку [`TimePeriodTab`](#TimePeriodTab) периодов времени. В интерфейсе Optimacros аналогично открытию вкладки `Время` -> `Период времени`. Период времени передается параметром `identifier` в формате идентификатора вкладки или строки: 'Days', 'Weeks', 'Periods', 'Months', 'Quarters', 'Half Years', 'Years'.
+
+&nbsp;
+
 ### Интерфейс TimeOptionsTab<a name="TimeOptionsTab"></a>
 ```ts
-interface TimeOptionsTab {
+interface TimeOptionsTab extends Tab{
 	resetForm(): Object;
 	applyForm(): Object;
 }
 ```
-Вкладка `Время`. Для работы не требует открытия. Является [`плоской таблицей`](../appendix/constraints.md#flatTable). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
+Вкладка `Время`. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия. Является [`плоской таблицей`](../appendix/constraints.md#flatTable). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
 
 &nbsp;
 
@@ -259,6 +267,32 @@ resetForm(): Object
 applyForm(): Object
 ```
 Применяет все изменения данных. Возвращает объект вида `{"success": true}`.
+
+&nbsp;
+
+### Интерфейс TimePeriodTab<a name="TimePeriodTab"></a>
+```ts
+interface TimePeriodTab extends Tab{
+	subsetsTab(): TimePeriodSubsetTab;
+}
+```
+Вкладка периодов времени. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия.
+
+&nbsp;
+
+```js
+subsetsTab(): TimePeriodSubsetTab
+```
+Возвращает ссылку на вкладку [`TimePeriodSubsetTab`](#TimePeriodSubsetTab) сабсетов времени.
+
+&nbsp;
+
+### Интерфейс TimePeriodSubsetTab<a name="TimePeriodSubsetTab"></a>
+```ts
+interface TimePeriodSubsetTab extends Tab{
+}
+```
+Вкладка сабсетов времени. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия.
 
 &nbsp;
 
