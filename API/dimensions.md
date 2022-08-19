@@ -193,21 +193,21 @@ interface Versions {
 	versionSubsetsTab(): VersionSubsetsTab;
 }
 ```
-Интерфейс для получения ссылки на [`VersionsTab`](#VersionsTab).
+Интерфейс для получения доступа к вкладкам измерения `Версии`.
 
 &nbsp;
 
 ```js
 versionsTab(): VersionsTab
 ```
-Возвращает ссылку на вкладку [`VersionsTab`](#VersionsTab) настроек версий. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
+Возвращает ссылку на вкладку [`VersionsTab`](#VersionsTab) настроек версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
 
 &nbsp;
 
 ```js
 versionSubsetsTab(): VersionSubsetsTab
 ```
-Возвращает ссылку на вкладку [`VersionSubsetsTab`](#VersionSubsetsTab) сабсетов версий. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия.
+Возвращает ссылку на вкладку [`VersionSubsetsTab`](#VersionSubsetsTab) сабсетов версий.
 
 &nbsp;
 
