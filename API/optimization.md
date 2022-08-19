@@ -13,6 +13,9 @@ interface Optimization {
 ```js
 optimizationRequestsTab(): OptimizationRequestTab
 ```
+```ts
+`Не реализовано`
+```
 Возвращает ссылку на интерфейс [`OptimizationRequestTab`](#OptimizationRequestTab). В интерфейсе Optimacros аналогично открытию вкладки `Оптимизация` -> `Оптимизационные запросы`.
 
 &nbsp;

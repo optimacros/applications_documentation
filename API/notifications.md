@@ -15,6 +15,9 @@ interface Manager {
 ```js
 smtp(channel: string): Smtp.Builder
 ```
+```ts
+`Не реализовано`
+```
 Возвращает интерфейс [`Smtp.Builder`](#Smtp.Builder) канала с именем `channel` уведомления пользователя по протоколу [`SMTP`](https://ru.wikipedia.org/wiki/SMTP).
 
 &nbsp;
