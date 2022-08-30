@@ -136,7 +136,7 @@ interface StringRequestBody {
 &nbsp;
 
 ```js
-	setBody(value: string): boolean
+setBody(value: string): boolean
 ```
 Устанавливает переданную строку в тело запроса. Возвращает `true`.
 
@@ -153,7 +153,7 @@ interface FormRequestBody {
 &nbsp;
 
 ```js
-	params(): Params
+params(): Params
 ```
 ```ts
 `Не реализовано`
