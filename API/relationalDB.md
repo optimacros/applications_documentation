@@ -186,6 +186,9 @@ load(): SqlConnection
 
 ### Интерфейс MysqlConnectorBuilder<a name="MysqlConnectorBuilder"></a>
 ```ts
+`Не реализовано`
+```
+```ts
 interface MysqlConnectorBuilder extends SqlConnectorBuilder {
 	loadImportBuilder(): MysqlImportBuilder;
 }

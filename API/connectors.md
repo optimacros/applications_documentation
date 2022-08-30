@@ -3,7 +3,7 @@
 ### Интерфейс Connectors<a name="Connectors"></a>
 ```ts
 interface Connectors {
-	mysql(): MysqlConnectorBuilder;
+	mysql(): SqlConnectorBuilder;
 	postgresql(): SqlConnectorBuilder;
 	sqlServer(): MicrosoftSqlConnectorBuilder;
 	oracle(): OracleConnectorBuilder;
@@ -17,9 +17,9 @@ interface Connectors {
 &nbsp;
 
 ```js
-mysql(): MysqlConnectorBuilder
+mysql(): SqlConnectorBuilder
 ```
-Возвращает коннектор [`MysqlConnectorBuilder`](./relationalDB.md#MysqlConnectorBuilder) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
+Возвращает коннектор [`SqlConnectorBuilder`](./relationalDB.md#SqlConnectorBuilder) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
 
 &nbsp;
 
