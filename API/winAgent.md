@@ -1,13 +1,12 @@
 # WinAgent
 
+***Интерфесы этого раздела не реализованы в Application Manager.***
+
 WinAgent – сервис создания отчётов MS Word и Excel, работающий по протоколу [`HTTP`](https://ru.wikipedia.org/wiki/HTTP). Для его работы на выделенной машине под управлением Windows должен быть установлен сам сервис и MS Office, включающий пакеты Word и Excel. WinAgent принимает на вход отчёты из Optimacros и файл MS Word или MS Excel с макросом (расширение `docm` или `xlsm`) и запускает макрос. Макрос должен заранее знать, где будут располагаться входящие файлы. Он будет автомагически располагать в шаблоне данные этих файлов в зависимости от задачи.
 
 Все интерфейсы этого раздела находятся в пространстве имён `WinAgent`.
 
 ### Интерфейс WinAgentBuilder<a name="WinAgentBuilder"></a>
-```ts
-`Не реализовано`
-```
 
 ```js
 interface WinAgentBuilder {
@@ -75,9 +74,6 @@ makeRunMacrosAction(): RunMacroAction
 &nbsp;
 
 ### Интерфейс BaseAction<a name="BaseAction"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface BaseAction {
@@ -96,11 +92,8 @@ run(): BaseActionResult
 &nbsp;
 
 ### Интерфейс RunMacroAction<a name="RunMacroAction"></a>
-```ts
-`Не реализовано`
-```
 
-```еs
+```ts
 interface RunMacroAction extends BaseAction {
 	setMacroName(macroName: string): this;
 	setMacroFilePath(macroFilePath: string): this;
@@ -141,9 +134,6 @@ run(): RunMacroActionResult
 &nbsp;
 
 ### Интерфейс BaseActionResult<a name="BaseActionResult"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface BaseActionResult {
@@ -155,9 +145,6 @@ interface BaseActionResult {
 &nbsp;
 
 ### Интерфейс RunMacroActionResult<a name="RunMacroActionResult"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface RunMacroActionResult extends BaseActionResult {

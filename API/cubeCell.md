@@ -36,7 +36,7 @@ getFormatInfo(): CubeFormatInfo
 ```js
 getDimensions(): EntityInfo[]
 ```
-***Не реализовано***
+***Не реализовано.***
 
 Возвращает массив [`EntityInfo`](./views.md#EntityInfo) измерений куба.
 
@@ -69,11 +69,7 @@ getDimensionEntity(): EntityInfo | null
 
 ## Получение клеток куба с помощью формулы<a name="select"></a>
 
-&nbsp;
-
 ***Интерфесы этого раздела не реализованы в Application Manager.***
-
-&nbsp;
 
 ### Интерфейс CubeCellSelectorBuilder<a name="CubeCellSelectorBuilder"></a>
 

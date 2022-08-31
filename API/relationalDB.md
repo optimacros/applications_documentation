@@ -185,9 +185,9 @@ load(): SqlConnection
 &nbsp;
 
 ### Интерфейс MysqlConnectorBuilder<a name="MysqlConnectorBuilder"></a>
-```ts
-`Не реализовано`
-```
+
+***Не реализовано.***
+
 ```ts
 interface MysqlConnectorBuilder extends SqlConnectorBuilder {
 	loadImportBuilder(): MysqlImportBuilder;
@@ -218,9 +218,7 @@ interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 ```js
 setDriver(name: string | null): MicrosoftSqlConnectorBuilder
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Устанавливает драйвер взаимодействия с MS SQL Server. Допустимые значения: `DBLIB`, `ODBC`, `SQLSRV`. Значение по умолчанию: `DBLIB`. Возвращает `this`.
 
@@ -235,9 +233,7 @@ setDriver(name: string | null): MicrosoftSqlConnectorBuilder
 ```js
 loadBulkCopyBuilder(): SqlBulkCopyBuilder
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает ссылку на интерфейс [`SqlBulkCopyBuilder`](#SqlBulkCopyBuilder) импорта/экспорта через файл CSV.
 
@@ -482,9 +478,8 @@ getStats(): Object
 &nbsp;
 
 ### Интерфейс SqlBulkCopyBuilder<a name="SqlBulkCopyBuilder"></a>
-```ts
-`Не реализовано`
-```
+
+***Не реализовано.***
 
 ```ts
 interface SqlBulkCopyBuilder {
@@ -768,9 +763,6 @@ format(path: string, xml: boolean): SqlBulkCopyResult
 &nbsp;
 
 ### Интерфейс SqlBulkCopyResult<a name="SqlBulkCopyResult"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface SqlBulkCopyResult {

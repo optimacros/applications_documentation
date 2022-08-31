@@ -43,9 +43,8 @@ save(name: string, charset?: string): string
 &nbsp;
 
 ### Интерфейс CsvReader<a name="CsvReader"></a>
-```ts
-`Не реализовано`
-```
+
+***Не реализовано.***
 
 ```ts
 interface CsvReader {
@@ -80,9 +79,6 @@ generator(): string[][]
 &nbsp;
 
 ### Интерфейс BaseConverter<a name="BaseConverter"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface BaseConverter {
@@ -109,9 +105,6 @@ convert(): string
 &nbsp;
 
 ### Интерфейс ExcelToCsvConverter<a name="ExcelToCsvConverter"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface ExcelToCsvConverter extends BaseConverter {
@@ -130,9 +123,8 @@ setSheetIdentifier(identifier: string | number): ExcelToCsvConverter
 &nbsp;
 
 ### Интерфейс ConverterManager<a name="ConverterManager"></a>
-```ts
-`Не реализовано`
-```
+
+***Не реализовано.***
 
 ```ts
 interface ConverterManager {
@@ -173,9 +165,7 @@ csvWriter(): CsvWriter
 ```js
 csvReader(path: PathObj): CsvReader
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает ссылку на [`CsvReader`](#CsvReader) для чтения файла `path` в формате [`PathObj`](./fs.md#PathObj).
 
@@ -184,9 +174,7 @@ csvReader(path: PathObj): CsvReader
 ```js
 converterManager(): ConverterManager
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает ссылку на [`ConverterManager`](#ConverterManager).
 

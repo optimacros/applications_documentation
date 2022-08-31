@@ -1,10 +1,6 @@
 # Синхронизация мультикубов и справочников
 
-&nbsp;
-
 ***Интерфесы этого раздела не реализованы в Application Manager.***
-
-&nbsp;
 
 ### Интерфейс SyncBuilder<a name="SyncBuilder"></a>
 ```ts

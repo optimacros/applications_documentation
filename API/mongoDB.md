@@ -423,9 +423,8 @@ max: Object
 &nbsp;
 
 ### Интерфейс Types<a name="Types"></a>
-```ts
-`Не реализовано`
-```
+
+***Не реализовано.***
 
 ```ts
 interface Types {

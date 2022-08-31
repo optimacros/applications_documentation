@@ -21,9 +21,8 @@ multicubesTab(): MulticubesTab
 ```js
 syncMulticube(): SyncMulticubeBuilder
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Возвращает интерфейс [`SyncMulticubeBuilder`](./sync.md#SyncMulticubeBuilder) синхронизации мультикубов.
 
 &nbsp;
@@ -81,9 +80,8 @@ pivot(viewName?: string): Pivot
 ```js
 elementsCreator(): ElementsCreator
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#ElementsCreator) для добавления элементов.
 
 &nbsp;
@@ -98,9 +96,8 @@ elementsDeleter(): ElementsDeleter
 ```js
 elementsReorder(): ElementsReorder
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#ElementsReorder) для тасования элементов.
 
 &nbsp;
@@ -135,9 +132,7 @@ interface MulticubeTab extends Tab {
 ```js
 cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Очищает всё содержимое кубов `cubesIdentifiers` или весь мультикуб при вызове без параметров. Возвращает `this`.
 
@@ -146,9 +141,7 @@ cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```js
 cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает интерфейс [`CubeCellSelectorBuilder`](./cubeCell.md#CubeCellSelectorBuilder) выборки клеток для куба `identifier`.
 
@@ -745,9 +738,7 @@ rows(): LabelsGroup | undefined
 ```js
 dropDown(): Labels
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает набор заголовков строк [`Labels`](#Labels) выпадающего списка, который в интерфейсе пользователя Optimacros можно получить кликом по треугольнику внутри ячейки. Эта функция считается неэффективной, так как выгружает справочник целиком. Лучше зайти в нужный справочник и итерироваться по нему.
 
@@ -756,9 +747,7 @@ dropDown(): Labels
 ```js
 getFormatType(): string
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает строку с форматом клетки. Возможные значения: `'NUMBER'`, `'BOOLEAN'`, 
 `'ENTITY'`, `'TIME_ENTITY'`, `'LINE_ITEM_SUBSET'`, `'VERSION'`, `'TEXT'`, `'DATE'`, `'NONE'`.
@@ -805,9 +794,7 @@ first(): Cell
 ```js
 setValue(value: number | string | null)
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
 

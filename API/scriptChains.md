@@ -1,9 +1,8 @@
 # Цепочки скриптов
 
+***Интерфесы этого раздела не применимы в Application Manager.***
+
 ### Интерфейс ButtonInfoOptions<a name="ButtonInfoOptions"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface ButtonInfoOptions {
@@ -30,9 +29,6 @@ setStyle(style: string): ButtonInfoOptions
 &nbsp;
 
 ### Интерфейс ButtonInfo<a name="ButtonInfo"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface ButtonInfo {
@@ -59,9 +55,6 @@ options(): ButtonInfoOptions
 &nbsp;
 
 ### Интерфейс EnvironmentInfo<a name="EnvironmentInfo"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface EnvironmentInfo {
@@ -88,9 +81,6 @@ get(key: string): any
 &nbsp;
 
 ### Интерфейс ResultBaseAction<a name="ResultBaseAction"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface ResultBaseAction {
@@ -123,9 +113,6 @@ setModelId(modelId: string): this
 &nbsp;
 
 ### Интерфейс ResultMacrosAction<a name="ResultMacrosAction"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface ResultMacrosAction extends ResultBaseAction {
@@ -167,9 +154,6 @@ environmentInfo(): EnvironmentInfo
 &nbsp;
 
 ### Интерфейс ResultOpenAction<a name="ResultOpenAction"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface ResultOpenAction extends ResultBaseAction {
@@ -188,9 +172,6 @@ buttonInfo(): ButtonInfo
 &nbsp;
 
 ### Интерфейс ResultActionsInfo<a name="ResultActionsInfo"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface ResultActionsInfo {

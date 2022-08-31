@@ -1,5 +1,7 @@
 # Уведомление пользователя
 
+***Интерфесы этого раздела не реализованы в Application Manager.***
+
 Все интерфейсы этого раздела находятся в пространстве имён `Notifications`.
 
 ### Интерфейс Manager<a name="Manager"></a>
@@ -15,17 +17,11 @@ interface Manager {
 ```js
 smtp(channel: string): Smtp.Builder
 ```
-```ts
-`Не реализовано`
-```
 Возвращает интерфейс [`Smtp.Builder`](#Smtp.Builder) канала с именем `channel` уведомления пользователя по протоколу [`SMTP`](https://ru.wikipedia.org/wiki/SMTP).
 
 &nbsp;
 
 ### Интерфейс Smtp.Builder<a name="Smtp.Builder"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface Smtp.Builder {
@@ -76,9 +72,6 @@ send(): Smtp.Result
 &nbsp;
 
 ### Интерфейс Smtp.Result<a name="Smtp.Result"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface Smtp.Result {

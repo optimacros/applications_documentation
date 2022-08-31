@@ -21,9 +21,8 @@ listsTab(): ListsTab
 ```js
 syncList(): SyncListBuilder
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Возвращает интерфейс [`SyncListBuilder`](./sync.md#SyncListBuilder) синхронизации справочников.
 
 &nbsp;
@@ -224,9 +223,8 @@ interface VersionsTab extends Tab {
 ```js
 copyVersion(from: string, to: string): Object
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Копирует срез по версии `from` в срез по версии `to` во всех мультикубах модели, которые имеют измерение версий, включающее обе эти версии. Возвращает объект вида `{"success": true}`.
 
 &nbsp;

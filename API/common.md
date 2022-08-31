@@ -41,9 +41,7 @@ modelInfo(): ModelInfo
 ```js
 userInfo(): UserInfo
 ```
-```ts
-`Не реализовано`
-```
+***Не применимо в Application Manager.***
 
 Возвращает ссылку на интерфейс [`UserInfo`](#UserInfo).
 
@@ -60,9 +58,7 @@ resultInfo(): ResultInfo
 ```js
 entitiesInfo(): EntitiesInfo
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает ссылку на интерфейс [`EntitiesInfo`](#EntitiesInfo).
 
@@ -71,9 +67,7 @@ entitiesInfo(): EntitiesInfo
 ```js
 copyData(): CopyData
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает ссылку на интерфейс [`CopyData`](#CopyData).
 
@@ -256,9 +250,8 @@ name(): string
 ```js
 lastSyncDate(): number
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Возвращает дату и время в формате [`UNIX`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F) последнего пересчёта модели в ручном режиме.
 
 &nbsp;
@@ -273,9 +266,8 @@ autoCalcStatus(): boolean
 ```js
 setModelCalculationMode(status: boolean): boolean
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Устанавливает признак режима автоматического пересчёта модели. Аналог в интерфейсе Optimacros: меню пользователя -> `Параметры` -> `Расширенные` -> `Режим ручного пересчёта модели`. Возвращает `true`.
 
 &nbsp;
@@ -283,9 +275,8 @@ setModelCalculationMode(status: boolean): boolean
 ```js
 repair(): boolean
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Делает резервную копию модели, останавливает все [`процессы`](https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81_(%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)) ОС, которые обслуживают модель, запускает их заново и восстанавливает модель из копии. Аналог в интерфейсе Optimacros: меню пользователя -> `Перезапустить модель`. Возвращает `true`.
 
 &nbsp;
@@ -293,9 +284,8 @@ repair(): boolean
 ```js
 recalculate(): boolean
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Выполняет пересчёт модели в ручном режиме. Не останавливает процессы модели, за счёт чего выполняется значительно быстрее, чем `repair()`. Аналог в интерфейсе Optimacros: меню пользователя -> `Пересчитать модель`. Возвращает `true`.
 
 &nbsp;
@@ -303,9 +293,8 @@ recalculate(): boolean
 ```js
 backup(path: string): boolean
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Сохраняет резервную копию в [`рабочую директорию`](../appendix/glossary.md#scriptDir) скрипта по пути `path`. Возвращает `true`.
 
 &nbsp;
@@ -313,17 +302,15 @@ backup(path: string): boolean
 ```js
 exportObfuscationState(): ExportObfuscationState
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Возвращает интерфейс [`ExportObfuscationState`](#ExportObfuscationState) экспорта модели в обфусцированном состоянии.
 
 &nbsp;
 
 ### Интерфейс UserInfo<a name="UserInfo"></a>
-```ts
-`Не реализовано`
-```
+
+***Не применимо в Application Manager.***
 
 ```ts
 interface UserInfo {
@@ -389,9 +376,8 @@ interface ResultInfo {
 ```js
 addFileHash(hash: string): ResultInfo
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
+
 Добавляет к ответу на запрос скрипта хэш `hash` файла, ранее зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry). Для пользователя это приведёт к тому, что файл будет скачан в браузере. Возвращает `this`.
 
 &nbsp;
@@ -399,9 +385,8 @@ addFileHash(hash: string): ResultInfo
 ```js
 actionsInfo(): ResultActionsInfo
 ```
-```ts
-`Не реализовано`
-```
+***Не применимо в Application Manager.***
+
 Возвращает интерфейс [`ResultActionsInfo`](./scriptChains.md#ResultActionsInfo) создания действий, которые можно автомагически осуществить после исполнения текущего скрипта.
 
 &nbsp;
@@ -409,9 +394,8 @@ actionsInfo(): ResultActionsInfo
 ```js
 setProperty(name: string, value: any): ResultInfo
 ```
-```ts
-`Не реализовано`
-```
+***Не применимо в Application Manager.***
+
 Устанавливает свойству `name` значение `value` в HTTP-ответе на запрос о запуске скрипта приложением-клиентом (например, web-интерфейсом Optimacros). Возвращает `this`.
 
 &nbsp;
@@ -442,9 +426,8 @@ getCollection(longId: number[]): EntityInfo[]
 &nbsp;
 
 ### Интерфейс CopyData<a name="CopyData"></a>
-```ts
-`Не реализовано`
-```
+
+***Не реализовано.***
 
 ```ts
 interface CopyData {
