@@ -207,9 +207,7 @@ interface ExportResult {
 ```js
 mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
 ```
-```ts
-`Не реализовано`
-```
+`***Не реализовано***`
 
 Если экспорт был в формате `'xls'` или `'xlsx'`, создаёт в файле Excel `toFile` новый лист `toSheet` и помещает в него результат экспорта.  Данные берутся с листа `fromSheet`, по умолчанию – с первого листа. Возращает `this`.
 
@@ -225,9 +223,7 @@ getHash(): string | null
 ```js
 copyToLocal(path: string): ExportResult
 ```
-```ts
-`Не реализовано`
-```
+***`Не реализовано`***
 
 Копирует экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir). Возвращает `this`.
 
@@ -236,9 +232,7 @@ copyToLocal(path: string): ExportResult
 ```js
 moveToLocal(path: string): ExportResult
 ```
-```ts
-`Не реализовано`
-```
+***`Не реализовано`***
 
 Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) и убирает его из [`глобального реестра`](../appendix/glossary.md#globalFileRegistry). Возвращает `this`.
 
@@ -369,9 +363,8 @@ import(): Importer
 &nbsp;
 
 ### Интерфейс StorageImporter<a name="StorageImporter"></a>
-```ts
-`Не реализовано`
-```
+
+`***Не реализовано***`
 
 ```ts
 interface StorageImporter extends Importer {
