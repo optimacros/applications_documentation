@@ -1,56 +1,10 @@
 # Низкоуровневый доступ к клеткам и кубам
 
-1. [Доступ к клеткам и кубам](#lowlevel)
+1. [Получение информации о кубе](#lowlevel)
 1. [Получение клеток куба с помощью формулы](#select)
 1. [Обновление клеток куба по формуле](#update)
 
-## Доступ к клеткам и кубам<a name="lowlevel"></a>
-
-### Интерфейс CubeCell<a name="CubeCell"></a>
-```ts
-`Не реализовано`
-```
-
-```ts
-interface CubeCell {
-	definitions(): number[];
-	getDimensionIds(): number[];
-	getDimensionItems(): EntityInfo[];
-	getValue(): number | string | null | boolean;
-}
-```
-Низкоуровневый интерфейс доступа к данным клетки куба.
-
-&nbsp;
-
-<a name="CubeCell.definitions"></a>
-```js
-definitions(): number[]
-```
-Возвращает такой же массив идентификаторов, что и `getDimensionIds()`. Однако дополнительно первым элементом является идентификатор самого куба.
-
-&nbsp;
-
-```js
-getDimensionIds(): number[]
-```
-Возвращает массив идентификаторов тех элементов измерений куба, которыми определена клетка.  Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#CubeInfo.getDimensions).
-
-&nbsp;
-
-```js
-getDimensionItems(): EntityInfo[]
-```
-Возвращает массив [`EntityInfo`](./views.md#EntityInfo) элементов измерений куба, которыми определена клетка. Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#CubeInfo.getDimensions).
-
-&nbsp;
-
-```js
-getValue(): number | string | null | boolean
-```
-Возвращает значение клетки. Если формат клетки – справочник или дата, возвращает идентификатор элемента.
-
-&nbsp;
+## Получение информации о кубе<a name="lowlevel"></a>
 
 ### Интерфейс CubeInfo<a name="CubeInfo"></a>
 ```ts
@@ -82,9 +36,8 @@ getFormatInfo(): CubeFormatInfo
 ```js
 getDimensions(): EntityInfo[]
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано***
+
 Возвращает массив [`EntityInfo`](./views.md#EntityInfo) измерений куба.
 
 &nbsp;
@@ -116,10 +69,11 @@ getDimensionEntity(): EntityInfo | null
 
 ## Получение клеток куба с помощью формулы<a name="select"></a>
 
+***Интерфесы этого раздела не реализованы в Application Manager.***
+
+&nbsp;
+
 ### Интерфейс CubeCellSelectorBuilder<a name="CubeCellSelectorBuilder"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface CubeCellSelectorBuilder {
@@ -186,6 +140,49 @@ generator(): IterableIterator<CubeCell>
 
 &nbsp;
 
+### Интерфейс CubeCell<a name="CubeCell"></a>
+
+```ts
+interface CubeCell {
+	definitions(): number[];
+	getDimensionIds(): number[];
+	getDimensionItems(): EntityInfo[];
+	getValue(): number | string | null | boolean;
+}
+```
+Низкоуровневый интерфейс доступа к данным клетки куба.
+
+&nbsp;
+
+<a name="CubeCell.definitions"></a>
+```js
+definitions(): number[]
+```
+Возвращает такой же массив идентификаторов, что и `getDimensionIds()`. Однако дополнительно первым элементом является идентификатор самого куба.
+
+&nbsp;
+
+```js
+getDimensionIds(): number[]
+```
+Возвращает массив идентификаторов тех элементов измерений куба, которыми определена клетка.  Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#CubeInfo.getDimensions).
+
+&nbsp;
+
+```js
+getDimensionItems(): EntityInfo[]
+```
+Возвращает массив [`EntityInfo`](./views.md#EntityInfo) элементов измерений куба, которыми определена клетка. Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#CubeInfo.getDimensions).
+
+&nbsp;
+
+```js
+getValue(): number | string | null | boolean
+```
+Возвращает значение клетки. Если формат клетки – справочник или дата, возвращает идентификатор элемента.
+
+&nbsp;
+
 ## Обновление клеток куба по формуле<a name="update"></a>
 
 ### Интерфейс CubeCellUpdaterBuilder<a name="CubeCellUpdaterBuilder"></a>
@@ -234,7 +231,9 @@ interface CubeCellUpdater {
 ```js
 getCount(): number
 ```
-Должна возвращать количество ячеек, модифицированных применением формулы. ***Не реализовано; возвращает `-1`.***
+***Не реализовано, возвращает `-1`.***
+
+Возвращает количество ячеек, модифицированных применением формулы.
 
 &nbsp;
 
