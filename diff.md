@@ -18,7 +18,7 @@ OM.connectAsync(https: string, wss: string, token: string. modelId: string, env?
 ```js
 OM.connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM
 ```
-Статический метод интерфейса `OM`. Устанавливает соединение с моделью `modelId` по адресу `https`, используя [WebSocket](https://ru.wikipedia.org/wiki/WebSocket) `wss` и токен пользователя `userToken`, и устанавливает [переменные окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B) `env`. Доступ к переменным окружения можно получить с помощью интрефейса [Environment](./API/env.md#Environment). Возвращает интерфейс модели [OM](./API/API.md#OM), [аналог](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#singleModel) глобальной переменной `om: OM` скриптов 1.0.
+Статический метод интерфейса `OM`. Устанавливает соединение с моделью `modelId` по адресу `https`, используя [WebSocket](https://ru.wikipedia.org/wiki/WebSocket) `wss` и токен пользователя `userToken`, и устанавливает [переменные окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B) `env`. Доступ к переменным окружения можно получить с помощью интрефейса [Environment](./API/env.md#Environment). Возвращает ссылку на интерфейс модели [OM](./API/API.md#OM), [аналог](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#singleModel) глобальной переменной `om: OM` скриптов 1.0.
 
 &nbsp;
 
@@ -43,6 +43,7 @@ interface EventPromise {
     on('error', callback: () => void): void; // предшествует ошибке, которую можно поймать через catch
 }
 ```
+Комбинация возможностей обычного [Promise](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [await](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [EventEmitter](https://nodejsdev.ru/doc/event-emitter/#eventemitter) генерирующего события из источника.
 
 &nbsp;
 
@@ -51,7 +52,7 @@ interface EventPromise {
 ```js
 OM.status(...args: any[]): OM
 ```
-Статический метод интерфейса `OM`.
+Статический метод интерфейса `OM`. Устанавливает статусное сообщение `args`. Если `args` задано в виде массива, то выводит элементы в заданном порядке, разделяя их пробелом. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ. Аналог метода [setStatusMessage](https://github.com/optimacros/scripts_documentation/blob/main/API/common.md#RequestManager.setStatusMessage) в Скриптах 1.0. ***Не реализовано, выводит подсвеченное зеленым цветом сообщение в терминале вывода.***
 
 &nbsp;
 
@@ -66,7 +67,7 @@ OM.web(eventName, callback: (args: {}) => string | WebHandlerResponse)
 
 ## Вывод приложения<a name="asyncOutput"></a>
 
-Вывод приложения доступен непосредственно во время его работы в режиме реального времени. [Вывод в Скриптах 1.0](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#syncOutput) был `доступен` только после завершения работы скрипта.
+Вывод приложения доступен непосредственно во время его работы в режиме реального времени в окне терминала вывода. [Вывод в Скриптах 1.0](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#syncOutput) был `доступен` только после завершения работы скрипта.
 
 &nbsp;
 
