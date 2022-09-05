@@ -40,7 +40,7 @@ class EventPromise extends EventEmitter {
     catch(callback: (error) => void): this;
 }
 ```
-Комбинация возможностей обычного [Promise](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [await](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [EventEmitter](https://nodejsdev.ru/doc/event-emitter/#eventemitter) генерирующего события из источника. ***Описание данного класса находиться в доработке.***
+Комбинация возможностей обычного [Promise](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [await](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [EventEmitter](https://nodejsdev.ru/doc/event-emitter/#eventemitter) генерирующего события из источника. ***Описание данного класса находится в доработке.***
 
 &nbsp;
 
@@ -58,7 +58,7 @@ OM.status(...args: any[]): OM
 ```js
 OM.web(eventName, callback: (args: {}) => string | WebHandlerResponse)
 ```
-***Метод находиться в разработке.***
+***Метод находится в разработке.***
 
 Статический метод интерфейса `OM`. Из функций `callback` web-обработчиков нельзя использовать `OM.connect`, можно только `OM.connectAsync`.
 
