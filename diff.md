@@ -29,7 +29,7 @@ OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?
 ```js
 OM.script(relativePathOrId: string, params: Object): EventPromise
 ```
-Статический метод интерфейса `OM`. Запускает скрипт `relativePathOrId` с параметрами `params`. В качестве параметра `relativePathOrId` можно передать идентификатор скрипта, существующего в Application Manager (скрипт может находиться в другом приложении), или относительный путь к скрипту в текущем приложении. **Важно! Скрипт должен быть запускаемым.**  Список запускаемых скриптов и их идентификаторы можно найти, нажав на кнопку `Edit Application` -> `Executable Scripts`.
+Статический метод интерфейса `OM`. Запускает скрипт `relativePathOrId` с параметрами `params`. В качестве параметра `relativePathOrId` можно передать идентификатор скрипта, существующего в Application Manager (скрипт может находиться в другом приложении), или относительный путь к скрипту в текущем приложении. **Важно! Скрипт должен быть запускаемым.** Список запускаемых скриптов и их идентификаторы можно найти, нажав на кнопку `Edit Application` -> `Executable Scripts`.
 
 Метод возвращает ссылку на объект класса [EventPromise](#EventPromise). Родительский скрипт может ждать результата выполнения дочернего скрипта или продолжить работу параллельно с дочерним скриптом.
 
@@ -40,7 +40,7 @@ class EventPromise extends EventEmitter {
     catch(callback: (error) => void): this;
 }
 ```
-Комбинация возможностей обычного [Promise](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [await](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [EventEmitter](https://nodejsdev.ru/doc/event-emitter/#eventemitter) генерирующего события из источника. ***Описание данного класса еще находиться в доработке***
+Комбинация возможностей обычного [Promise](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [await](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [EventEmitter](https://nodejsdev.ru/doc/event-emitter/#eventemitter) генерирующего события из источника. ***Описание данного класса находиться в доработке.***
 
 &nbsp;
 
@@ -58,11 +58,9 @@ OM.status(...args: any[]): OM
 ```js
 OM.web(eventName, callback: (args: {}) => string | WebHandlerResponse)
 ```
-***Метод находиться в разработке***
+***Метод находиться в разработке.***
 
 Статический метод интерфейса `OM`. Из функций `callback` web-обработчиков нельзя использовать `OM.connect`, можно только `OM.connectAsync`.
-
-&nbsp;
 
 ### Интерфейс WebHandlerResponse<a name="WebHandlerResponse"></a>
 ```ts
@@ -77,8 +75,6 @@ interface WebHandlerResponse {
 ## Вывод приложения<a name="asyncOutput"></a>
 
 Вывод приложения доступен непосредственно во время его работы в режиме реального времени в окне терминала вывода. [Вывод в Скриптах 1.0](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#syncOutput) был `доступен` только после завершения работы скрипта.
-
-&nbsp;
 
 ### `console.log()` добавляет символ переноса строки<a name="lineBreak"></a>
 
