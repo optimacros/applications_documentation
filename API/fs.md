@@ -31,7 +31,7 @@ local(): Filesystem
 ```js
 sharedFolder(id: string): Filesystem
 ```
-***Не реализовано.***
+***Не применимо в Application Manager.***
 
 Возвращает интерфейс [`Filesystem`](#Filesystem) доступа к shared folder – папке на сервере, которая была добавлена администратором при установке Workspace через manifest внутрь контейнера workspace.
 

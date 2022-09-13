@@ -61,7 +61,7 @@ http(): Http.HttpManager
 ```js
 winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
 ```
-***Не реализовано.***
+***Более не поддерживается в скриптах.***
 
 Возвращает коннектор [`WinAgent.WinAgentBuilder`](./winAgent.md#WinAgentBuilder) для взаимодействия с [`WinAgent`](./winAgent.md). Параметр `builtIn` указывает использовать встроенную конфигурацию воркспейса. Значение по умолчанию: `false`.
 
