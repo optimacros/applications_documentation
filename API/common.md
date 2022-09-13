@@ -41,7 +41,7 @@ modelInfo(): ModelInfo
 ```js
 userInfo(): UserInfo
 ```
-***Не применимо в Application Manager.***
+***Не реализовано.***
 
 Возвращает ссылку на интерфейс [`UserInfo`](#UserInfo).
 
@@ -385,7 +385,7 @@ addFileHash(hash: string): ResultInfo
 ```js
 actionsInfo(): ResultActionsInfo
 ```
-***Не применимо в Application Manager.***
+***Не реализовано.***
 
 Возвращает интерфейс [`ResultActionsInfo`](./scriptChains.md#ResultActionsInfo) создания действий, которые можно автомагически осуществить после исполнения текущего скрипта.
 
