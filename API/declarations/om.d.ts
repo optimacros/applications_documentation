@@ -200,11 +200,11 @@ export interface BaseElementsCreator {
 
     create(): number[];
 }
-export interface NumericElementsCreator implements BaseElementsCreator {
+export interface NumericElementsCreator extends BaseElementsCreator {
     setCount(count: number): this;
 }
 
-export interface NamedElementsCreator implements BaseElementsCreator {
+export interface NamedElementsCreator extends BaseElementsCreator {
     setElementNames(names: string[]): this;
 }
 
@@ -354,7 +354,7 @@ export interface TimeOptionsTab extends Tab {
 }
 
 export interface Times {
-    optionsTab(): Tab;
+    optionsTab(): TimeOptionsTab;
 
     timePeriodTab(identifier: string | number): TimePeriodTab;
 }

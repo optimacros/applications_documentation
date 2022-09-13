@@ -28,7 +28,7 @@ getAll(): Object
 ```js
 setAll(pairs: Object): boolean
 ```
-Не работает.
+Устанавливает значения всех параметров, описанных в объекте `pairs`.
 
 &nbsp;
 
@@ -89,9 +89,7 @@ stringify(): string
 ```js
 setEncodingType(type: string): UrlParams
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Устанавливает стандарт кодировки параметров URL. Допустимые значения: `NONE`, `RFC1738`, `RFC3986`. Значение по умолчанию: `RFC1738`. Возвращает `this`.
 
@@ -100,9 +98,7 @@ setEncodingType(type: string): UrlParams
 ```js
 getEncodingType(): string
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает стандарт кодировки параметров URL.
 
@@ -136,13 +132,16 @@ interface StringRequestBody {
 &nbsp;
 
 ```js
-	setBody(value: string): boolean
+setBody(value: string): boolean
 ```
 Устанавливает переданную строку в тело запроса. Возвращает `true`.
 
 &nbsp;
 
 ### Интерфейс FormRequestBody<a name="FormRequestBody"></a>
+
+***Не реализовано.***
+
 ```ts
 interface FormRequestBody {
 	params(): Params;
@@ -153,7 +152,7 @@ interface FormRequestBody {
 &nbsp;
 
 ```js
-	params(): Params
+params(): Params
 ```
 Возвращает объект [`Params`](#Params) для установки значений параметров.
 
@@ -419,6 +418,8 @@ getWithReferer(): boolean
 ```js
 setProtocols(protocols: string[]): boolean
 ```
+***Не реализовано.***
+
 Устанавливает список протоколов, для которых разрешены перенаправления. Значение по умолчанию: `['http', 'https']`. Возвращает `true`.
 
 &nbsp;
@@ -426,14 +427,15 @@ setProtocols(protocols: string[]): boolean
 ```js
 getProtocols(): string[]
 ```
+***Не реализовано.***
+
 Возвращает список протоколов, для которых разрешены перенаправления.
 
 &nbsp;
 
 ### Интерфейс HttpAuth<a name="HttpAuth"></a>
-```ts
-`Не реализовано`
-```
+
+***Не реализовано.***
 
 ```ts
 interface HttpAuth {
@@ -476,9 +478,8 @@ setStatus(status: boolean): HttpAuth
 &nbsp;
 
 ### Интерфейс Cert<a name="Cert"></a>
-```ts
-`Не реализовано`
-```
+
+***Не реализовано.***
 
 ```ts
 interface Cert {
@@ -487,7 +488,7 @@ interface Cert {
 	setPassphrase(passphrase: string): Cert;
 }
 ```
-Интерфейс настройки сертификата аутентификации HTTP. ***Не реализован.***
+Интерфейс настройки сертификата аутентификации HTTP.
 
 &nbsp;
 
@@ -607,6 +608,8 @@ allowRedirects(): AllowRedirects
 ```js
 auth(): HttpAuth
 ```
+***Не реализовано.***
+
 Возвращает интерфейс [`HttpAuth`](#HttpAuth) доступа к настройкам аутентификации HTTP.
 
 &nbsp;
@@ -614,7 +617,9 @@ auth(): HttpAuth
 ```js
 cert(): Cert
 ```
-Возвращает интерфейс [`Cert`](#Cert) для настройки аутентификации по сертификату. ***Не реализовано.***
+***Не реализовано.***
+
+Возвращает интерфейс [`Cert`](#Cert) для настройки аутентификации по сертификату.
 
 &nbsp;
 
@@ -787,7 +792,7 @@ getMessage(): string
 ```ts
 interface Response {
 	headers(): ObjectOfStringArray;
-	getStringData(length?: number, catchEof?: boolean): string;
+	getStringData(): string;
 	getStringDataLikeJson(): Object | boolean;
 	getStringDataGenerator(length?: number): string[];
 	getBinaryDataGenerator(length?: number): string[];
@@ -808,9 +813,9 @@ headers(): ObjectOfStringArray
 &nbsp;
 
 ```js
-getStringData(length?: number, catchEof?: boolean): string
+getStringData(): string
 ```
-Возвращает данные ответа. Размер данных ограничен лимитом в `length` байт. Параметр `length` может принимать значения от 1 байта до 100 Мбайт = 100 * 2<sup>20</sup> байт; значение по умолчанию: `100 Мбайт`. Если размер данных превышает лимит и `catchEof === true`, выбрасывается исключение. Значение `catchEof` по умолчанию: `true`.
+Возвращает данные ответа в виде строки. Размер данных ограничен лимитом в `50 Мбайт`.
 
 &nbsp;
 
@@ -824,6 +829,8 @@ getStringDataLikeJson(): Object | boolean
 ```js
 getStringDataGenerator(length?: number): string[];
 ```
+***Не реализовано.***
+
 Возвращает генератор, при каждом обращении возвращающий данные от сервера в виде строки размером *около* `length` байт. Параметр `length` может принимать значения от 1 байта до 1 Мбайта = 2<sup>20</sup> байт; значение по умолчанию: `1 Мбайт`. Несмотря на то, что размер данных задаётся в байтах, строки хранятся в кодировке `UTF-8`, и если последний многобайтовый символ возвращаемого куска данных не полностью помещается в заданный лимит, строка не будет обрезана на середине символа. Вместо этого генератор обрежет строку точно между символами `UTF-8` и вернёт результат размером чуть менее `length` байт. При следующем обращении к генератору указанный символ будет первым символом возвращаемой строки, чья длина теперь может быть чуть больше `length` байт.
 
 &nbsp;
@@ -831,6 +838,8 @@ getStringDataGenerator(length?: number): string[];
 ```js
 getBinaryDataGenerator(length?: number): string[];
 ```
+***Не реализовано.***
+
 Возвращает генератор, при каждом обращении возвращающий данные от сервера в виде строки размером *ровно* `length` байт. Параметр `length` может принимать значения от 1 байта до 1 Мбайта = 2<sup>20</sup> байт; значение по умолчанию: `1 Мбайт`.
 
 &nbsp;

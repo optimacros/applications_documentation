@@ -1,5 +1,7 @@
 # Уведомление пользователя
 
+***Интерфесы этого раздела не реализованы в Application Manager.***
+
 Все интерфейсы этого раздела находятся в пространстве имён `Notifications`.
 
 ### Интерфейс Manager<a name="Manager"></a>
@@ -20,9 +22,6 @@ smtp(channel: string): Smtp.Builder
 &nbsp;
 
 ### Интерфейс Smtp.Builder<a name="Smtp.Builder"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface Smtp.Builder {
@@ -73,9 +72,6 @@ send(): Smtp.Result
 &nbsp;
 
 ### Интерфейс Smtp.Result<a name="Smtp.Result"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface Smtp.Result {

@@ -16,9 +16,7 @@ interface Environment {
 ```js
 load(name: string): Environment
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Загружает значения переменных окружения из нуль-мерного мультикуба `name`. Возвращает `this`.
 
@@ -27,9 +25,7 @@ load(name: string): Environment
 ```js
 loadFromMulticube(name: string, view?: string | null): Environment
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Загружает данные в переменную окружения `view` (или `name`, если `view` не задано) из представления `view` мультикуба `name`. Если `view` не задано, используется представление по умолчанию.   Возвращает `this`.
 

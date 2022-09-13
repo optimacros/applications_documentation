@@ -21,6 +21,8 @@ multicubesTab(): MulticubesTab
 ```js
 syncMulticube(): SyncMulticubeBuilder
 ```
+***Не реализовано.***
+
 Возвращает интерфейс [`SyncMulticubeBuilder`](./sync.md#SyncMulticubeBuilder) синхронизации мультикубов.
 
 &nbsp;
@@ -71,13 +73,15 @@ open(name: string): Tab
 ```js
 pivot(viewName?: string): Pivot
 ```
-Возвращает ссылку на объект [`Pivot`](#Pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах 1.0. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](../appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
+Возвращает ссылку на объект [`Pivot`](#Pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](../appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
 
 &nbsp;
 
 ```js
 elementsCreator(): ElementsCreator
 ```
+***Не реализовано.***
+
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#ElementsCreator) для добавления элементов.
 
 &nbsp;
@@ -92,6 +96,8 @@ elementsDeleter(): ElementsDeleter
 ```js
 elementsReorder(): ElementsReorder
 ```
+***Не реализовано.***
+
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#ElementsReorder) для тасования элементов.
 
 &nbsp;
@@ -126,9 +132,7 @@ interface MulticubeTab extends Tab {
 ```js
 cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Очищает всё содержимое кубов `cubesIdentifiers` или весь мультикуб при вызове без параметров. Возвращает `this`.
 
@@ -137,9 +141,7 @@ cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```js
 cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает интерфейс [`CubeCellSelectorBuilder`](./cubeCell.md#CubeCellSelectorBuilder) выборки клеток для куба `identifier`.
 
@@ -294,10 +296,6 @@ exporter(): Exporter
 ```js
 storageExporter(): StorageExporter
 ```
-```ts
-`Не реализовано`
-```
-
 Возвращает ссылку на интерфейс [`StorageExporter`](./exportImport.md#StorageExporter) быстрого экспорта таблицы.
 
 &nbsp;
@@ -492,7 +490,7 @@ columns(): Labels
 ```ts
 interface Label {
 	longId(): number;
-	name(): string;
+	name(): string | null;
 	code(): string | null;
 	alias(): string | null;
 	label(): string | null;
@@ -536,14 +534,14 @@ alias(): string | null
 
 Если `this` является сущностью элемента справочника, в настройках которого задано некоторое свойство в качестве отображаемого имени (опция `Отображение`), и для этой сущности задано значение этого свойства, то возвращает значение этого свойства.
 
-Иначе возвращает [`name()`](#Label.name).
+Иначе возвращает `null`.
 
 &nbsp;
 
 ```js
 label(): string | null
 ```
-То же, что и [`alias()`](#alias).
+То же, что и [`alias()`](#alias). Если отображаемое имя не задано, возвращает [`name()`](#Label.name).
 
 &nbsp;
 
@@ -658,12 +656,14 @@ interface Cell {
 	setValue(value: number | string | null | boolean);
 	getValue(): number | string | null | boolean;
 	getNativeValue(): number | string | null | boolean;
+	getTextValue(): number | string | null;
 	getContextValue(): string | null;
 	definitions(): number[];
 	columns(): LabelsGroup | undefined;
 	rows(): LabelsGroup | undefined;
 	dropDown(): Labels;
 	getFormatType(): string;
+	isEditable(): boolean;
 }
 ```
 Интерфейс, представляющий клетку таблицы.
@@ -693,6 +693,14 @@ getNativeValue(): number | string | null | boolean;
 Возвращает самородное значение клетки, зависящее от формата. Если клетка имеет формат справочника, то возвращается [`longId`](#longId). 
 
 В противном случае возвращает то же, что и [`getValue()`](#Cell.getValue).
+
+&nbsp;
+
+<a name="Cell.getTextValue"></a>
+```js
+getTextValue(): number | string | null;
+```
+Возвращает значение клетки, которое видит пользователь. Работает только для клеток формата `Справочник` и `Дата`, в остальных случаях возвращает `null`.
 
 &nbsp;
 
@@ -730,9 +738,7 @@ rows(): LabelsGroup | undefined
 ```js
 dropDown(): Labels
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает набор заголовков строк [`Labels`](#Labels) выпадающего списка, который в интерфейсе пользователя Optimacros можно получить кликом по треугольнику внутри ячейки. Эта функция считается неэффективной, так как выгружает справочник целиком. Лучше зайти в нужный справочник и итерироваться по нему.
 
@@ -741,12 +747,17 @@ dropDown(): Labels
 ```js
 getFormatType(): string
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Возвращает строку с форматом клетки. Возможные значения: `'NUMBER'`, `'BOOLEAN'`, 
 `'ENTITY'`, `'TIME_ENTITY'`, `'LINE_ITEM_SUBSET'`, `'VERSION'`, `'TEXT'`, `'DATE'`, `'NONE'`.
+
+&nbsp;
+
+```js
+isEditable(): boolean
+```
+Возвращает признак возможности редактирования ячейки пользователем.
 
 &nbsp;
 
@@ -783,9 +794,7 @@ first(): Cell
 ```js
 setValue(value: number | string | null)
 ```
-```ts
-`Не реализовано`
-```
+***Не реализовано.***
 
 Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
 

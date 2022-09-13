@@ -1,5 +1,7 @@
 # Оптимизационные запросы
 
+***Интерфесы этого раздела не реализованы в Application Manager.***
+
 ### Интерфейс Optimization<a name="Optimization"></a>
 ```ts
 interface Optimization {
@@ -18,9 +20,6 @@ optimizationRequestsTab(): OptimizationRequestTab
 &nbsp;
 
 ### Интерфейс OptimizationRequestTab<a name="OptimizationRequestTab"></a>
-```ts
-`Не реализовано`
-```
 
 ```ts
 interface OptimizationRequestTab extends Tab {
