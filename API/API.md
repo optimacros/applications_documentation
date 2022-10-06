@@ -34,10 +34,8 @@ interface OM {
 	readonly connectors: Connectors;
 	readonly notifications: Notifications.Manager;
 }
-
-var om: OM;
 ```
-Интерфейс `OM` являет собой набор интерфейсов, предоставляющих API cкриптов 1.0 через глобальную переменную `om`.
+Интерфейс `OM` являет собой набор интерфейсов, предоставляющих API доступа к модели.
 
 &nbsp;
 
