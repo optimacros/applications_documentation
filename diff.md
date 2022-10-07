@@ -23,12 +23,11 @@ OM.connect(https: string, wss: string, token: string, modelId: string, env?: Obj
 Пример установки соединения и получения ссылки на интерфейс модели:
 
 ![URL-адрес и modelId](./pic/modelId.png)
-
 ```js
 const om = OM.connect(
     'https://ws116.optimacros.com/',
     'wss://ws116.optimacros.com:8081',
-    'token',
+    'MyNamedToken',
     '3e72d0057138616a1904c69848389ac0',
     {param1: 1, param2: 'abc'}
 );
@@ -112,4 +111,4 @@ interface WebHandlerResponse {
 
 &nbsp;
 
-[Оглавление](../README.md)
+[Оглавление](./README.md)
