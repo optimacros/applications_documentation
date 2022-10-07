@@ -12,7 +12,27 @@
 ```js
 OM.connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM
 ```
-Статический метод интерфейса `OM`. Устанавливает соединение с моделью `modelId` по адресу `https`, используя [WebSocket](https://ru.wikipedia.org/wiki/WebSocket) `wss` и токен пользователя `userToken`, и устанавливает [переменные окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B) `env`. Доступ к переменным окружения можно получить с помощью интрефейса [Environment](./API/env.md#Environment). Возвращает ссылку на интерфейс модели [OM](./API/API.md#OM), [аналог](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#singleModel) глобальной переменной `om: OM` скриптов 1.0.
+Статический метод интерфейса `OM`. Устанавливает соединение с моделью `modelId` по адресу `https`, используя [WebSocket](https://ru.wikipedia.org/wiki/WebSocket) `wss` и токен пользователя `token`, и устанавливает [переменные окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B) `env`. Возвращает ссылку на интерфейс модели [OM](./API/API.md#OM), [аналог](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#singleModel) глобальной переменной `om: OM` скриптов 1.0.
+
+- `https` - URL-адрес воркспейса с указанием протокола HTTPS.
+- `wss` - URL-адрес воркспейса с указанием протокола WSS и порта подключения.
+- `token` - токен пользователя для доступа к данным модели. Это уникальная секретная строка, которую можно получить в профиле пользователя через «Логин-центр» (Create Named Token). Токен может быть создан только администратором ЛЦ и имеет ограничение по времени жизни, которое нужно выбрать при его создании.
+- `modelId` - идентификатор модели. Индентификатор можно узнать в адресной строке браузера.
+- `env` - переменные окружения, которые будут переданы в модель после установки соединения. Доступ к переменным окружения можно получить с помощью интрефейса [Environment](./API/env.md#Environment). Необязательный параметр.
+
+Пример установки соединения и получения ссылки на интерфейс модели:
+
+![URL-адрес и modelId](./pic/modelId.png)
+
+```js
+const om = OM.connect(
+    'https://ws116.optimacros.com/',
+    'wss://ws116.optimacros.com:8081',
+    'token',
+    '3e72d0057138616a1904c69848389ac0',
+    {param1: 1, param2: 'abc'}
+);
+```
 
 &nbsp;
 
