@@ -1,6 +1,6 @@
 #  Документация по [Optimacros](https://optimacros.ru/) Application Manager
 
-Поскольку Application Manager является огнерождённым потомком Скриптов 1.0, он наследует всю их [`документацию`](https://github.com/optimacros/scripts_documentation), сохраняя полную обратную совместимость.
+Документация по API Application Manager наследует всю [`документацию Скриптов 1.0`](https://github.com/optimacros/scripts_documentation), сохраняя полную обратную совместимость.
 
 1. [Требования к разработчику приложений](prerequisities.md)
 1. [Курс молодого бойца / Cook book](./cookBook/cookBook.md)
