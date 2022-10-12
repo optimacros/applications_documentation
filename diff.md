@@ -67,9 +67,9 @@ OM.params: Object
 
 ![Script parameters](./pic/scriptParameters.png)
 
-Окно ввода параметров.
+Окно ввода параметров в JSON формате.
 
-![Run script](./pic/runScript.png)
+![JSON parameters](./pic/jsonParameters.png)
 
 &nbsp;
 
