@@ -1,6 +1,6 @@
 #  Документация по [Optimacros](https://optimacros.ru/) Application Manager
 
-Документация по API Application Manager наследует всю [`документацию Скриптов 1.0`](https://github.com/optimacros/scripts_documentation), сохраняя полную обратную совместимость, и описывает дополнительные возможности API в системе Application Manager.
+Документация по API Application Manager. API AM частично совместим с [`API скриптов воркспейса`](https://github.com/optimacros/scripts_documentation), но также предоставляет дополнительные возможности.
 
 1. [Требования к разработчику приложений](prerequisities.md)
 1. [Курс молодого бойца / Cook book](./cookBook/cookBook.md)
