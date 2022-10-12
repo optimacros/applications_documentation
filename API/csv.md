@@ -80,6 +80,8 @@ generator(): string[][]
 
 ### Интерфейс BaseConverter<a name="BaseConverter"></a>
 
+***Не реализовано.***
+
 ```ts
 interface BaseConverter {
 	setSource(path: string): this;
@@ -105,6 +107,8 @@ convert(): string
 &nbsp;
 
 ### Интерфейс ExcelToCsvConverter<a name="ExcelToCsvConverter"></a>
+
+***Не реализовано.***
 
 ```ts
 interface ExcelToCsvConverter extends BaseConverter {
