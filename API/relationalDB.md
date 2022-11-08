@@ -43,28 +43,28 @@ all(): Object[]
 ```js
 first(): Object | null
 ```
-Возвращает ***следующую*** строку запроса, ***несмотря на название***.
+Возвращает первую строку запроса.
 
 &nbsp;
 
 ```js
 column(columnName: string): string[]
 ```
-Выбирает и возвращает в виде массива значения столбца `columnName` у всех оставшихся строк ответа.
+Выбирает и возвращает в виде массива значения столбца `columnName`.
 
 &nbsp;
 
 ```js
 cell(columnName: string, rowIndex?: number): number | string | boolean | null
 ```
-Пропускает в итераторе ответа `rowIndex` (по умолчанию: `0`) строк и возвращает значение столбца `columnName` из очередной строки. Внутренний итератор переходит на следующую строку.
+Возвращает значение столбца `columnName` в строке по индексу `rowIndex` (по умолчанию: `0`). 
 
 &nbsp;
 
 ```js
 updated(): number
 ```
-Возвращает количество изменённых строк. Если SQL-запрос был не на изменение, возвращаемое значение зависит от реализации.
+Возвращает количество изменённых строк. Если SQL-запрос был не на изменение, возвращаемое значение зависит от реализации. ***Не реализовано для базы данных PostgreSQL.***
 
 &nbsp;
 
@@ -96,14 +96,6 @@ execute(sql: string, bindings?: (string | number | boolean | null)[] | Object): 
 const sqlQuery = "INSERT INTO `city` (`name`, `country_id`, `population`) VALUES (?, ?, ?)";
 
 const queryResult = mySqlConn.qb().execute(sqlQuery, ['Хабаровск', 7, 610305]);
-```
-
-Если запрос делается к СУБД MySQL, допускается ещё один вариант: заполнители состоят из двоеточия и имени, `bindings` является объектом, в процессе конструирования запроса подстановка происходит по ключу имени. Пример:
-
-```js
-const sqlQuery = "SELECT SUM(`price`) as summary FROM `sells` WHERE price > :price";
-
-const queryResult = mySqlConn.qb().execute(sqlQuery, { price: 100 });
 ```
 
 &nbsp;
@@ -275,6 +267,9 @@ setTNS(value: string): OracleConnectorBuilder
 ## Импорт<a name="DBimport"></a>
 
 ### Интерфейс MysqlImportBuilder<a name="MysqlImportBuilder"></a>
+
+***Не реализовано.***
+
 ```js
 interface MysqlImportBuilder {
 	setTable(name: string): MysqlImportBuilder;
@@ -421,6 +416,9 @@ import(): MysqlImportResult
 &nbsp;
 
 ### Интерфейс MysqlImportResult<a name="MysqlImportResult"></a>
+
+***Не реализовано.***
+
 ```js
 interface MysqlImportResult {
 	hasErrors(): boolean;
@@ -763,6 +761,8 @@ format(path: string, xml: boolean): SqlBulkCopyResult
 &nbsp;
 
 ### Интерфейс SqlBulkCopyResult<a name="SqlBulkCopyResult"></a>
+
+***Не реализовано.***
 
 ```ts
 interface SqlBulkCopyResult {
