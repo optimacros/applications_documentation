@@ -148,7 +148,7 @@ export interface ExportResult {
 export interface Exporter {
     setEncoding(encoding: ExporterEncoding): this;
 
-    setExtension(extension: ExporterFileExtension): this;
+    setFormat(extension: ExporterFileExtension): this;
 
     setOmitSummaryRows(omitSummaryRows: boolean): this;
 

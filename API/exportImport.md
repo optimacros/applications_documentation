@@ -364,8 +364,6 @@ import(): Importer
 
 ### Интерфейс StorageImporter<a name="StorageImporter"></a>
 
-***Не реализовано.***
-
 ```ts
 interface StorageImporter extends Importer {
 	setMaxFailures(maxFailures: number): StorageImporter;
