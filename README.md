@@ -8,3 +8,4 @@ API Application Manager частично совместим с [`API Cкрипт
 1. [API Reference](./API/API.md)
 1. [Отличия от Скриптов 1.0](./diff.md)
 1. [Новые возможности](./features.md)
+1. [Веб-интерфейсы](./webHandlers/webHandlers.md)
