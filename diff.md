@@ -4,7 +4,7 @@
 1. [Доступ к входным параметрам](#params)
 1. [Запуск дочернего скрипта](#runScript)
 1. [Вывод статусного сообщения](#status)
-1. [Веб-обработчик](#webHandler)
+1. [Взаимодействие с другими приложениями](./webHandlers/webHandlers.md)
 1. [Вывод приложения](#asyncOutput)
 
 ## Соединение с моделью<a name="modelConnect"></a>
@@ -47,6 +47,8 @@ const om = OM.connect(
 
 &nbsp;
 
+### Асинхронная операция соединения <a name="connectAsync"></a>
+
 ```js
 OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>
 ```
@@ -85,8 +87,8 @@ OM.script(relativePathOrId: string, params: Object): EventPromise
 ### Класс EventPromise<a name="EventPromise"></a>
 ```ts
 class EventPromise extends EventEmitter {
-    then(callback: (result) => void): this;
-    catch(callback: (error) => void): this;
+    then(callback: (result: any) => void): this;
+    catch(callback: (error: any) => void): this;
 }
 ```
 Комбинация возможностей обычного [Promise](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [await](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [EventEmitter](https://nodejsdev.ru/doc/event-emitter/#eventemitter) генерирующего события из источника. ***Описание данного класса находится в доработке.***
@@ -99,25 +101,6 @@ class EventPromise extends EventEmitter {
 OM.status(...args: any[]): OM
 ```
 Статический метод интерфейса `OM`. Устанавливает статусное сообщение `args`. Если `args` задано в виде массива, то выводит элементы в заданном порядке, разделяя их пробелом. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ. Аналог метода [setStatusMessage](https://github.com/optimacros/scripts_documentation/blob/main/API/common.md#RequestManager.setStatusMessage) в Скриптах 1.0. ***Не реализовано, выводит подсвеченное зеленым цветом сообщение в терминале вывода.***
-
-&nbsp;
-
-## Веб-обработчик<a name="webHandler"></a>
-
-```js
-OM.web(eventName, callback: (args: {}) => string | WebHandlerResponse)
-```
-***Метод находится в разработке.***
-
-Статический метод интерфейса `OM`. Из функций `callback` web-обработчиков нельзя использовать `OM.connect`, можно только `OM.connectAsync`.
-
-### Интерфейс WebHandlerResponse<a name="WebHandlerResponse"></a>
-```ts
-interface WebHandlerResponse {
-    headers: { [x: string]: string };
-    body: string;
-}
-```
 
 &nbsp;
 
