@@ -10,26 +10,53 @@
 ## Создание веб-интерфейсов<a name="creation"></a>
 
 ```js
-OM.web(eventName: string, callback: (request: Object) => string | WebHandlerResponse): void
+OM.web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void
 ```
 
 Статический метод интерфейса `OM`. Позволяет создать веб-обработчик с именем `eventName` для взаимодейсвия с другими приложениями, при обращении к которому будет выполняться функция `callback`. 
 
-Функция-обработчик принимает на вход параметр `request` в виде объекта, который содержит следующие свойства:
-- `appId` - индентификатор приложения,
-- `path` - URL адрес, по которому был отправлен запрос к веб-обработчику,
-- параметры, переданные в запросе,
-- `urlRegex` - список групп совпадений URL адреса в регулярном выражении, если оно было задано, иначе это свойство отсутствует,
+Входной параметр `request` содержит ссылку на интерфейс `OMWebRequest`.
 
-Возвращает ответ в виде строки или объекта класса `WebHandlerResponse`. 
+### Интерфейс OMWebRequest
 
-### Интерфейс WebHandlerResponse<a name="WebHandlerResponse"></a>
+```ts
+interface OMWebRequest {
+    method: string,
+    headers: { [x: string]: string },
+    contentType: string,
+    params: {
+        appId: string,
+        path: string,
+    },
+    urlRegex?: string[],
+    query?: { [x: string]: string },
+    body: { [x: string]: string },
+}
+```
+
+Содержит информацию о запросе, который был передан веб-обработчику.
+
+- `method` - метод HTTP запроса, поддерживаются методы `GET` и `POST`.
+- `headers` - заголовки HTTP.
+- `contentType` - тип переданного контента.
+- `params` содержит индентификатор приложения `appId` и адрес `path`, по которому был отправлен запрос к веб-обработчику.
+- `urlRegex` - список групп совпадений адреса в регулярном выражении, если оно было задано, иначе это свойство отсутствует.
+- `query` - параметры запроса.
+- `body` - тело запроса.
+
+&nbsp;
+
+Функция-обработчик возвращает ответ в формате строки или ссылку на интерфейс `WebHandlerResponse`. 
+
+### Интерфейс WebHandlerResponse
 ```ts
 interface WebHandlerResponse {
     headers: { [x: string]: string };
     body: string;
 }
 ```
+
+Содержит заголовки HTTP `headers` и тело ответа `body` в формате строки.
 
 &nbsp;
 
