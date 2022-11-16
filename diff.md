@@ -29,7 +29,7 @@ OM.connect(https: string, wss: string, token: string, modelId: string, env?: Obj
 
 ![URL-адрес и modelId](./pic/modelId.png)
 
-2. Задаем токен пользователя в `General parameters` в системе Application Manager.
+2. Задаем токен пользователя в модальном окне `General parameters` в системе Application Manager.
 
 ![Secret Token](./pic/secretToken.png)
 
@@ -66,7 +66,7 @@ OM.params: Object
 ```
 Свойство интерфейса `OM`. Позволяет получить доступ к параметрам, переданным в скрипт в виде [JSON](https://habr.com/ru/post/554274/) объекта при его запуске.
 
-`Запуск скрипта с параметрами` позволяет передать в скрипт входные параметры. В системе Application Manager параметры задаются в виде [JSON](https://habr.com/ru/post/554274/) объекта через интерфейс `General parameters` или в дополнительном модальном окне при запуске скрипта.
+`Запуск скрипта с параметрами` позволяет передать в скрипт входные параметры. В системе Application Manager параметры задаются в виде [JSON](https://habr.com/ru/post/554274/) объекта в модальном окне `General parameters` или в модальном окне при запуске скрипта.
 
 ![Script parameters](./pic/scriptParameters.png)
 
@@ -81,7 +81,7 @@ OM.params: Object
 ```js
 OM.script(relativePathOrId: string, params: Object): EventPromise
 ```
-Статический метод интерфейса `OM`. Запускает скрипт `relativePathOrId` с [входными параметрами](#params) `params`. В качестве параметра `relativePathOrId` можно передать идентификатор скрипта, существующего в Application Manager (скрипт может находиться в другом приложении), или относительный путь к скрипту в текущем приложении. **Важно! Скрипт должен быть запускаемым.** Список запускаемых скриптов и их идентификаторы можно найти, нажав на кнопку `Edit Application` -> `Executable Scripts`.
+Статический метод интерфейса `OM`. Запускает скрипт `relativePathOrId` с [входными параметрами](#params) `params`. В качестве параметра `relativePathOrId` можно передать идентификатор скрипта, существующего в Application Manager (скрипт может находиться в другом приложении), или относительный путь к скрипту в текущем приложении. **Важно! Скрипт должен быть исполняемым.** Список исполняемых скриптов и их идентификаторы можно найти в модальном окне `Edit Application` на вкладке `Executable Scripts`.
 
 Метод возвращает ссылку на объект класса [EventPromise](#EventPromise). Родительский скрипт может ждать результата выполнения дочернего скрипта или продолжить работу параллельно с дочерним скриптом.
 
