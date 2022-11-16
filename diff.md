@@ -109,7 +109,7 @@ OM.status(...args: any[]): OM
 
 Вывод приложения доступен непосредственно во время его работы в режиме реального времени в окне терминала вывода. [Вывод в Скриптах 1.0](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#syncOutput) был `доступен` только после завершения работы скрипта.
 
-### `console.log()` добавляет символ переноса строки<a name="lineBreak"></a>
+**`console.log()` добавляет символ переноса строки**<a name="lineBreak"></a>
 
 В [отличие](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#noLineBreak) от скриптов 1.0 при выводе информации на экран не нужно специально добавлять символ `'\n'` переноса строки.
 
