@@ -146,9 +146,9 @@ export interface ExportResult {
 }
 
 export interface Exporter {
-    setEncoding(encoding: ExporterEncoding): this;
+    setEncoding(encoding: string): this;
 
-    setFormat(extension: ExporterFileExtension): this;
+    setFormat(extension: string): this;
 
     setOmitSummaryRows(omitSummaryRows: boolean): this;
 
@@ -162,11 +162,11 @@ export interface Exporter {
 
     setFileName(fileName: string): this;
 
-    setDelimiter(delimiter: ExporterCsvDelimiter): this;
+    setDelimiter(delimiter: string): this;
 
-    setEnclosure(enclosure: ExporterCsvEnclosure): this;
+    setEnclosure(enclosure: string): this;
 
-    setEscape(escape: ExporterCsvEscape): this;
+    setEscape(escape: string): this;
 
     setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): this;
 
