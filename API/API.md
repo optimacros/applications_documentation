@@ -1,12 +1,12 @@
 # API Reference
 
 1. [Интерфейс Application manager (на языке TypeScript)](./declarations/om.d.ts)
-1. [Соединение с моделью](#modelConnect)
 1. [Доступ к входным параметрам](#inputParams)
+1. [Соединение с моделью](#modelConnect)
 1. [Запуск дочернего скрипта](#runScript)
 1. [Вывод статусного сообщения](#status)
+1. [Веб-интерфейсы](#webHandlers)
 1. [Интерфейсы модели OM](./om.md)
-1. [Веб-интерфейсы](./webHandlers.md)
 
 &nbsp;
 
@@ -25,6 +25,23 @@ export interface OMStatic {
 }
 ```
 Интерфейс `OMStatic` являет собой набор методов глобального объекта `OM` в системе Application Manager.
+
+## Доступ к входным параметрам<a name="inputParams"></a>
+
+```js
+OM.params: Object
+```
+Позволяет получить доступ к параметрам, переданным в скрипт при его запуске в виде [JSON](https://habr.com/ru/post/554274/) объекта.
+
+`Запуск скрипта с параметрами` позволяет передать в скрипт входные параметры. В системе Application Manager параметры задаются в виде [JSON](https://habr.com/ru/post/554274/) объекта в модальном окне `General parameters` или в модальном окне при запуске скрипта.
+
+![Script parameters](./pic/scriptParameters.png)
+
+Окно ввода параметров в JSON формате.
+
+![JSON parameters](./pic/jsonParameters.png)
+
+&nbsp;
 
 ## Соединение с моделью<a name="modelConnect"></a>
 
@@ -77,23 +94,6 @@ OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?
 
 &nbsp;
 
-## Доступ к входным параметрам<a name="inputParams"></a>
-
-```js
-OM.params: Object
-```
-Позволяет получить доступ к параметрам, переданным в скрипт при его запуске в виде [JSON](https://habr.com/ru/post/554274/) объекта.
-
-`Запуск скрипта с параметрами` позволяет передать в скрипт входные параметры. В системе Application Manager параметры задаются в виде [JSON](https://habr.com/ru/post/554274/) объекта в модальном окне `General parameters` или в модальном окне при запуске скрипта.
-
-![Script parameters](./pic/scriptParameters.png)
-
-Окно ввода параметров в JSON формате.
-
-![JSON parameters](./pic/jsonParameters.png)
-
-&nbsp;
-
 ## Запуск дочернего скрипта<a name="runScript"></a>
 
 ```js
@@ -120,6 +120,15 @@ class EventPromise extends EventEmitter {
 OM.status(...args: any[]): OM
 ```
 Устанавливает статусное сообщение `args`. Если `args` задано в виде массива, то выводит элементы в заданном порядке, разделяя их пробелом. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ. Аналог метода [setStatusMessage](https://github.com/optimacros/scripts_documentation/blob/main/API/common.md#RequestManager.setStatusMessage) в Скриптах 1.0. ***Не реализовано, выводит подсвеченное зеленым цветом сообщение в терминале вывода.***
+
+&nbsp;
+
+## Веб-интерфесы<a name="webHandlers"></a>
+
+```js
+web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
+```
+Создает веб-обработчик для взаимодейсвия с другими приложениями. Подробное описание [читать тут](./webHandlers.md).
 
 &nbsp;
 
