@@ -60,7 +60,7 @@ interface WebHandlerResponse {
 
 &nbsp;
 
-В функций веб-обработчиков нельзя устанавливать соединение с моделью через [OM.connect](../diff.md#modelConnect), можно только выполнять асинхронную операцию соединения [OM.connectAsync](../diff.md#connectAsync).
+В функций веб-обработчиков нельзя устанавливать соединение с моделью через [OM.connect](./API.md#modelConnect), можно только выполнять асинхронную операцию соединения [OM.connectAsync](./API.md#connectAsync).
 
 &nbsp;
 
