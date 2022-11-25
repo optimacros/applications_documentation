@@ -110,7 +110,7 @@ class EventPromise extends EventEmitter {
     catch(callback: (error: any) => void): this;
 }
 ```
-Комбинация возможностей обычного [Promise](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [await](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [EventEmitter](https://nodejsdev.ru/doc/event-emitter/#eventemitter) генерирующего события из источника. ***Описание данного класса находится в доработке.***
+Комбинация возможностей обычного [Promise](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [await](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [EventEmitter](https://nodejsdev.ru/doc/event-emitter/#eventemitter) генерирующего события из источника.
 
 &nbsp;
 
@@ -123,7 +123,7 @@ OM.status(...args: any[]): OM
 
 &nbsp;
 
-## Веб-интерфесы<a name="webHandlers"></a>
+## Веб-интерфейсы<a name="webHandlers"></a>
 
 ```js
 web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
