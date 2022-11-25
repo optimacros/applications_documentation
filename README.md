@@ -7,4 +7,3 @@ API Application Manager частично совместим с [`API Cкрипт
 1. [Расширенные возможности](./advancedFeatues/advancedFeatues.md)
 1. [API Reference](./API/API.md)
 1. [Отличия от Скриптов 1.0](./diff.md)
-1. [Новые возможности](./features.md)

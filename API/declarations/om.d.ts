@@ -1488,4 +1488,37 @@ export interface OM {
     readonly notifications: Notifications.Manager;
 }
 
-export var om: OM;
+export class EventPromise extends EventEmitter {
+    then(callback: (result: any) => void): this;
+    catch(callback: (error: any) => void): this;
+}
+
+export interface OMWebRequest {
+    method: string,
+    headers: { [x: string]: string },
+    contentType: string,
+    params: {
+        appId: string,
+        path: string,
+    },
+    urlRegex?: string[],
+    query?: { [x: string]: string },
+    body: { [x: string]: string },
+}
+
+export interface WebHandlerResponse {
+    headers: { [x: string]: string };
+    body: string;
+}
+
+export interface OMStatic {
+    new (): OM;
+
+    readonly params: Object;
+
+    connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
+    connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+    script(relativePathOrId: string, params: Object): EventPromise;
+    status(...args: any[]): OM;
+    web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
+}
