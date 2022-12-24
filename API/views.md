@@ -96,6 +96,7 @@ elementsDeleter(): ElementsDeleter
 ```js
 elementsReorder(): ElementsReorder
 ```
+***Не реализовано.***
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
 
 &nbsp;

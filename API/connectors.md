@@ -17,9 +17,9 @@ interface Connectors {
 &nbsp;
 
 ```js
-mysql(): MysqlConnectorBuilder
+mysql(): SqlConnectorBuilder
 ```
-Возвращает коннектор [`SqlConnectorBuilder`](./relationalDB.md#mysql-connector-builder) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
+Возвращает коннектор [`SqlConnectorBuilder`](./relationalDB.md#sql-connector-builder) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
 
 &nbsp;
 

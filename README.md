@@ -1,6 +1,6 @@
 #  Документация по [Optimacros](https://optimacros.ru/) Application Manager API
 
-Application Manager API частично совместимо с [`API Cкриптов 1.0`](https://github.com/optimacros/scripts_documentation/blob/main/README.md) в модели, но также предоставляет дополнительные возможности.
+Application Manager API частично совместим с [`API Cкриптов 1.0`](https://github.com/optimacros/scripts_documentation/blob/main/README.md) в модели, но также предоставляет дополнительные возможности.
 
 1. [Требования к разработчику приложений](prerequisities.md)
 1. [Курс молодого бойца / Cook book](./cookBook/cookBook.md)

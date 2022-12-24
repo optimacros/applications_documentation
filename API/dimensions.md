@@ -60,7 +60,7 @@ interface ListTab extends Tab {
 ```js
 subsetTab(): ListSubsetsTab
 ```
-Возвращает ссылку на интерфейс [`ListSubsetsTab`](#list-child-tab). В интерфейсе Optimacros аналогично открытию вкладки `Выборки` справочника `name`.
+Возвращает ссылку на интерфейс [`ListSubsetsTab`](#list-child-tab) доступа к вкладке выборок справочника. В интерфейсе Optimacros аналогично открытию вкладки `Выборки` справочника `name`.
 
 &nbsp;
 ```js
