@@ -8,7 +8,7 @@
 
 ***Не реализовано.***
 
-### Интерфейс ElementsCreator<a name="ElementsCreator"></a>
+### Интерфейс ElementsCreator<a name="elements-creator"></a>
 
 ```ts
 interface ElementsCreator {
@@ -23,25 +23,24 @@ interface ElementsCreator {
 ```js
 numeric(): NumericElementsCreator
 ```
-Возращает ссылку на [`NumericElementsCreator`](#NumericElementsCreator).
+Возращает ссылку на интерфейс [`NumericElementsCreator`](#numeric-elements-creator).
 
 &nbsp;
 
 ```js
 named(): NamedElementsCreator
 ```
-Возращает ссылку на [`NamedElementsCreator`](#NamedElementsCreator).
+Возращает ссылку на интерфейс [`NamedElementsCreator`](#named-elements-creator).
 
 &nbsp;
 
-### Интерфейс NumericElementsCreator<a name="NumericElementsCreator"></a>
-
+### Интерфейс NumericElementsCreator<a name="numeric-elements-creator"></a>
 ```ts
 interface NumericElementsCreator extends BaseElementsCreator {
 	setCount(count: number): NumericElementsCreator;
 }
 ```
-Интерфейс позволяет добавить заданное количество элементов в заданную позицию таблицы. Аналог кнопки "Добавить элементы" в интерфейсе Optimacros. Перед созданием элементов необходимо указать их количество (нет значения по умолчанию) и позицию добавления (по умолчанию: в конец). Интерфейс наследуется от [`BaseElementsCreator`](#BaseElementsCreator).
+Интерфейс позволяет добавить заданное количество элементов в заданную позицию таблицы. Аналог кнопки "Добавить элементы" в интерфейсе Optimacros. Перед созданием элементов необходимо указать их количество (нет значения по умолчанию) и позицию добавления (по умолчанию: в конец). Интерфейс наследуется от [`BaseElementsCreator`](#base-elements-creator).
 
 &nbsp;
 
@@ -52,14 +51,13 @@ setCount(count: number): NumericElementsCreator
 
 &nbsp;
 
-### Интерфейс NamedElementsCreator<a name="NamedElementsCreator"></a>
-
+### Интерфейс NamedElementsCreator<a name="named-elements-creator"></a>
 ```ts
 interface NamedElementsCreator extends BaseElementsCreator {
 	setElementNames(names: string[]): NamedElementsCreator;
 }
 ```
-Интерфейс позволяет добавить заданное количество элементов с именами в заданную позицию таблицы. Аналог кнопки "Добавить элементы с именами" в интерфейсе Optimacros. Перед созданием элементов необходимо указать список имен элементов и позицию добавления (по умолчанию: в конец). Интерфейс наследуется от [`BaseElementsCreator`](#BaseElementsCreator).
+Интерфейс позволяет добавить заданное количество элементов с именами в заданную позицию таблицы. Аналог кнопки "Добавить элементы с именами" в интерфейсе Optimacros. Перед созданием элементов необходимо указать список имен элементов и позицию добавления (по умолчанию: в конец). Интерфейс наследуется от [`BaseElementsCreator`](#base-elements-creator).
 
 &nbsp;
 
@@ -70,8 +68,7 @@ setElementNames(names: string[]): NamedElementsCreator
 
 &nbsp;
 
-### Интерфейс BaseElementsCreator<a name="BaseElementsCreator"></a>
-
+### Интерфейс BaseElementsCreator<a name="base-elements-creator"></a>
 ```ts
 interface BaseElementsCreator {
 	setPositionAfter(relativeLongId: number): BaseElementsCreator;
@@ -89,14 +86,14 @@ interface BaseElementsCreator {
 ```js
 setPositionAfter(relativeLongId: number): BaseElementsCreator
 ```
-Устанавливает позицию добавления после [`relativeLongId`](./views.md#longId). Возвращает `this`.
+Устанавливает позицию добавления после [`relativeLongId`](./views.md#long-id). Возвращает `this`.
 
 &nbsp; 
 
 ```js
 setPositionBefore(relativeLongId: number): BaseElementsCreator
 ```
-Устанавливает позицию добавления до [`relativeLongId`](./views.md#longId). Возвращает `this`.
+Устанавливает позицию добавления до [`relativeLongId`](./views.md#long-id). Возвращает `this`.
 
 &nbsp;
 
@@ -114,23 +111,24 @@ setPositionEnd(): BaseElementsCreator
 
 &nbsp;
 
+<a name="base-elements-creator.set-position-child-of"></a>
 ```js
 setPositionChildOf(parentLongId: number): BaseElementsCreator
 ```
-Устанавливает позицию добавления дочерней для [`parentLongId`](./views.md#longId). Возвращает `this`.
+Устанавливает позицию добавления элемента как дочернего для [`parentLongId`](./views.md#long-id). Возвращает `this`.
 
 &nbsp;
 
 ```js
 create(): number[]
 ```
-Добавляет элементы и возвращает массив их [`longId`](./views.md#longId).
+Добавляет элементы и возвращает массив их [`longId`](./views.md#long-id).
 
 &nbsp;
 
 ## Удаление элементов<a name="delete"></a>
 
-### Интерфейс ElementsDeleter<a name="ElementsDeleter"></a>
+### Интерфейс ElementsDeleter<a name="elements-deleter"></a>
 ```ts
 interface ElementsDeleter {
 	appendIdentifier(identifier: number): ElementsDeleter;
@@ -144,7 +142,7 @@ interface ElementsDeleter {
 ```js
 appendIdentifier(identifier: number): ElementsDeleter
 ```
-Добавляет в буфер элемент, чей [`longId`](./views.md#longId) равен `identifier`. Возращает `this`.
+Добавляет в буфер элемент, чей [`longId`](./views.md#long-id) равен `identifier`. Возращает `this`.
 
 &nbsp;
 
@@ -159,7 +157,7 @@ delete(): ElementsDeleter
 
 ***Не реализовано.***
 
-### Интерфейс ElementsReorder<a name="ElementsReorder"></a>
+### Интерфейс ElementsReorder<a name="elements-reorder"></a>
 
 ```ts
 interface ElementsReorder {
@@ -169,7 +167,7 @@ interface ElementsReorder {
 	reverse(): ElementsReorder;
 }
 ```
-Интерфейс позволяет перетасовать элементы и доступен только для элементов справочников. Во время работы хранит очередь элементов, которые функцией [`reorder()`](#reorder) будут переданы на сервер для перепозиционирования в порядке этой очереди.
+Интерфейс позволяет перетасовать элементы и доступен только для элементов справочников. Во время работы хранит очередь элементов, которые функцией [`reorder()`](#elements-reorder.reorder) будут переданы на сервер для перепозиционирования в порядке этой очереди.
 
 Аналог кнопки "Переместить" в интерфейсе Optimacros. Но в отличие от интерфейса пользователя, в скриптах 1.0 изменение позиции элемента возможно только в пределах элементов с тем же родительским элементом. Поэтому для постановки элемента в конкретную позицию среди элементов с другим родительским, нужно сначала сменить родителя. Именно так и организован интерфейс пользователя: в таком случае он отправляет на сервер две команды.
 
@@ -178,7 +176,7 @@ interface ElementsReorder {
 ```js
 append(longId: number, relativeLongId?: number, position?: string): ElementsReorder
 ```
-Добавляет в очередь данные о [`longId`](./views.md#longId) элемента, который впоследствии будет позиционирован относительно элемента `relativeLongId` (значение по умолчанию: `-1`). Возвращает `this`. Способ позиционирования задаёт аргумент `position` (регистр имеет значение):
+Добавляет в очередь данные о [`longId`](./views.md#long-id) элемента, который впоследствии будет позиционирован относительно элемента `relativeLongId` (значение по умолчанию: `-1`). Возвращает `this`. Способ позиционирования задаёт аргумент `position` (регистр имеет значение):
 
 `'Before'` — непосредственно перед `relativeLongId`;
 
@@ -190,7 +188,7 @@ append(longId: number, relativeLongId?: number, position?: string): ElementsReor
 
 &nbsp;
 
-<a name="reorder"></a>
+<a name="elements-reorder.reorder"></a>
 ```js
 reorder(): ElementsReorder
 ```

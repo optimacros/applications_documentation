@@ -1,6 +1,6 @@
 # Интерфейс Common
 
-### Интерфейс Common<a name="Common"></a>
+### Интерфейс Common<a name="common"></a>
 ```ts
 interface Common {
 	createCellBuffer(): CellBuffer;
@@ -19,14 +19,14 @@ interface Common {
 ```js
 createCellBuffer(): CellBuffer
 ```
-Возвращает ссылку на интерфейс [`CellBuffer`](#CellBuffer).
+Возвращает ссылку на интерфейс [`CellBuffer`](#cell-buffer).
 
 &nbsp;
 
 ```js
 requestInfo(): RequestManager
 ```
-Возвращает ссылку на интерфейс [`RequestManager`](#RequestManager).
+Возвращает ссылку на интерфейс [`RequestManager`](#request-manager).
 
 &nbsp;
 
@@ -34,7 +34,7 @@ requestInfo(): RequestManager
 ```js
 modelInfo(): ModelInfo
 ```
-Возвращает ссылку на интерфейс [`ModelInfo`](#ModelInfo).
+Возвращает ссылку на интерфейс [`ModelInfo`](#model-info).
 
 &nbsp;
 
@@ -43,15 +43,14 @@ userInfo(): UserInfo
 ```
 ***Не реализовано.***
 
-Возвращает ссылку на интерфейс [`UserInfo`](#UserInfo).
+Возвращает ссылку на интерфейс [`UserInfo`](#user-info).
 
 &nbsp;
 
 ```js
 resultInfo(): ResultInfo
 ```
-
-Возвращает ссылку на интерфейс [`ResultInfo`](#ResultInfo).
+Возвращает ссылку на интерфейс [`ResultInfo`](#result-info).
 
 &nbsp;
 
@@ -60,7 +59,7 @@ entitiesInfo(): EntitiesInfo
 ```
 ***Не реализовано.***
 
-Возвращает ссылку на интерфейс [`EntitiesInfo`](#EntitiesInfo).
+Возвращает ссылку на интерфейс [`EntitiesInfo`](#entities-info).
 
 &nbsp;
 
@@ -69,11 +68,11 @@ copyData(): CopyData
 ```
 ***Не реализовано.***
 
-Возвращает ссылку на интерфейс [`CopyData`](#CopyData).
+Возвращает ссылку на интерфейс [`CopyData`](#copy-data).
 
 &nbsp;
 
-### Интерфейс RequestManager<a name="RequestManager"></a>
+### Интерфейс RequestManager<a name="request-manager"></a>
 ```ts
 interface RequestManager {
 	log(message: string, print?: boolean): RequestManager;
@@ -94,7 +93,7 @@ log(message: string, print?: boolean): RequestManager
 
 &nbsp;
 
-<a name="RequestManager.logStatusMessage"></a>
+<a name="request-manager.log-status-message"></a>
 ```js
 logStatusMessage(message: string, print?: boolean): RequestManager
 ```
@@ -102,6 +101,7 @@ logStatusMessage(message: string, print?: boolean): RequestManager
 
 &nbsp;
 
+<a name="request-manager.set-status-message"></a>
 ```js
 setStatusMessage(message: string): RequestManager
 ```
@@ -111,7 +111,7 @@ setStatusMessage(message: string): RequestManager
 
 &nbsp;
 
-### Интерфейс CellBuffer<a name="CellBuffer"></a>
+### Интерфейс CellBuffer<a name="cell-buffer"></a>
 ```ts
 interface CellBuffer {
 	set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
@@ -139,7 +139,7 @@ interface CellBuffer {
 * вызов `CellBuffer.apply()`
 ```
 
-При модификации большого количества клеток (от нескольких сотен тысяч), рекомендуется пользоваться [`импортом CSV`](./exportImport.md#Importer).
+При модификации большого количества клеток (от нескольких сотен тысяч), рекомендуется пользоваться [`импортом CSV`](./exportImport.md#importer).
 
 &nbsp;
 
@@ -174,7 +174,7 @@ canLoadCellsValues(value: boolean): CellBuffer
 
 &nbsp;
 
-### Интерфейс ExportObfuscationState<a name="ExportObfuscationState"></a>
+### Интерфейс ExportObfuscationState<a name="export-obfuscation-state"></a>
 ```ts
 interface ExportObfuscationState {
 	setPath(path: string): ExportObfuscationState;
@@ -215,7 +215,7 @@ export(): boolean
 
 &nbsp;
 
-### Интерфейс ModelInfo<a name="ModelInfo"></a>
+### Интерфейс ModelInfo<a name="model-info"></a>
 ```ts
 interface ModelInfo {
 	id(): string;
@@ -295,7 +295,7 @@ backup(path: string): boolean
 ```
 ***Не реализовано.***
 
-Сохраняет резервную копию в [`рабочую директорию`](../appendix/glossary.md#scriptDir) скрипта по пути `path`. Возвращает `true`.
+Сохраняет резервную копию в [`рабочую директорию`](../appendix/glossary.md#script-dir) скрипта по пути `path`. Возвращает `true`.
 
 &nbsp;
 
@@ -304,11 +304,11 @@ exportObfuscationState(): ExportObfuscationState
 ```
 ***Не реализовано.***
 
-Возвращает интерфейс [`ExportObfuscationState`](#ExportObfuscationState) экспорта модели в обфусцированном состоянии.
+Возвращает интерфейс [`ExportObfuscationState`](#export-obfuscation-state) экспорта модели в обфусцированном состоянии.
 
 &nbsp;
 
-### Интерфейс UserInfo<a name="UserInfo"></a>
+### Интерфейс UserInfo<a name="user-info"></a>
 
 ***Не применимо в Application Manager.***
 
@@ -328,7 +328,7 @@ interface UserInfo {
 ```js
 getEntity(): EntityInfo
 ```
-Возвращает сущность пользователя в виде [`EntityInfo`](./views.md#EntityInfo).
+Возвращает сущность пользователя в виде [`EntityInfo`](./views.md#entity-info).
 
 &nbsp;
 
@@ -356,11 +356,11 @@ getLastName(): string
 ```js
 getRole(): EntityInfo
 ```
-Возвращает сущность роли пользователя в виде [`EntityInfo`](./views.md#EntityInfo).
+Возвращает сущность роли пользователя в виде [`EntityInfo`](./views.md#entity-info).
 
 &nbsp;
 
-### Интерфейс ResultInfo<a name="ResultInfo"></a>
+### Интерфейс ResultInfo<a name="result-info"></a>
 ```ts
 interface ResultInfo {
 	addFileHash(hash: string): ResultInfo;
@@ -372,13 +372,13 @@ interface ResultInfo {
 
 &nbsp;
 
-<a name="ResultInfo.addFileHash"></a>
+<a name="result-info.add-file-hash"></a>
 ```js
 addFileHash(hash: string): ResultInfo
 ```
 ***Не реализовано.***
 
-Добавляет к ответу на запрос скрипта хэш `hash` файла, ранее зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry). Для пользователя это приведёт к тому, что файл будет скачан в браузере. Возвращает `this`.
+Добавляет к ответу на запрос скрипта хэш `hash` файла, ранее зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#global-file-registry). Для пользователя это приведёт к тому, что файл будет скачан в браузере. Возвращает `this`.
 
 &nbsp;
 
@@ -387,7 +387,7 @@ actionsInfo(): ResultActionsInfo
 ```
 ***Не реализовано.***
 
-Возвращает интерфейс [`ResultActionsInfo`](./scriptChains.md#ResultActionsInfo) создания действий, которые можно автомагически осуществить после исполнения текущего скрипта.
+Возвращает интерфейс [`ResultActionsInfo`](./scriptChains.md#result-actions-info) создания действий, которые можно автомагически осуществить после исполнения текущего скрипта.
 
 &nbsp;
 
@@ -400,32 +400,32 @@ setProperty(name: string, value: any): ResultInfo
 
 &nbsp;
 
-### Интерфейс EntitiesInfo<a name="EntitiesInfo"></a>
+### Интерфейс EntitiesInfo<a name="entities-info"></a>
 ```ts
 interface EntitiesInfo {
 	get(longId: number): EntityInfo | null;
 	getCollection(longId: number[]): EntityInfo[];
 }
 ```
-Интерфейс для получения сущности по [`longId`](./views.md#longId).
+Интерфейс для получения сущности по [`longId`](./views.md#long-id).
 
 &nbsp;
 
 ```js
 get(longId: number): EntityInfo | null
 ```
-Возвращает сущность [`EntityInfo`](./views.md#EntityInfo) по её [`longId`](./views.md#longId).
+Возвращает сущность [`EntityInfo`](./views.md#entity-info) по её [`longId`](./views.md#long-id).
 
 &nbsp;
 
 ```js
 getCollection(longId: number[]): EntityInfo[]
 ```
-Возвращает массив сущностей [`EntityInfo`](./views.md#EntityInfo) по массиву их [`longId`](./views.md#longId).
+Возвращает массив сущностей [`EntityInfo`](./views.md#entity-info) по массиву их [`longId`](./views.md#long-id).
 
 &nbsp;
 
-### Интерфейс CopyData<a name="CopyData"></a>
+### Интерфейс CopyData<a name="copy-data"></a>
 
 ***Не реализовано.***
 
@@ -447,14 +447,14 @@ interface CopyData {
 ```js
 setSourceLongId(longId: number): CopyData
 ```
-Устанавливает [`longId`](./views.md#longId) измерения источника.
+Устанавливает [`longId`](./views.md#long-id) измерения источника.
 
 &nbsp;
 
 ```js
 setDestLongId(longId: number): CopyData
 ```
-Устанавливает [`longId`](./views.md#longId) измерения приёмника.
+Устанавливает [`longId`](./views.md#long-id) измерения приёмника.
 
 &nbsp;
 
@@ -475,7 +475,7 @@ enableCopyAllCubes(): CopyData
 ```js
 setMulticubeLongIds(longIds: number[]): CopyData
 ```
-Устанавливает [`longId`](./views.md#longId) мультикубов.
+Устанавливает [`longId`](./views.md#long-id) мультикубов.
 
 &nbsp;
 

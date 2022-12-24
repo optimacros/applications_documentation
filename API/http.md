@@ -1,8 +1,8 @@
 # HTTP
 
-Все интерфейсы этого раздела, кроме [`ObjectOfStringArray`](#ObjectOfStringArray), находятся в пространстве имён `Http`.
+Все интерфейсы этого раздела, кроме [`ObjectOfStringArray`](#object-of-string-array), находятся в пространстве имён `Http`.
 
-### Интерфейс Params<a name="Params"></a>
+### Интерфейс Params<a name="params"></a>
 ```ts
 interface Params {
 	getAll(): Object;
@@ -67,7 +67,7 @@ clear(): boolean
 
 &nbsp;
 
-### Интерфейс UrlParams<a name="UrlParams"></a>
+### Интерфейс UrlParams<a name="url-params"></a>
 ```ts
 interface UrlParams extends Params {
 	stringify(): string;
@@ -75,7 +75,7 @@ interface UrlParams extends Params {
 	getEncodingType(): string;
 }
 ```
-Интерфейс, представляющий набор параметров и их значений для передачи их в [`Url`](#Url). Наследуется от интерфейса [`Params`](#Params).
+Интерфейс, представляющий набор параметров и их значений для передачи их в [`Url`](#url). Наследуется от интерфейса [`Params`](#params).
 
 &nbsp;
 
@@ -104,7 +104,7 @@ getEncodingType(): string
 
 &nbsp;
 
-### Интерфейс JsonRequestBody<a name="JsonRequestBody"></a>
+### Интерфейс JsonRequestBody<a name="json-request-body"></a>
 ```ts
 interface JsonRequestBody {
 	setJson(value: string | Object): boolean;
@@ -121,7 +121,7 @@ setJson(value: string | Object): boolean
 
 &nbsp;
 
-### Интерфейс StringRequestBody<a name="StringRequestBody"></a>
+### Интерфейс StringRequestBody<a name="string-request-body"></a>
 ```ts
 interface StringRequestBody {
 	setBody(value: string): boolean;
@@ -138,7 +138,7 @@ setBody(value: string): boolean
 
 &nbsp;
 
-### Интерфейс FormRequestBody<a name="FormRequestBody"></a>
+### Интерфейс FormRequestBody<a name="form-request-body"></a>
 
 ***Не реализовано.***
 
@@ -154,11 +154,11 @@ interface FormRequestBody {
 ```js
 params(): Params
 ```
-Возвращает объект [`Params`](#Params) для установки значений параметров.
+Возвращает объект [`Params`](#params) для установки значений параметров.
 
 &nbsp;
 
-### Интерфейс RequestBody<a name="RequestBody"></a>
+### Интерфейс RequestBody<a name="request-body"></a>
 ```ts
 interface RequestBody {
 	jsonBody(): JsonRequestBody;
@@ -173,25 +173,25 @@ interface RequestBody {
 ```js
 jsonBody(): JsonRequestBody
 ```
-Устанавливает значение [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type: application/json`, возвращает интерфейс [`JsonRequestBody`](#JsonRequestBody) для отправки [`JSON`](https://ru.wikipedia.org/wiki/JSON) в теле запроса.
+Устанавливает значение [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type: application/json`, возвращает интерфейс [`JsonRequestBody`](#json-request-body) для отправки [`JSON`](https://ru.wikipedia.org/wiki/JSON) в теле запроса.
 
 &nbsp;
 
 ```js
 stringBody(): StringRequestBody
 ```
-*Не* устанавливает [`заголовок HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type`, возвращает интерфейс [`StringRequestBody`](#StringRequestBody) для отправки строки в теле запроса.
+*Не* устанавливает [`заголовок HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type`, возвращает интерфейс [`StringRequestBody`](#string-request-body) для отправки строки в теле запроса.
 
 &nbsp;
 
 ```js
 formBody(): FormRequestBody
 ```
-Устанавливает значение [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type: application/x-www-form-urlencoded`, возвращает интерфейс [`FormRequestBody`](#FormRequestBody) для отправки формы в теле запроса.
+Устанавливает значение [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type: application/x-www-form-urlencoded`, возвращает интерфейс [`FormRequestBody`](#form-request-body) для отправки формы в теле запроса.
 
 &nbsp;
 
-### Интерфейс Url<a name="Url"></a>
+### Интерфейс Url<a name="url"></a>
 ```ts
 interface Url {
 	setUrl(url: string): boolean;
@@ -332,11 +332,11 @@ getFragment(): string | null
 ```js
 params(): UrlParams
 ```
-Возвращает интерфейс доступа [`UrlParams`](#UrlParams) к параметрам URL.
+Возвращает интерфейс доступа [`UrlParams`](#url-params) к параметрам URL.
 
 &nbsp;
 
-### Интерфейс AllowRedirects<a name="AllowRedirects"></a>
+### Интерфейс AllowRedirects<a name="allow-redirects"></a>
 ```ts
 interface AllowRedirects {
 	setStatus(status: boolean): boolean;
@@ -433,7 +433,7 @@ getProtocols(): string[]
 
 &nbsp;
 
-### Интерфейс HttpAuth<a name="HttpAuth"></a>
+### Интерфейс HttpAuth<a name="http-auth"></a>
 
 ***Не реализовано.***
 
@@ -477,7 +477,7 @@ setStatus(status: boolean): HttpAuth
 
 &nbsp;
 
-### Интерфейс Cert<a name="Cert"></a>
+### Интерфейс Cert<a name="cert"></a>
 
 ***Не реализовано.***
 
@@ -513,7 +513,7 @@ setPassphrase(passphrase: string): Cert
 
 &nbsp;
 
-### Интерфейс Verify<a name="Verify"></a>
+### Интерфейс Verify<a name="verify"></a>
 ```ts
 interface Verify {
 	setStatus(value: boolean): boolean;
@@ -536,7 +536,7 @@ setPath(path: string): boolean
 
 &nbsp;
 
-### Интерфейс Options<a name="Options"></a>
+### Интерфейс Options<a name="options"></a>
 ```ts
 interface Options {
 	setConnTimeout(seconds: number): boolean;
@@ -601,7 +601,7 @@ getCanDecodeContent(): boolean
 ```js
 allowRedirects(): AllowRedirects
 ```
-Возвращает интерфейс [`AllowRedirects`](#AllowRedirects) доступа к настройкам перенаправлений HTTP.
+Возвращает интерфейс [`AllowRedirects`](#allow-redirects) доступа к настройкам перенаправлений HTTP.
 
 &nbsp;
 
@@ -610,7 +610,7 @@ auth(): HttpAuth
 ```
 ***Не реализовано.***
 
-Возвращает интерфейс [`HttpAuth`](#HttpAuth) доступа к настройкам аутентификации HTTP.
+Возвращает интерфейс [`HttpAuth`](#http-auth) доступа к настройкам аутентификации HTTP.
 
 &nbsp;
 
@@ -619,18 +619,18 @@ cert(): Cert
 ```
 ***Не реализовано.***
 
-Возвращает интерфейс [`Cert`](#Cert) для настройки аутентификации по сертификату.
+Возвращает интерфейс [`Cert`](#cert) для настройки аутентификации по сертификату.
 
 &nbsp;
 
 ```js
 verify(): Verify
 ```
-Возвращает интерфейс [`Verify`](#Verify) проверки сертификатов SSL.
+Возвращает интерфейс [`Verify`](#verify) проверки сертификатов SSL.
 
 &nbsp;
 
-### Интерфейс RequestBuilder<a name="RequestBuilder"></a>
+### Интерфейс RequestBuilder<a name="request-builder"></a>
 ```ts
 interface RequestBuilder {
 	url(): Url;
@@ -650,7 +650,7 @@ interface RequestBuilder {
 ```js
 url(): Url
 ```
-Возвращает объект [`Url`](#Url) построения URL.
+Возвращает объект [`Url`](#url) построения URL.
 
 &nbsp;
 
@@ -671,39 +671,39 @@ getMethod(): string
 ```js
 body(): RequestBody
 ```
-Возвращает интерфейс [`RequestBody`](#RequestBody) формирования тела запроса.
+Возвращает интерфейс [`RequestBody`](#request-body) формирования тела запроса.
 
 &nbsp;
 
 ```js
 options(): Options
 ```
-Возвращает интерфейс [`Options`](#Options) настройки опций соединения.
+Возвращает интерфейс [`Options`](#options) настройки опций соединения.
 
 &nbsp;
 
 ```js
 cookies(): Params
 ```
-Возвращает интерфейс [`Params`](#Params) для доступа к [`cookies`](https://ru.wikipedia.org/wiki/Cookie).
+Возвращает интерфейс [`Params`](#params) для доступа к [`cookies`](https://ru.wikipedia.org/wiki/Cookie).
 
 &nbsp;
 
 ```js
 headers(): Params
 ```
-Возвращает интерфейс [`Params`](#Params) для формирования [`HTTP-заголовков`](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B8_HTTP) запроса.
+Возвращает интерфейс [`Params`](#params) для формирования [`HTTP-заголовков`](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B8_HTTP) запроса.
 
 &nbsp;
 
 ```js
 send(): Response
 ```
-Отправляет HTTP-запрос, дожидается ответа и возвращает интерфейс [`Response`](#Response) доступа к данным ответа сервера.
+Отправляет HTTP-запрос, дожидается ответа и возвращает интерфейс [`Response`](#response) доступа к данным ответа сервера.
 
 &nbsp;
 
-### Интерфейс HttpManager<a name="HttpManager"></a>
+### Интерфейс HttpManager<a name="http-manager"></a>
 ```ts
 interface HttpManager {
 	requestBuilder(): RequestBuilder;
@@ -720,7 +720,7 @@ interface HttpManager {
 ```js
 requestBuilder(): RequestBuilder
 ```
-Возвращает объект [`RequestBuilder`](#RequestBuilder) построения запроса.
+Возвращает объект [`RequestBuilder`](#request-builder) построения запроса.
 
 &nbsp;
 
@@ -753,7 +753,7 @@ base64Decode(value: string): string | boolean
 
 &nbsp;
 
-### Тип ObjectOfStringArray<a name="ObjectOfStringArray"></a>
+### Тип ObjectOfStringArray<a name="object-of-string-array"></a>
 ```ts
 type ObjectOfStringArray = {
 	[key: string]: string[];
@@ -763,7 +763,7 @@ type ObjectOfStringArray = {
 
 &nbsp;
 
-### Интерфейс ResponseErrors<a name="ResponseErrors"></a>
+### Интерфейс ResponseErrors<a name="response-errors"></a>
 ```ts
 interface ResponseErrors {
 	getCode(): number;
@@ -788,7 +788,7 @@ getMessage(): string
 
 &nbsp;
 
-### Интерфейс Response<a name="Response"></a>
+### Интерфейс Response<a name="response"></a>
 ```ts
 interface Response {
 	headers(): ObjectOfStringArray;
@@ -808,7 +808,7 @@ interface Response {
 ```js
 headers(): ObjectOfStringArray
 ```
-Возвращает заголовки ответа в виде [`ObjectOfStringArray`](#ObjectOfStringArray).
+Возвращает заголовки ответа в виде [`ObjectOfStringArray`](#object-of-string-array).
 
 &nbsp;
 
@@ -861,7 +861,7 @@ isOk(): boolean
 ```js
 getErrors(): ResponseErrors
 ```
-Возвращает интерфейс [`ResponseErrors`](#ResponseErrors) доступа к ошибкам HTTP.
+Возвращает интерфейс [`ResponseErrors`](#response-errors) доступа к ошибкам HTTP.
 
 &nbsp;
 
