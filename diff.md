@@ -18,19 +18,19 @@
 
 ## Доступ к входным параметрам<a name="input-params"></a>
 
-В системе Application Manager передача параметров в скрипт осуществляется через свойство [params](./API/API.md#input-params) глобального объекта `OM`. Скрипты в модели могут получать доступ к переменным окружения с помощью интерфейса [Environment](https://github.com/optimacros/scripts_documentation/blob/main/API/env.md#environment).
+В системе Application Manager передача параметров в скрипт осуществляется через свойство [`params`](./API/API.md#input-params) глобального объекта `OM`. Скрипты в модели могут получать доступ к переменным окружения с помощью интерфейса [`Environment`](https://github.com/optimacros/scripts_documentation/blob/main/API/env.md#environment).
 
 &nbsp;
 
 ## Запуск дочернего скрипта<a name="run-script"></a>
 
-В системе Application Manager запуск дочернего скрипта осуществляется с помощью метода [script](./API/API.md#run-script) глобального объекта `OM`. В Скриптах 1.0 - с помощью интерфейса [ResultActionsInfo](https://github.com/optimacros/scripts_documentation/blob/main/API/scriptChains.md#result-actions-info).
+В системе Application Manager запуск дочернего скрипта осуществляется с помощью метода [`script`](./API/API.md#run-script) глобального объекта `OM`. В Скриптах 1.0 - с помощью интерфейса [`ResultActionsInfo`](https://github.com/optimacros/scripts_documentation/blob/main/API/scriptChains.md#result-actions-info).
 
 &nbsp;
 
 ## Вывод статусного сообщения<a name="status"></a>
 
-В системе Application Manager метод [status](./API/API.md#status) глобального объекта `OM` является аналогом метода [setStatusMessage](https://github.com/optimacros/scripts_documentation/blob/main/API/common.md#request-manager.set-status-message) в Скриптах 1.0.
+В системе Application Manager метод [`status`](./API/API.md#status) глобального объекта `OM` является аналогом метода [`setStatusMessage`](https://github.com/optimacros/scripts_documentation/blob/main/API/common.md#request-manager.set-status-message) в Скриптах 1.0.
 
 &nbsp;
 
