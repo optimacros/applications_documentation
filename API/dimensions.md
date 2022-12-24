@@ -1,6 +1,6 @@
 # Измерения
 
-### Интерфейс Lists<a name="Lists"></a>
+### Интерфейс Lists<a name="lists"></a>
 ```ts
 interface Lists {
 	listsTab(): ListsTab;
@@ -14,7 +14,7 @@ interface Lists {
 ```js
 listsTab(): ListsTab
 ```
-Возвращает ссылку на интерфейс [`ListsTab`](#ListsTab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Справочники`.
+Возвращает ссылку на интерфейс [`ListsTab`](#lists-tab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Справочники`.
 
 &nbsp;
 
@@ -23,28 +23,28 @@ syncList(): SyncListBuilder
 ```
 ***Не реализовано.***
 
-Возвращает интерфейс [`SyncListBuilder`](./sync.md#SyncListBuilder) синхронизации справочников.
+Возвращает интерфейс [`SyncListBuilder`](./sync.md#sync-list-builder) синхронизации справочников.
 
 &nbsp;
 
-### Интерфейс ListsTab<a name="ListsTab"></a>
+### Интерфейс ListsTab<a name="lists-tab"></a>
 ```ts
 interface ListsTab extends Tab {
 	open(name: string): ListTab;
 }
 ```
-Интерфейс для получения ссылки на [`ListTab`](#ListTab). Интерфейс наследуется от [`Tab`](./views.md#Tab). Несмотря на это, функция `open()` **не реализована**.
+Интерфейс для получения ссылки на [`ListTab`](#list-tab). Интерфейс наследуется от [`Tab`](./views.md#tab). Несмотря на это, функция `open()` **не реализована**.
 
 &nbsp;
 
 ```js
 open(name: string): ListTab
 ```
-Возвращает ссылку на [`ListTab`](#ListTab) справочника `name`. В интерфейсе Optimacros аналогично открытию вкладки справочника `name`.
+Возвращает ссылку на [`ListTab`](#list-tab) справочника `name`. Если такой справочник отсутствует, бросает исключение. В интерфейсе Optimacros аналогично открытию вкладки справочника `name`.
 
 &nbsp;
 
-### Интерфейс ListTab<a name="ListTab"></a>
+### Интерфейс ListTab<a name="list-tab"></a>
 ```ts
 interface ListTab extends Tab {
 	subsetTab(): ListSubsetsTab;
@@ -53,37 +53,37 @@ interface ListTab extends Tab {
 	importer(): ListImporter;
 }
 ```
-Вкладка справочника. Интерфейс наследуется от [`Tab`](./views.md#Tab).
+Вкладка справочника. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
 ```js
 subsetTab(): ListSubsetsTab
 ```
-Возвращает интерфейс [`ListSubsetsTab`](#ListChildTab) доступа к вкладке выборок справочника.
+Возвращает ссылку на интерфейс [`ListSubsetsTab`](#list-child-tab) доступа к вкладке выборок справочника. В интерфейсе Optimacros аналогично открытию вкладки `Выборки` справочника `name`.
 
 &nbsp;
 ```js
 propertiesTab(): ListPropertiesTab
 ```
-Возвращает интерфейс [`ListPropertiesTab`](#ListChildTab) доступа к вкладке свойств справочника.
+Возвращает ссылку на интерфейс [`ListPropertiesTab`](#list-child-tab) доступа к вкладке свойств справочника. В интерфейсе Optimacros аналогично открытию вкладки `Свойства` справочника `name`.
 
 &nbsp;
 ```js
 accessModelTab(): ListAccessModelTab
 ```
-Возвращает интерфейс [`ListAccessModelTab`](#ListAccessModelTab) доступа к вкладке разграничения прав доступа по элементам справочника (МДП).
+Возвращает ссылку на интерфейс [`ListAccessModelTab`](#list-access-model-tab) доступа к вкладке разграничения прав доступа по элементам справочника (МДП).
 
 &nbsp;
 
 ```js
 importer(): ListImporter
 ```
-Возвращает интерфейс [`ListImporter`](#ListImporter) для импорта данных в справочник.
+Возвращает ссылку на интерфейс [`ListImporter`](#list-importer) для импорта данных в справочник.
 
 &nbsp;
 
-### Интерфейс ListSubsetsTab, ListPropertiesTab (ListChildTab)<a name="ListChildTab"></a>
+### Интерфейс ListSubsetsTab, ListPropertiesTab (ListChildTab)<a name="list-child-tab"></a>
 ```ts
 interface ListChildTab extends Tab {
 	listTab(): ListTab;
@@ -92,24 +92,24 @@ interface ListChildTab extends Tab {
 interface ListSubsetsTab = ListChildTab;
 interface ListPropertiesTab = ListChildTab;
 ```
-Интерфейс доступа к дочерним вкладкам справочника. Интерфейс наследуется от [`Tab`](./views.md#Tab).
+Интерфейс доступа к дочерним вкладкам справочника. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
 ```js
 listTab(): ListTab
 ```
-Возвращает интерфейс [`ListTab`](#ListTab) вкладки того справочника, чья дочерняя вкладка представляет собой `this`.
+Возвращает интерфейс [`ListTab`](#list-tab) вкладки того справочника, чья дочерняя вкладка представляет собой `this`.
 
 &nbsp;
 
-### Интерфейс ListAccessModelTab<a name="ListAccessModelTab"></a>
+### Интерфейс ListAccessModelTab<a name="list-access-model-tab"></a>
 ```ts
 interface ListAccessModelTab extends ListChildTab {
 	isEnabled(): boolean;
 }
 ```
-Интерфейс доступа к вкладке `МДП` справочника. Интерфейс наследуется от [`ListChildTab`](#ListChildTab).
+Интерфейс доступа к вкладке `МДП` справочника. Интерфейс наследуется от [`ListChildTab`](#list-child-tab).
 
 &nbsp;
 
@@ -120,7 +120,7 @@ isEnabled(): boolean
 
 &nbsp;
 
-### Интерфейс ListImporter<a name="ListImporter"></a>
+### Интерфейс ListImporter<a name="list-importer"></a>
 ```ts
 interface ListImporter extends Importer {
 	setFilePath(path: string): ListImporter;
@@ -132,7 +132,7 @@ interface ListImporter extends Importer {
 	getUpdatedPropertiesOnParentLevels(): boolean;
 }
 ```
-Интерфейс импорта в справочник. Интерфейс наследуется от [`Importer`](./exportImport.md#Importer).
+Интерфейс импорта в справочник. Интерфейс наследуется от [`Importer`](./exportImport.md#importer).
 
 &nbsp;
 
@@ -185,7 +185,7 @@ getUpdatedPropertiesOnParentLevels(): boolean
 
 &nbsp;
 
-### Интерфейс Versions<a name="Versions"></a>
+### Интерфейс Versions<a name="versions"></a>
 ```ts
 interface Versions {
 	versionsTab(): VersionsTab;
@@ -199,24 +199,24 @@ interface Versions {
 ```js
 versionsTab(): VersionsTab
 ```
-Возвращает ссылку на вкладку [`VersionsTab`](#VersionsTab) настроек версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
+Возвращает ссылку на вкладку [`VersionsTab`](#versions-tab) настроек версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
 
 &nbsp;
 
 ```js
 versionSubsetsTab(): VersionSubsetsTab
 ```
-Возвращает ссылку на вкладку [`VersionSubsetsTab`](#VersionSubsetsTab) сабсетов версий.
+Возвращает ссылку на вкладку [`VersionSubsetsTab`](#version-subsets-tab) выборок версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии` -> `Выборки`.
 
 &nbsp;
 
-### Интерфейс VersionsTab<a name="VersionsTab"></a>
+### Интерфейс VersionsTab<a name="versions-tab"></a>
 ```ts
 interface VersionsTab extends Tab {
 	copyVersion(from: string, to: string): Object;
 }
 ```
-Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия.
+Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
 
 &nbsp;
 
@@ -229,16 +229,16 @@ copyVersion(from: string, to: string): Object
 
 &nbsp;
 
-### Интерфейс VersionSubsetsTab<a name="VersionSubsetsTab"></a>
+### Интерфейс VersionSubsetsTab<a name="version-subsets-tab"></a>
 ```ts
-interface VersionSubsetsTab extends Tab{
+interface VersionSubsetsTab extends Tab {
 }
 ```
-Вкладка сабсетов версий. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия.
+Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
 
 &nbsp;
 
-### Интерфейс Times<a name="Times"></a>
+### Интерфейс Times<a name="times"></a>
 ```ts
 interface Times {
 	optionsTab(): TimeOptionsTab;
@@ -252,25 +252,25 @@ interface Times {
 ```js
 optionsTab(): TimeOptionsTab
 ```
-Возвращает ссылку на вкладку [`TimeOptionsTab`](#TimeOptionsTab) настроек времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
+Возвращает ссылку на вкладку [`TimeOptionsTab`](#time-options-tab) настроек времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
 
 &nbsp;
 
 ```js
 timePeriodTab(identifier: string | number): TimePeriodTab
 ```
-Возвращает ссылку на вкладку [`TimePeriodTab`](#TimePeriodTab) периодов времени. В интерфейсе Optimacros аналогично открытию вкладки `Время` -> `Период времени`. Период времени передается параметром `identifier` в формате идентификатора вкладки или строки: `Days`, `Weeks`, `Periods`, `Months`, `Quarters`, `Half Years`, `Years`.
+Возвращает ссылку на вкладку [`TimePeriodTab`](#time-period-tab) измерения времени `identifier`. Доступны измерения `Days`, `Weeks`, `Periods`, `Months`, `Quarters`, `Half Years`, `Years`. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
 
 &nbsp;
 
-### Интерфейс TimeOptionsTab<a name="TimeOptionsTab"></a>
+### Интерфейс TimeOptionsTab<a name="time-options-tab"></a>
 ```ts
-interface TimeOptionsTab extends Tab{
+interface TimeOptionsTab extends Tab {
 	resetForm(): Object;
 	applyForm(): Object;
 }
 ```
-Вкладка `Время`. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия. Является [`плоской таблицей`](../appendix/constraints.md#flatTable). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
+Вкладка `Время`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. Является [`плоской таблицей`](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#flat-table). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
 
 &nbsp;
 
@@ -288,29 +288,28 @@ applyForm(): Object
 
 &nbsp;
 
-### Интерфейс TimePeriodTab<a name="TimePeriodTab"></a>
+### Интерфейс TimePeriodTab<a name="time-period-tab"></a>
 ```ts
-interface TimePeriodTab extends Tab{
+interface TimePeriodTab extends Tab {
 	subsetsTab(): TimePeriodSubsetTab;
 }
 ```
-Вкладка периодов времени. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия.
+Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
 
 &nbsp;
 
 ```js
 subsetsTab(): TimePeriodSubsetTab
 ```
-Возвращает ссылку на вкладку [`TimePeriodSubsetTab`](#TimePeriodSubsetTab) сабсетов времени.
-
+Возвращает ссылку на вкладку [`TimePeriodSubsetTab`](#time-period-subset-tab) выборок выбранного измерения времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
 &nbsp;
 
-### Интерфейс TimePeriodSubsetTab<a name="TimePeriodSubsetTab"></a>
+### Интерфейс TimePeriodSubsetTab<a name="time-period-subset-tab"></a>
 ```ts
-interface TimePeriodSubsetTab extends Tab{
+interface TimePeriodSubsetTab extends Tab {
 }
 ```
-Вкладка сабсетов времени. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия.
+Интерфейс доступа к вкладке `Выборки` выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
 
 &nbsp;
 
