@@ -3,6 +3,7 @@
 1. [Интерфейс Application manager (на языке TypeScript)](./declarations/om.d.ts)
 1. [Доступ к входным параметрам](#input-params)
 1. [Соединение с моделью](#model-connect)
+1. [Закрытие соединения с моделью](#model-close)
 1. [Запуск дочернего скрипта](#run-script)
 1. [Вывод статусного сообщения](#status)
 1. [Веб-интерфейсы](#web-handlers)
@@ -13,15 +14,18 @@
 ### Интерфейс OMStatic
 ```ts
 export interface OMStatic {
-    new (): OM;
-
-    readonly params: Object;
-
-    connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
-    connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
-    script(relativePathOrId: string, params: Object): EventPromise;
-    status(...args: any[]): OM;
-    web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
+	new (): OM;
+	
+	readonly params: Object;
+	
+	connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
+	connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+	
+	close(): void;
+	
+	script(relativePathOrId: string, params: Object): EventPromise;
+	status(...args: any[]): OM;
+	web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
 }
 ```
 Интерфейс `OMStatic` являет собой набор методов глобального объекта `OM` в системе Application Manager.
@@ -90,7 +94,16 @@ OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?
 ```
 Выполняет асинхронную операцию соединения с моделью. Описание параметров соответствует методу [`OM.connect()`](#model-connect). Возвращает ссылку на объект [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise). Чтобы получить соединение с моделью, необходимо дождаться, когда `промис` завершится. 
 
-При создании соединения с помощью `connectAsync()` все синхронные методы всех интерфейсов API отключаются и выдают ошибку , их асинхронные пары продолжают работать.
+При создании соединения с помощью `connectAsync()` все синхронные методы всех интерфейсов API отключаются и выдают ошибку, их асинхронные пары продолжают работать.
+
+&nbsp;
+
+### Закрытие соединения с моделью<a name="model-close"></a>
+
+```js
+close(): void;
+```
+Закрывает соединение с моделью, а также все открытые связанные с ней сетевые соединения: с базами данных, с FTP-серверами.
 
 &nbsp;
 
