@@ -13,8 +13,6 @@
 ### Интерфейс OMStatic
 ```ts
 export interface OMStatic {
-    new (): OM;
-
     readonly params: Object;
 
     connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
