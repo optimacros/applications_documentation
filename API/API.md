@@ -31,13 +31,13 @@ export interface OMStatic {
 ```js
 OM.params: Object
 ```
-Позволяет получить доступ к параметрам, переданным в скрипт при его запуске в виде [JSON](https://habr.com/ru/post/554274/) объекта.
+Позволяет получить доступ к параметрам, переданным в скрипт при его запуске в виде [JSON](https://habr.com/ru/post/554274/).
 
-`Запуск скрипта с параметрами` позволяет передать в скрипт входные параметры. В системе Application Manager параметры задаются в виде [JSON](https://habr.com/ru/post/554274/) объекта в модальном окне `General parameters` или в модальном окне при запуске скрипта.
+`Запуск скрипта с параметрами` позволяет передать в скрипт входные параметры. В системе Application Manager параметры задаются в виде [JSON](https://habr.com/ru/post/554274/) в модальном окне `General parameters` или в модальном окне при запуске скрипта.
 
 ![Script parameters](./pic/scriptParameters.png)
 
-Окно ввода параметров в JSON формате.
+Окно ввода параметров в формате JSON.
 
 ![JSON parameters](./pic/jsonParameters.png)
 
@@ -54,7 +54,7 @@ OM.connect(https: string, wss: string, token: string, modelId: string, env?: Obj
 - `wss` - URL-адрес воркспейса с указанием протокола WS/WSS.
 - `token` - токен пользователя для доступа к данным модели. Это уникальная секретная строка, которую можно получить в профиле пользователя через «Логин-центр» (Create Named Token). Токен может быть создан только администратором ЛЦ и имеет ограничение по времени жизни, которое нужно выбрать при его создании.
 - `modelId` - идентификатор модели. Индентификатор можно узнать в адресной строке браузера.
-- `env` - переменные окружения, которые будут переданы в модель после установки соединения. Доступ к переменным окружения можно получить с помощью интрефейса [`Environment`](./env.md#environment). *Опциональный параметр.*
+- `env` - переменные окружения, которые будут переданы в модель после установки соединения. Доступ к переменным окружения можно получить с помощью интерфейса [`Environment`](./env.md#environment). *Опциональный параметр.*
 
 **Внимание!** Токен пользователя обязательно должен быть передан в скрипт как [входной параметр](#input-params), иначе ваш личный секретный токен может увидеть любой пользователь, у которого есть доступ к коду вашего приложения!
 
@@ -64,7 +64,7 @@ OM.connect(https: string, wss: string, token: string, modelId: string, env?: Obj
 
 ![URL-адрес и modelId](./pic/modelId.png)
 
-2. Задаем токен пользователя в модальном окне `General parameters` в системе Application Manager.
+2. Задаём токен пользователя в модальном окне `General parameters` в системе Application Manager.
 
 ![Secret Token](./pic/secretToken.png)
 
@@ -88,9 +88,9 @@ const om = OM.connect(
 ```js
 OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>
 ```
-Выполняет асинхронную операцию соединения с моделью. Описание параметров соответствует методу [`OM.connect`](#model-connect). Возвращает ссылку на объект [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise). Чтобы получить соединение с моделью, необходимо дождаться, когда `промис` завершиться. 
+Выполняет асинхронную операцию соединения с моделью. Описание параметров соответствует методу [`OM.connect()`](#model-connect). Возвращает ссылку на объект [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise). Чтобы получить соединение с моделью, необходимо дождаться, когда `промис` завершится. 
 
-При создании соединения с помощью `connectAsync` отключаются и выдают ошибку все синхронные методы всех интерфейсов API, их асинхронные пары продолжают работать.
+При создании соединения с помощью `connectAsync()` все синхронные методы всех интерфейсов API отключаются и выдают ошибку , их асинхронные пары продолжают работать.
 
 &nbsp;
 
@@ -99,7 +99,7 @@ OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?
 ```js
 OM.script(relativePathOrId: string, params: Object): EventPromise
 ```
-Запускает скрипт `relativePathOrId` с [входными параметрами](#input-params) `params`. В качестве параметра `relativePathOrId` можно передать идентификатор скрипта, существующего в Application Manager (скрипт может находиться в другом приложении), или относительный путь к скрипту в текущем приложении. **Важно! Скрипт должен быть исполняемым.** Список исполняемых скриптов и их идентификаторы можно найти в модальном окне `Edit Application` на вкладке `Executable Scripts`.
+Запускает скрипт `relativePathOrId` с [входными параметрами](#input-params) `params`. В качестве параметра `relativePathOrId` можно передать идентификатор скрипта, существующего в Application Manager (скрипт может находиться в другом приложении), или относительный путь к скрипту в текущем приложении. **Важно! Скрипт должен быть исполняемым.** Список исполняемых скриптов и их идентификаторы можно найти в модальном окне `Edit Application` на вкладке `Executable Scripts`.
 
 Метод возвращает ссылку на объект класса `EventPromise`. Родительский скрипт может ждать результата выполнения дочернего скрипта или продолжить работу параллельно с дочерним скриптом.
 
@@ -110,7 +110,7 @@ class EventPromise extends EventEmitter {
     catch(callback: (error: any) => void): this;
 }
 ```
-Комбинация возможностей обычного [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [`await`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [`EventEmitter`](https://nodejsdev.ru/doc/event-emitter/#eventemitter) генерирующего события из источника.
+Комбинация возможностей обычного [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [`await`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [`EventEmitter`](https://nodejsdev.ru/doc/event-emitter/#eventemitter), генерирующего события из источника.
 
 &nbsp;
 
@@ -119,7 +119,7 @@ class EventPromise extends EventEmitter {
 ```js
 OM.status(...args: any[]): OM
 ```
-Устанавливает статусное сообщение `args`. Если `args` задано в виде массива, то выводит элементы в заданном порядке, разделяя их пробелом. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ. Аналог метода [`setStatusMessage`](https://github.com/optimacros/scripts_documentation/blob/main/API/common.md#request-manager.set-status-message) в Скриптах 1.0. ***Не реализовано, выводит подсвеченное зеленым цветом сообщение в терминале вывода.***
+Устанавливает статусное сообщение `args`. Если `args` задано в виде массива, то выводит элементы в заданном порядке, разделяя их пробелом. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ. Аналог метода [`setStatusMessage()`](https://github.com/optimacros/scripts_documentation/blob/main/API/common.md#request-manager.set-status-message) в Скриптах 1.0. ***Не реализовано, выводит подсвеченное зеленым цветом сообщение в терминале вывода.***
 
 &nbsp;
 
@@ -128,7 +128,7 @@ OM.status(...args: any[]): OM
 ```js
 web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
 ```
-Создает веб-обработчик для взаимодейсвия с другими приложениями. Подробное описание [читать тут](./webHandlers.md).
+Создает веб-обработчик для взаимодействия с другими приложениями. Подробное описание [читать тут](./webHandlers.md).
 
 &nbsp;
 
