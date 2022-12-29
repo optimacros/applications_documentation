@@ -86,9 +86,11 @@ const om = OM.connect(
 ```js
 OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>
 ```
-Выполняет асинхронную операцию соединения с моделью. Описание параметров соответствует методу [`OM.connect()`](#model-connect). Возвращает ссылку на объект [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise). Чтобы получить соединение с моделью, необходимо дождаться, когда `промис` завершится. 
+Выполняет асинхронную операцию соединения с моделью. Описание параметров соответствует методу [`OM.connect()`](#model-connect). Возвращает ссылку на объект [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise). Чтобы получить соединение с моделью, необходимо дождаться, когда `Promise` завершится. 
 
-При создании соединения с помощью `connectAsync()` все синхронные методы всех интерфейсов API отключаются и выдают ошибку , их асинхронные пары продолжают работать.
+При создании соединения с помощью `connectAsync()` все синхронные методы всех интерфейсов API отключаются и выдают ошибку, их асинхронные пары продолжают работать.
+
+Об асинхронных функциях см. [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
