@@ -62,11 +62,13 @@ OM.connect(https: string, wss: string, token: string, modelId: string, env?: Obj
 
 ![URL-адрес и modelId](./pic/modelId.png)
 
-2. Задаём токен пользователя в модальном окне `General parameters` в системе Application Manager.
+2. Если версия *Workspace Middle-End* меньше `2.3.2`, то `wss`, как правило, будет таким: `wss://ws116.optimacros.com:8081`. Если версия *Workspace Middle-End* больше или равна `2.3.2`, то `wss`, как правило, будет таким: `wss://ws116.optimacros.com/ws`. 
+
+3. Задаём токен пользователя в модальном окне `General parameters` в системе Application Manager.
 
 ![Secret Token](./pic/secretToken.png)
 
-3. Запускаем скрипт с параметрами.
+4. Запускаем скрипт с параметрами.
 
 ```js
 const om = OM.connect(
