@@ -77,6 +77,7 @@ copyData(): CopyData
 interface CellBuffer {
 	set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
 	apply(): CellBuffer;
+	async applyAsync(): Promise<CellBuffer>;
 	count(): number;
 	canLoadCellsValues(value: boolean): CellBuffer;
 }
@@ -114,8 +115,11 @@ set(cell: Cell | CubeCell, value: number | string | null): CellBuffer
 <a name="apply"></a>
 ```js
 apply(): CellBuffer
+async applyAsync(): Promise<CellBuffer>
 ```
 Передаёт на сервер значения всех клеток для присваивания в модели и очищает буфер. Перед присваиванием сервер может их обработать и выставить другие значение, например, после установки в ячейку формата даты строки `'2019-03-01'` впоследствии из неё будет считана строка `'1 Mar 19'`. Возвращает `this`.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 

@@ -460,6 +460,8 @@ export interface CellBuffer {
 
     apply(): CellBuffer;
 
+    async applyAsync(): Promise<CellBuffer>;
+
     count(): number;
 
     canLoadCellsValues(value: boolean): CellBuffer;
