@@ -72,45 +72,6 @@ copyData(): CopyData
 
 &nbsp;
 
-### Интерфейс RequestManager<a name="request-manager"></a>
-```ts
-interface RequestManager {
-	log(message: string, print?: boolean): RequestManager;
-	logStatusMessage(message: string, print?: boolean): RequestManager;
-	setStatusMessage(message: string): RequestManager;
-}
-```
-Интерфейс для записи в лог (устаревший функционал) и работы со статусными сообщениями. Все функции возвращают `this`.
-
-&nbsp;
-
-```js
-log(message: string, print?: boolean): RequestManager
-```
-Выводит сообщение `message` в лог, доступ к которому можно получить в админке. Если `print === true` (по умолчанию: `false`), дублирует `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
-
-![Лог в админке](./pic/requestInfo.png)
-
-&nbsp;
-
-<a name="request-manager.log-status-message"></a>
-```js
-logStatusMessage(message: string, print?: boolean): RequestManager
-```
-Делает то же, что и `setStatusMessage()`. Если `print === true` (по умолчанию: `false`), дублирует `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
-
-&nbsp;
-
-<a name="request-manager.set-status-message"></a>
-```js
-setStatusMessage(message: string): RequestManager
-```
-Устанавливает статусное сообщение `message`. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ.
-
-![Статусное сообщение](./pic/statusMessage.png)
-
-&nbsp;
-
 ### Интерфейс CellBuffer<a name="cell-buffer"></a>
 ```ts
 interface CellBuffer {
@@ -173,6 +134,45 @@ canLoadCellsValues(value: boolean): CellBuffer
 По умолчанию: `true`. Однако такое поведение сохранено лишь для обратной совместимости, оно приводит к деградации производительности. Поэтому рекомендуется сразу после инициализации объекта вызывать эту функцию и передавать `false`.
 
 &nbsp;
+
+&nbsp;
+
+### Интерфейс RequestManager<a name="request-manager"></a>
+```ts
+interface RequestManager {
+	log(message: string, print?: boolean): RequestManager;
+	logStatusMessage(message: string, print?: boolean): RequestManager;
+	setStatusMessage(message: string): RequestManager;
+}
+```
+Интерфейс для записи в лог (устаревший функционал) и работы со статусными сообщениями. Все функции возвращают `this`.
+
+&nbsp;
+
+```js
+log(message: string, print?: boolean): RequestManager
+```
+Выводит сообщение `message` в лог, доступ к которому можно получить в админке. Если `print === true` (по умолчанию: `false`), дублирует `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
+
+![Лог в админке](./pic/requestInfo.png)
+
+&nbsp;
+
+<a name="request-manager.log-status-message"></a>
+```js
+logStatusMessage(message: string, print?: boolean): RequestManager
+```
+Делает то же, что и `setStatusMessage()`. Если `print === true` (по умолчанию: `false`), дублирует `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
+
+&nbsp;
+
+<a name="request-manager.set-status-message"></a>
+```js
+setStatusMessage(message: string): RequestManager
+```
+Устанавливает статусное сообщение `message`. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ.
+
+![Статусное сообщение](./pic/statusMessage.png)
 
 ### Интерфейс ExportObfuscationState<a name="export-obfuscation-state"></a>
 ```ts
