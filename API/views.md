@@ -73,7 +73,7 @@ open(name: string): Tab
 ```js
 pivot(viewName?: string): Pivot
 ```
-Возвращает ссылку на объект [`Pivot`](#pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
+Возвращает ссылку на интерфейс [`Pivot`](#pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
 
 &nbsp;
 
@@ -248,7 +248,7 @@ interface Grid {
 ```js
 range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange
 ```
-Возвращает ссылку на объект с интерфейсом [`GridRange`](#grid-range), представляющий прямоугольный диапазон ячеек.
+Возвращает интерфейс [`GridRange`](#grid-range), представляющий прямоугольный диапазон ячеек.
 
 Аргументы `rowStart` и `columnStart` задают начальные номера строки и столбца соответственно. Значения по умолчанию: `0`.
 Аргументы `rowCount` и `columnCount` задают количество строк и столбцов соответственно. Особое значение этих аргументов `-1` означает захват всех строк/столбцов до конца таблицы. Значения по умолчанию: `-1`.
@@ -314,7 +314,7 @@ interface GridDefinitionInfo {
 ```js
 getPageSelectors(): GridPageSelector[]
 ```
-Возвращает массив объектов с интерфейсом [`GridPageSelector`](#grid-page-selector), которые представляют метаданные о фильтрах таблицы.
+Возвращает массив интерфейсов [`GridPageSelector`](#grid-page-selector), которые представляют метаданные о фильтрах таблицы.
 
 &nbsp;
 
@@ -322,7 +322,7 @@ getPageSelectors(): GridPageSelector[]
 ```js
 getRowDimensions(): GridDimension[]
 ```
-Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о строках таблицы.
+Возвращает массив интерфейсов [`GridDimension`](#grid-dimension), которые представляют метаданные о строках таблицы.
 
 &nbsp;
 
@@ -330,7 +330,7 @@ getRowDimensions(): GridDimension[]
 ```js
 getColumnDimensions(): GridDimension[]
 ```
-Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о столбцах таблицы.
+Возвращает массив интерфейсов [`GridDimension`](#grid-dimension), которые представляют метаданные о столбцах таблицы.
 
 &nbsp;
 
@@ -564,7 +564,7 @@ interface Labels {
 	findLabelByLongId(longId: number): Label | null;
 }
 ```
-Интерфейс, представляющий набор объектов [`LabelsGroup`](#labels-group), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#grid-range-chunk).
+Интерфейс, представляющий набор интерфейсов [`LabelsGroup`](#labels-group), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#grid-range-chunk).
 
 &nbsp;
 
@@ -589,7 +589,7 @@ count(): number
 ```js
 all(): LabelsGroup[]
 ```
-Возвращает набор объектов заголовков каждой строки/столбца[`LabelsGroup`](#labels-group) в виде массива.
+Возвращает массив интерфейсов [`LabelsGroup`](#labels-group) заголовков каждой строки/столбца.
 
 &nbsp;
 
@@ -610,7 +610,7 @@ chunkInstance(): GridRangeChunk
 ```js
 findLabelByLongId(longId: number): Label | null
 ```
-Возвращает объект [`Label`](#label) по его [`longId`](#long-id), если он присутствует в `this`, иначе — `null`.
+Возвращает интерфейс [`Label`](#label) по его [`longId`](#long-id), если он присутствует в `this`, иначе — `null`.
 
 &nbsp;
 
@@ -817,7 +817,7 @@ chunkInstance(): GridRangeChunk
 ```js
 getByIndexes(indexes: number[]): Cells | null
 ```
-Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#cells).
+Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать непрямоугольный объект [`Cells`](#cells).
 
 &nbsp;
 
