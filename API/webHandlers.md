@@ -1,6 +1,7 @@
 # Веб-интерфейсы<a name="web-handlers"></a>
 
 1. [Создание веб-интерфейсов](#creation)
+1. [Асинхронные функции](#async)
 1. [Настройка приложения](#settings)
 1. [Обращение к веб-интерфейсам](#request)
 1. [Статические файлы](#static-files)
@@ -10,10 +11,12 @@
 ## Создание веб-интерфейсов<a name="creation"></a>
 
 ```js
-OM.web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void
+OM.web(eventName: string, [async] callback: (request: OMWebRequest) => string | WebHandlerResponse): void
 ```
 
-Создает веб-обработчик с именем `eventName` для взаимодействия с другими приложениями, при обращении к которому будет выполняться функция `callback()`. 
+Создает веб-обработчик с именем `eventName` для взаимодействия с другими приложениями, при обращении к которому будет выполняться функция `callback()`.
+
+***В теле функции `callback()` не работают синхронные функции доступа к данным.*** Для взаимодействия с моделью необходимо пользоваться [`асинхронными функциями`](#async). С этой целью рекомендуется саму функцию `callback()` тоже объявлять асинхронной, хотя это и необязательно.
 
 Входной параметр `request` содержит ссылку на интерфейс `OMWebRequest`.
 
@@ -61,6 +64,23 @@ interface WebHandlerResponse {
 &nbsp;
 
 В функциях веб-обработчиков нельзя устанавливать соединение с моделью через [`OM.connect()`](./API.md#model-connect), можно только выполнять асинхронную операцию соединения [`OM.connectAsync()`](./API.md#connect-async).
+
+&nbsp;
+
+## Асинхронные функции<a name="async"></a>
+
+В Application Manager API некоторые функции имеют асинхронные аналоги. Имя асинхронного аналога функции `doSomething()` образовано из её имени и суффикса `'Async'`: `doSomethingAsync()`.
+
+Каждая асинхронная функция принимает те же аргументы, что и её аналог, делает то же самое, что и аналог, и возвращает [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise), возвращающий то же самое значение, что и функция-аналог.
+
+То есть, сигнатуры функций-аналогов выглядят так:
+
+```js
+doSomething( [args] ): result;
+async doSomethingAsync( [args] ): Promise<result>;
+```
+
+Для вызова асинхронных функций можно использовать функционал класса [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) или синтаксис [`async/await`](#https://learn.javascript.ru/async-await).
 
 &nbsp;
 
