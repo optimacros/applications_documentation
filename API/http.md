@@ -154,7 +154,7 @@ interface FormRequestBody {
 ```js
 params(): Params
 ```
-Возвращает объект [`Params`](#params) для установки значений параметров.
+Возвращает интерфейс [`Params`](#params) для установки значений параметров.
 
 &nbsp;
 
@@ -650,7 +650,7 @@ interface RequestBuilder {
 ```js
 url(): Url
 ```
-Возвращает объект [`Url`](#url) построения URL.
+Возвращает интерфейс [`Url`](#url) построения URL.
 
 &nbsp;
 
@@ -720,7 +720,7 @@ interface HttpManager {
 ```js
 requestBuilder(): RequestBuilder
 ```
-Возвращает объект [`RequestBuilder`](#request-builder) построения запроса.
+Возвращает интерфейс [`RequestBuilder`](#request-builder) построения запроса.
 
 &nbsp;
 
