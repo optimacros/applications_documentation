@@ -498,6 +498,8 @@ export interface ModelInfo {
 
     autoCalcStatus(): boolean;
 
+    async autoCalcStatusAsync(): Promise<boolean>;
+
     setModelCalculationMode(status: boolean): boolean;
 
     repair(): boolean;

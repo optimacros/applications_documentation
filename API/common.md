@@ -227,6 +227,7 @@ interface ModelInfo {
 	async nameAsync(): Promise<string>;
 	lastSyncDate(): number;
 	autoCalcStatus(): boolean;
+	async autoCalcStatusAsync(): Promise<boolean>;
 	setModelCalculationMode(status: boolean): boolean;
 	repair(): boolean;
 	recalculate(): boolean;
@@ -268,8 +269,13 @@ lastSyncDate(): number
 
 ```js
 autoCalcStatus(): boolean
+async autoCalcStatusAsync(): Promise<boolean>;
 ```
 Возвращает признак режима автоматического пересчёта модели.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
+
+***Асинхронная версия не реализована.***
 
 &nbsp;
 
