@@ -224,6 +224,7 @@ export(): boolean
 interface ModelInfo {
 	id(): string;
 	name(): string;
+	async nameAsync(): Promise<string>;
 	lastSyncDate(): number;
 	autoCalcStatus(): boolean;
 	setModelCalculationMode(status: boolean): boolean;
@@ -246,8 +247,13 @@ id(): string
 
 ```js
 name(): string
+async nameAsync(): Promise<string>
 ```
 Возвращает имя модели.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
+
+***Асинхронная версия не реализована.***
 
 &nbsp;
 

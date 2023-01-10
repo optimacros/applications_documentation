@@ -492,6 +492,8 @@ export interface ModelInfo {
 
     name(): string;
 
+    async nameAsync(): Promise<string>;
+
     lastSyncDate(): number;
 
     autoCalcStatus(): boolean;
