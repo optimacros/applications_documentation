@@ -456,6 +456,7 @@ for (const chunk of range.generator(1000)) {
 ```ts
 interface GridRangeChunk {
 	cells(): Cells;
+	async cellsAsync(): Promise<Cells>;
 	rows(): Labels;
 	columns(): Labels;
 }
@@ -466,8 +467,11 @@ interface GridRangeChunk {
 
 ```js
 cells(): Cells
+async cellsAsync(): Promise<Cells>;
 ```
 Возвращает ссылку на набор ячеек [`Cells`](#cells) текущего куска.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
