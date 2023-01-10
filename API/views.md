@@ -661,6 +661,7 @@ interface Cell {
 	columns(): LabelsGroup | undefined;
 	async columnsAsync(): Promise<LabelsGroup | undefined>;
 	rows(): LabelsGroup | undefined;
+	async rowsAsync(): Promise<LabelsGroup | undefined>;
 	dropDown(): Labels;
 	getFormatType(): string;
 	isEditable(): boolean;
@@ -733,8 +734,11 @@ async columnsAsync(): Promise<LabelsGroup | undefined>
 
 ```js
 rows(): LabelsGroup | undefined
+async rowsAsync(): Promise<LabelsGroup | undefined>;
 ```
 Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретной строки.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 

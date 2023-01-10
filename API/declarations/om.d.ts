@@ -23,6 +23,8 @@ export interface Cell {
 
     rows(): LabelsGroup | undefined;
 
+    async rowsAsync(): Promise<LabelsGroup | undefined>;
+
     dropDown(): Labels;
 
     getFormatType(): string;
