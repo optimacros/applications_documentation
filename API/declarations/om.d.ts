@@ -89,6 +89,8 @@ export interface GridRangeChunk {
 
     rows(): Labels;
 
+    async rowsAsync(): Promise<Labels>;
+
     columns(): Labels;
 }
 

@@ -458,6 +458,7 @@ interface GridRangeChunk {
 	cells(): Cells;
 	async cellsAsync(): Promise<Cells>;
 	rows(): Labels;
+	async rowsAsync(): Promise<Labels>;
 	columns(): Labels;
 }
 ```
@@ -477,8 +478,11 @@ async cellsAsync(): Promise<Cells>;
 
 ```js
 rows(): Labels
+async rowsAsync(): Promise<Labels>;
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки строк.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
