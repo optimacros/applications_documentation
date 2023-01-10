@@ -570,7 +570,7 @@ parentLongId(): number
 interface Labels {
 	start(): number;
 	count(): number;
-	all(): LabelsGroup[];
+	all(): (LabelsGroup | undefined)[];
 	get(index: number): LabelsGroup | null;
 	chunkInstance(): GridRangeChunk;
 	findLabelByLongId(longId: number): Label | null;
@@ -599,7 +599,7 @@ count(): number
 &nbsp;
 
 ```js
-all(): LabelsGroup[]
+all(): (LabelsGroup | undefined)[]
 ```
 Возвращает набор объектов заголовков каждой строки/столбца[`LabelsGroup`](#labels-group) в виде массива.
 
