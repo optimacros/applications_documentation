@@ -659,6 +659,7 @@ interface Cell {
 	getContextValue(): string | null;
 	definitions(): number[];
 	columns(): LabelsGroup | undefined;
+	async columnsAsync(): Promise<LabelsGroup | undefined>;
 	rows(): LabelsGroup | undefined;
 	dropDown(): Labels;
 	getFormatType(): string;
@@ -722,8 +723,11 @@ definitions(): number[]
 
 ```js
 columns(): LabelsGroup | undefined
+async columnsAsync(): Promise<LabelsGroup | undefined>
 ```
 Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретного столбца.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 

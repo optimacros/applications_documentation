@@ -19,6 +19,8 @@ export interface Cell {
 
     columns(): LabelsGroup | undefined;
 
+    async columnsAsync(): Promise<LabelsGroup | undefined>;
+
     rows(): LabelsGroup | undefined;
 
     dropDown(): Labels;
