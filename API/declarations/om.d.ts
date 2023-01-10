@@ -92,6 +92,8 @@ export interface GridRangeChunk {
     async rowsAsync(): Promise<Labels>;
 
     columns(): Labels;
+
+    async columnsAsync(): Promise<Labels>;
 }
 
 export interface GridRange {
