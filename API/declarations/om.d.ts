@@ -1388,6 +1388,8 @@ export namespace Http {
         headers(): Params;
 
         send(): Response;
+
+        async sendAsync(): Promise<Response>;
     }
 
     export interface HttpManager {
