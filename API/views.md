@@ -573,6 +573,7 @@ interface Labels {
 	all(): (LabelsGroup | undefined)[];
 	async allAsync(): Promise<(LabelsGroup | undefined)[]>;
 	get(index: number): LabelsGroup | null;
+	async getAsync(index: number): Promise<LabelsGroup | undefined>;
 	chunkInstance(): GridRangeChunk;
 	findLabelByLongId(longId: number): Label | null;
 }
@@ -611,8 +612,11 @@ async allAsync(): Promise<(LabelsGroup | undefined)[]>;
 
 ```js
 get(index: number): LabelsGroup | null
+async getAsync(index: number): Promise<LabelsGroup | undefined>;
 ```
 Аналог `all()[index]`.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 

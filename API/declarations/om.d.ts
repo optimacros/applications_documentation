@@ -79,6 +79,8 @@ export interface Labels {
 
     get(index: number): LabelsGroup | undefined;
 
+    async getAsync(index: number): Promise<LabelsGroup | undefined>;
+
     chunkInstance(): GridRangeChunk;
 
     findLabelByLongId(longId: number): Label | undefined;
