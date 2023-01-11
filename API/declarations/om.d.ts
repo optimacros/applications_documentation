@@ -75,6 +75,8 @@ export interface Labels {
 
     all(): (LabelsGroup | undefined)[];
 
+    async allAsync(): Promise<(LabelsGroup | undefined)[]>;
+
     get(index: number): LabelsGroup | undefined;
 
     chunkInstance(): GridRangeChunk;

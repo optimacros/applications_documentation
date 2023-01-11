@@ -571,6 +571,7 @@ interface Labels {
 	start(): number;
 	count(): number;
 	all(): (LabelsGroup | undefined)[];
+	async allAsync(): Promise<(LabelsGroup | undefined)[]>;
 	get(index: number): LabelsGroup | null;
 	chunkInstance(): GridRangeChunk;
 	findLabelByLongId(longId: number): Label | null;
@@ -600,8 +601,11 @@ count(): number
 
 ```js
 all(): (LabelsGroup | undefined)[]
+async allAsync(): Promise<(LabelsGroup | undefined)[]>;
 ```
 Возвращает набор объектов заголовков каждой строки/столбца[`LabelsGroup`](#labels-group) в виде массива.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
