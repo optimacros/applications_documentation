@@ -192,6 +192,8 @@ export interface Exporter {
 export interface Pivot {
     create(): Grid;
 
+    async createAsync(): Promise<Grid>;
+
     rowsFilter(...data: string[] | number[]): Pivot;
 
     columnsFilter(...data: string[] | number[]): Pivot;

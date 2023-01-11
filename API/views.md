@@ -164,6 +164,7 @@ getCubeInfo(identifier: string | number): CubeInfo
 ```ts
 interface Pivot {
 	create(): Grid;
+	async createAsync(): Promise<Grid>;
 	rowsFilter(data: string | string[] | number | number[]): Pivot;
 	columnsFilter(data: string | string[] | number | number[]): Pivot;
 	withoutValues(): Pivot;
@@ -176,8 +177,11 @@ interface Pivot {
 
 ```js
 create(): Grid
+async createAsync(): Promise<Grid>;
 ```
 Возвращает ссылку на [`Grid`](#grid) настроенного представления мультикуба.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
