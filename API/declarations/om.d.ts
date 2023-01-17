@@ -345,6 +345,8 @@ export interface MulticubeTab extends Tab {
     cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 
     getCubeInfo(identifier: string | number): CubeInfo;
+    
+    async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>;
 }
 
 export interface MulticubesTab extends Tab {

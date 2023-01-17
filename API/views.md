@@ -122,6 +122,7 @@ interface MulticubeTab extends Tab {
 	cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 	cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 	getCubeInfo(identifier: string | number): CubeInfo;
+	async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>;
 }
 ```
 Вкладка мультикуба. Интерфейс наследуется от [`Tab`](#tab).
@@ -155,8 +156,11 @@ cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder
 
 ```js
 getCubeInfo(identifier: string | number): CubeInfo
+async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>
 ```
 Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`.
+
+Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
