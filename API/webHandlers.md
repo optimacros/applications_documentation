@@ -80,7 +80,7 @@ doSomething( [args] ): result;
 async doSomethingAsync( [args] ): Promise<result>;
 ```
 
-Для вызова асинхронных функций можно использовать функционал класса [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) или синтаксис [`async/await`](#https://learn.javascript.ru/async-await).
+Для вызова асинхронных функций можно использовать функционал класса [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) или синтаксис [`async/await`](https://learn.javascript.ru/async-await).
 
 &nbsp;
 
