@@ -106,7 +106,7 @@ interface SqlConnection {
 	qb(): SqlQueryBuilder;
 }
 ```
-Объект соединения с реляционной базой данных.
+Интерфейс соединения с реляционной базой данных.
 
 &nbsp;
 
@@ -172,7 +172,7 @@ setDatabase(value: string): SqlConnectorBuilder
 ```js
 load(): SqlConnection
 ```
-Соединяется с БД и возвращает объект соединения [`SqlConnection`](#sql-connection).
+Соединяется с БД и возвращает интерфейс соединения [`SqlConnection`](#sql-connection).
 
 &nbsp;
 
