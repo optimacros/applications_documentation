@@ -19,9 +19,10 @@ export interface OMStatic {
 	readonly params: Object;
 	
 	connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
-	connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+	async connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
 	
 	close(): void;
+	async closeAsync(): Promise<void>;
 	
 	script(relativePathOrId: string, params: Object): EventPromise;
 	status(...args: any[]): OM;
@@ -29,6 +30,8 @@ export interface OMStatic {
 }
 ```
 Интерфейс `OMStatic` являет собой набор методов глобального объекта `OM` в системе Application Manager.
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 ## Доступ к входным параметрам<a name="input-params"></a>
 
@@ -90,9 +93,9 @@ const om = OM.connect(
 ### Асинхронная операция соединения <a name="connect-async"></a>
 
 ```js
-OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>
+async OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>
 ```
-Выполняет асинхронную операцию соединения с моделью. Описание параметров соответствует методу [`OM.connect()`](#model-connect). Возвращает ссылку на объект [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise). Чтобы получить соединение с моделью, необходимо дождаться, когда `промис` завершится. 
+Выполняет асинхронную операцию соединения с моделью. Описание параметров соответствует методу [`OM.connect()`](#model-connect). Возвращает ссылку на объект [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise). Чтобы получить соединение с моделью, необходимо дождаться, когда `Promise` завершится. 
 
 При создании соединения с помощью `connectAsync()` все синхронные методы всех интерфейсов API отключаются и выдают ошибку, их асинхронные пары продолжают работать.
 
@@ -101,7 +104,8 @@ OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?
 ### Закрытие соединения с моделью<a name="model-close"></a>
 
 ```js
-close(): void;
+close(): void
+async closeAsync(): Promise<void>
 ```
 Закрывает соединение с моделью, а также все открытые связанные с ней сетевые соединения: с базами данных, с FTP-серверами.
 
