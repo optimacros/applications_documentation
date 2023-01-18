@@ -254,8 +254,6 @@ async nameAsync(): Promise<string>
 
 Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
-***Асинхронная версия не реализована.***
-
 &nbsp;
 
 ```js
