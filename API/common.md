@@ -273,8 +273,6 @@ async autoCalcStatusAsync(): Promise<boolean>;
 
 Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
-***Асинхронная версия не реализована.***
-
 &nbsp;
 
 ```js
