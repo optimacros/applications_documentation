@@ -3,6 +3,7 @@
 1. [Интерфейс Application manager (на языке TypeScript)](./declarations/om.d.ts)
 1. [Доступ к входным параметрам](#input-params)
 1. [Соединение с моделью](#model-connect)
+1. [Закрытие соединения с моделью](#model-close)
 1. [Запуск дочернего скрипта](#run-script)
 1. [Вывод статусного сообщения](#status)
 1. [Веб-интерфейсы](#web-handlers)
@@ -13,16 +14,22 @@
 ### Интерфейс OMStatic
 ```ts
 export interface OMStatic {
-    readonly params: Object;
-
-    connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
-    connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
-    script(relativePathOrId: string, params: Object): EventPromise;
-    status(...args: any[]): OM;
-    web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
+	readonly params: Object;
+	
+	connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
+	async connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+	
+	close(): void;
+	async closeAsync(): Promise<void>;
+	
+	script(relativePathOrId: string, params: Object): EventPromise;
+	status(...args: any[]): OM;
+	web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
 }
 ```
 Интерфейс `OMStatic` являет собой набор методов глобального объекта `OM` в системе Application Manager.
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 ## Доступ к входным параметрам<a name="input-params"></a>
 
@@ -62,19 +69,21 @@ OM.connect(https: string, wss: string, token: string, modelId: string, env?: Obj
 
 ![URL-адрес и modelId](./pic/modelId.png)
 
-2. Задаём токен пользователя в модальном окне `General parameters` в системе Application Manager.
+2. Если версия *Workspace Middle-End* меньше `2.3.2`, то `wss`, как правило, будет таким: `wss://ws116.optimacros.com:8081`. Если версия *Workspace Middle-End* больше или равна `2.3.2`, то `wss`, как правило, будет таким: `wss://ws116.optimacros.com/ws`. 
+
+3. Задаём токен пользователя в модальном окне `General parameters` в системе Application Manager.
 
 ![Secret Token](./pic/secretToken.png)
 
-3. Запускаем скрипт с параметрами.
+4. Запускаем скрипт с параметрами.
 
 ```js
 const om = OM.connect(
-    'https://ws116.optimacros.com/',
-    'wss://ws116.optimacros.com/ws',
-    OM.params.token,
-    '3e72d0057138616a1904c69848389ac0',
-    {param1: 1, param2: 'abc'}
+	'https://ws116.optimacros.com/',
+	'wss://ws116.optimacros.com/ws',
+	OM.params.token,
+	'3e72d0057138616a1904c69848389ac0',
+	{param1: 1, param2: 'abc'}
 );
 ```
 В результате в переменную `om` будет записана ссылка на интерфейс модели [`OM`](./API.md#om). В модели будут установлены переменные окружения `param1` и `param2`.
@@ -84,13 +93,21 @@ const om = OM.connect(
 ### Асинхронная операция соединения <a name="connect-async"></a>
 
 ```js
-OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>
+async OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>
 ```
 Выполняет асинхронную операцию соединения с моделью. Описание параметров соответствует методу [`OM.connect()`](#model-connect). Возвращает ссылку на объект [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise). Чтобы получить соединение с моделью, необходимо дождаться, когда `Promise` завершится. 
 
 При создании соединения с помощью `connectAsync()` все синхронные методы всех интерфейсов API отключаются и выдают ошибку, их асинхронные пары продолжают работать.
 
-Об асинхронных функциях см. [`здесь`](./webHandlers.md#async).
+&nbsp;
+
+### Закрытие соединения с моделью<a name="model-close"></a>
+
+```js
+close(): void
+async closeAsync(): Promise<void>
+```
+Закрывает соединение с моделью, а также все открытые связанные с ней сетевые соединения: с базами данных, с FTP-серверами.
 
 &nbsp;
 
@@ -106,8 +123,8 @@ OM.script(relativePathOrId: string, params: Object): EventPromise
 ### Класс EventPromise<a name="event-promise"></a>
 ```ts
 class EventPromise extends EventEmitter {
-    then(callback: (result: any) => void): this;
-    catch(callback: (error: any) => void): this;
+	then(callback: (result: any) => void): this;
+	catch(callback: (error: any) => void): this;
 }
 ```
 Комбинация возможностей обычного [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [`await`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [`EventEmitter`](https://nodejsdev.ru/doc/event-emitter/#eventemitter), генерирующего события из источника.

@@ -114,18 +114,15 @@ export interface GridRange {
     generator(size?: number): GridRangeChunk[];
 }
 
-export interface GridDimension
-{
+export interface GridDimension {
     getDimensionEntity(): EntityInfo | undefined;
 }
 
-export interface GridPageSelector extends GridDimension
-{
+export interface GridPageSelector extends GridDimension {
     getSelectedEntity(): EntityInfo | null;
 }
 
-export interface GridDefinitionInfo
-{
+export interface GridDefinitionInfo {
     getPageSelectors(): GridPageSelector[];
 
     getRowDimensions(): GridDimension[];
@@ -216,6 +213,7 @@ export interface BaseElementsCreator {
 
     create(): number[];
 }
+
 export interface NumericElementsCreator extends BaseElementsCreator {
     setCount(count: number): this;
 }
@@ -269,8 +267,7 @@ export interface Environment {
     set(name: string, value: unknown): Environment;
 }
 
-export interface CubeCell
-{
+export interface CubeCell {
     definitions(): number[];
 
     getDimensionIds(): number[];
@@ -280,8 +277,7 @@ export interface CubeCell
     getValue(): number | string | null | boolean;
 }
 
-export interface CubeCellSelector
-{
+export interface CubeCellSelector {
     getCubeInfo(): CubeInfo;
 
     getCubeIdentifier(): number;
@@ -298,8 +294,7 @@ export interface CubeCellSelectorBuilder {
     load(): CubeCellSelector;
 }
 
-export interface CubeCellUpdater
-{
+export interface CubeCellUpdater {
     getCount(): number;
 }
 
@@ -459,6 +454,7 @@ export interface ListChildTab extends Tab {
 }
 
 export type ListSubsetsTab = ListChildTab;
+
 export type ListPropertiesTab = ListChildTab;
 
 export interface ListAccessModelTab extends ListChildTab {
@@ -1543,7 +1539,11 @@ export interface OMStatic {
     readonly params: Object;
 
     connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
-    connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+    async connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+
+    close(): void;
+    async closeAsync(): Promise<void>;
+		
     script(relativePathOrId: string, params: Object): EventPromise;
     status(...args: any[]): OM;
     web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;

@@ -73,7 +73,7 @@ open(name: string): Tab
 ```js
 pivot(viewName?: string): Pivot
 ```
-Возвращает ссылку на объект [`Pivot`](#pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
+Возвращает ссылку на интерфейс [`Pivot`](#pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
 
 &nbsp;
 
@@ -121,11 +121,14 @@ interface MulticubeTab extends Tab {
 	cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
 	cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 	cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
+	
 	getCubeInfo(identifier: string | number): CubeInfo;
 	async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>;
 }
 ```
 Вкладка мультикуба. Интерфейс наследуется от [`Tab`](#tab).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -160,8 +163,6 @@ async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>
 ```
 Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`.
 
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
-
 &nbsp;
 
 ### Интерфейс Pivot<a name="pivot"></a>
@@ -169,23 +170,25 @@ async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>
 interface Pivot {
 	create(): Grid;
 	async createAsync(): Promise<Grid>;
+	
 	rowsFilter(data: string | string[] | number | number[]): Pivot;
 	columnsFilter(data: string | string[] | number | number[]): Pivot;
+	
 	withoutValues(): Pivot;
 	addDependentContext(identifier: number): Pivot;
 }
 ```
 Интерфейс представления (сводной таблицы) мутилькуба. Функции интерфейса настраивают будущее отображение таблицы и ***не*** запрашивают данные мультикуба.
 
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
+
 &nbsp;
 
 ```js
 create(): Grid
-async createAsync(): Promise<Grid>;
+async createAsync(): Promise<Grid>
 ```
 Возвращает ссылку на [`Grid`](#grid) настроенного представления мультикуба.
-
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -256,7 +259,7 @@ interface Grid {
 ```js
 range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange
 ```
-Возвращает ссылку на объект с интерфейсом [`GridRange`](#grid-range), представляющий прямоугольный диапазон ячеек.
+Возвращает интерфейс [`GridRange`](#grid-range), представляющий прямоугольный диапазон ячеек.
 
 Аргументы `rowStart` и `columnStart` задают начальные номера строки и столбца соответственно. Значения по умолчанию: `0`.
 Аргументы `rowCount` и `columnCount` задают количество строк и столбцов соответственно. Особое значение этих аргументов `-1` означает захват всех строк/столбцов до конца таблицы. Значения по умолчанию: `-1`.
@@ -322,7 +325,7 @@ interface GridDefinitionInfo {
 ```js
 getPageSelectors(): GridPageSelector[]
 ```
-Возвращает массив объектов с интерфейсом [`GridPageSelector`](#grid-page-selector), которые представляют метаданные о фильтрах таблицы.
+Возвращает массив интерфейсов [`GridPageSelector`](#grid-page-selector), которые представляют метаданные о фильтрах таблицы.
 
 &nbsp;
 
@@ -330,7 +333,7 @@ getPageSelectors(): GridPageSelector[]
 ```js
 getRowDimensions(): GridDimension[]
 ```
-Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о строках таблицы.
+Возвращает массив интерфейсов [`GridDimension`](#grid-dimension), которые представляют метаданные о строках таблицы.
 
 &nbsp;
 
@@ -338,7 +341,7 @@ getRowDimensions(): GridDimension[]
 ```js
 getColumnDimensions(): GridDimension[]
 ```
-Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о столбцах таблицы.
+Возвращает массив интерфейсов [`GridDimension`](#grid-dimension), которые представляют метаданные о столбцах таблицы.
 
 &nbsp;
 
@@ -465,43 +468,41 @@ for (const chunk of range.generator(1000)) {
 interface GridRangeChunk {
 	cells(): Cells;
 	async cellsAsync(): Promise<Cells>;
+	
 	rows(): Labels;
 	async rowsAsync(): Promise<Labels>;
+	
 	columns(): Labels;
 	async columnsAsync(): Promise<Labels>;
 }
 ```
 Интерфейс для обработки куска [`GridRange`](#grid-range).
 
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
+
 &nbsp;
 
 ```js
 cells(): Cells
-async cellsAsync(): Promise<Cells>;
+async cellsAsync(): Promise<Cells>
 ```
 Возвращает ссылку на набор ячеек [`Cells`](#cells) текущего куска.
-
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
 ```js
 rows(): Labels
-async rowsAsync(): Promise<Labels>;
+async rowsAsync(): Promise<Labels>
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки строк.
-
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
 ```js
 columns(): Labels
-async columnsAsync(): Promise<Labels>;
+async columnsAsync(): Promise<Labels>
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки столбцов.
-
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -578,15 +579,20 @@ parentLongId(): number
 interface Labels {
 	start(): number;
 	count(): number;
+	
 	all(): (LabelsGroup | undefined)[];
 	async allAsync(): Promise<(LabelsGroup | undefined)[]>;
+	
 	get(index: number): LabelsGroup | null;
 	async getAsync(index: number): Promise<LabelsGroup | undefined>;
+	
 	chunkInstance(): GridRangeChunk;
 	findLabelByLongId(longId: number): Label | null;
 }
 ```
-Интерфейс, представляющий набор объектов [`LabelsGroup`](#labels-group), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#grid-range-chunk).
+Интерфейс, представляющий набор интерфейсов [`LabelsGroup`](#labels-group), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#grid-range-chunk).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -610,21 +616,17 @@ count(): number
 
 ```js
 all(): (LabelsGroup | undefined)[]
-async allAsync(): Promise<(LabelsGroup | undefined)[]>;
+async allAsync(): Promise<(LabelsGroup | undefined)[]>
 ```
-Возвращает набор объектов заголовков каждой строки/столбца[`LabelsGroup`](#labels-group) в виде массива.
-
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
+Возвращает массив интерфейсов [`LabelsGroup`](#labels-group) заголовков каждой строки/столбца.
 
 &nbsp;
 
 ```js
 get(index: number): LabelsGroup | null
-async getAsync(index: number): Promise<LabelsGroup | undefined>;
+async getAsync(index: number): Promise<LabelsGroup | undefined>
 ```
 Аналог `all()[index]`.
-
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -638,7 +640,7 @@ chunkInstance(): GridRangeChunk
 ```js
 findLabelByLongId(longId: number): Label | null
 ```
-Возвращает объект [`Label`](#label) по его [`longId`](#long-id), если он присутствует в `this`, иначе — `null`.
+Возвращает интерфейс [`Label`](#label) по его [`longId`](#long-id), если он присутствует в `this`, иначе — `null`.
 
 &nbsp;
 
@@ -686,16 +688,21 @@ interface Cell {
 	getTextValue(): number | string | null;
 	getContextValue(): string | null;
 	definitions(): number[];
+	
 	columns(): LabelsGroup | undefined;
 	async columnsAsync(): Promise<LabelsGroup | undefined>;
+	
 	rows(): LabelsGroup | undefined;
 	async rowsAsync(): Promise<LabelsGroup | undefined>;
+	
 	dropDown(): Labels;
 	getFormatType(): string;
 	isEditable(): boolean;
 }
 ```
 Интерфейс, представляющий клетку таблицы.
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -756,17 +763,13 @@ async columnsAsync(): Promise<LabelsGroup | undefined>
 ```
 Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретного столбца.
 
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
-
 &nbsp;
 
 ```js
 rows(): LabelsGroup | undefined
-async rowsAsync(): Promise<LabelsGroup | undefined>;
+async rowsAsync(): Promise<LabelsGroup | undefined>
 ```
 Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретной строки.
-
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -853,7 +856,7 @@ chunkInstance(): GridRangeChunk
 ```js
 getByIndexes(indexes: number[]): Cells | null
 ```
-Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#cells).
+Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать непрямоугольный объект [`Cells`](#cells).
 
 &nbsp;
 

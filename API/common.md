@@ -103,6 +103,8 @@ interface CellBuffer {
 
 При модификации большого количества клеток (от нескольких сотен тысяч), рекомендуется пользоваться [`импортом CSV`](./exportImport.md#importer).
 
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
+
 &nbsp;
 
 ```js
@@ -118,8 +120,6 @@ apply(): CellBuffer
 async applyAsync(): Promise<CellBuffer>
 ```
 Передаёт на сервер значения всех клеток для присваивания в модели и очищает буфер. Перед присваиванием сервер может их обработать и выставить другие значение, например, после установки в ячейку формата даты строки `'2019-03-01'` впоследствии из неё будет считана строка `'1 Mar 19'`. Возвращает `this`.
-
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -223,11 +223,15 @@ export(): boolean
 ```ts
 interface ModelInfo {
 	id(): string;
+	
 	name(): string;
 	async nameAsync(): Promise<string>;
+	
 	lastSyncDate(): number;
+	
 	autoCalcStatus(): boolean;
 	async autoCalcStatusAsync(): Promise<boolean>;
+	
 	setModelCalculationMode(status: boolean): boolean;
 	repair(): boolean;
 	recalculate(): boolean;
@@ -236,6 +240,8 @@ interface ModelInfo {
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -252,10 +258,6 @@ async nameAsync(): Promise<string>
 ```
 Возвращает имя модели.
 
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
-
-***Асинхронная версия не реализована.***
-
 &nbsp;
 
 ```js
@@ -269,13 +271,9 @@ lastSyncDate(): number
 
 ```js
 autoCalcStatus(): boolean
-async autoCalcStatusAsync(): Promise<boolean>;
+async autoCalcStatusAsync(): Promise<boolean>
 ```
 Возвращает признак режима автоматического пересчёта модели.
-
-Работа асинхронной версии описана [`здесь`](./webHandlers.md#async).
-
-***Асинхронная версия не реализована.***
 
 &nbsp;
 
