@@ -72,6 +72,75 @@ copyData(): CopyData
 
 &nbsp;
 
+### Интерфейс CellBuffer<a name="cell-buffer"></a>
+```ts
+interface CellBuffer {
+	set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
+	apply(): CellBuffer;
+	async applyAsync(): Promise<CellBuffer>;
+	count(): number;
+	canLoadCellsValues(value: boolean): CellBuffer;
+}
+```
+Буфер, куда можно временно поместить значения набора ячеек, не обязательно смежных, чтобы изменить их перед отправкой на сервер.
+
+В один буфер можно помещать запросы за изменение ячеек, принадлежащих разным представлениям одного объекта (мультикуба или справочника) и даже разным объектам. Однако в последнем случае следует понимать, что если между объектами (например, мультикубами `мк1` и `мк2`) существует связь, которая может привести к пересчёту значений, то последовательность действий
+
+```
+* запись в `CellBuffer` ячеек `мк1`
+* запись в `CellBuffer` ячеек `мк2`
+* вызов `CellBuffer.apply()`
+```
+
+и последовательность
+
+```
+* запись в `CellBuffer` ячеек `мк1`
+* вызов `CellBuffer.apply()`
+* запись в `CellBuffer` ячеек `мк2`
+* вызов `CellBuffer.apply()`
+```
+
+При модификации большого количества клеток (от нескольких сотен тысяч), рекомендуется пользоваться [`импортом CSV`](./exportImport.md#importer).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
+
+&nbsp;
+
+```js
+set(cell: Cell | CubeCell, value: number | string | null): CellBuffer
+```
+Устанавливает значение `value` в клетку `cell` в буфере. Возвращает `this`.
+
+&nbsp;
+
+<a name="apply"></a>
+```js
+apply(): CellBuffer
+async applyAsync(): Promise<CellBuffer>
+```
+Передаёт на сервер значения всех клеток для присваивания в модели и очищает буфер. Перед присваиванием сервер может их обработать и выставить другие значение, например, после установки в ячейку формата даты строки `'2019-03-01'` впоследствии из неё будет считана строка `'1 Mar 19'`. Возвращает `this`.
+
+&nbsp;
+
+```js
+count(): number
+```
+Возвращает количество ячеек в буфере.
+
+&nbsp;
+
+```js
+canLoadCellsValues(value: boolean): CellBuffer
+```
+Устанавливает значение `value`, указывающее, нужно ли перезагружать значения клеток в буфере, если они изменятся. Возвращает `this`.
+
+По умолчанию: `true`. Однако такое поведение сохранено лишь для обратной совместимости, оно приводит к деградации производительности. Поэтому рекомендуется сразу после инициализации объекта вызывать эту функцию и передавать `false`.
+
+&nbsp;
+
+&nbsp;
+
 ### Интерфейс RequestManager<a name="request-manager"></a>
 ```ts
 interface RequestManager {
@@ -108,71 +177,6 @@ setStatusMessage(message: string): RequestManager
 Устанавливает статусное сообщение `message`. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ.
 
 ![Статусное сообщение](./pic/statusMessage.png)
-
-&nbsp;
-
-### Интерфейс CellBuffer<a name="cell-buffer"></a>
-```ts
-interface CellBuffer {
-	set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
-	apply(): CellBuffer;
-	count(): number;
-	canLoadCellsValues(value: boolean): CellBuffer;
-}
-```
-Буфер, куда можно временно поместить значения набора ячеек, не обязательно смежных, чтобы изменить их перед отправкой на сервер.
-
-В один буфер можно помещать запросы за изменение ячеек, принадлежащих разным представлениям одного объекта (мультикуба или справочника) и даже разным объектам. Однако в последнем случае следует понимать, что если между объектами (например, мультикубами `мк1` и `мк2`) существует связь, которая может привести к пересчёту значений, то последовательность действий
-
-```
-* запись в `CellBuffer` ячеек `мк1`
-* запись в `CellBuffer` ячеек `мк2`
-* вызов `CellBuffer.apply()`
-```
-
-и последовательность
-
-```
-* запись в `CellBuffer` ячеек `мк1`
-* вызов `CellBuffer.apply()`
-* запись в `CellBuffer` ячеек `мк2`
-* вызов `CellBuffer.apply()`
-```
-
-При модификации большого количества клеток (от нескольких сотен тысяч), рекомендуется пользоваться [`импортом CSV`](./exportImport.md#importer).
-
-&nbsp;
-
-```js
-set(cell: Cell | CubeCell, value: number | string | null): CellBuffer
-```
-Устанавливает значение `value` в клетку `cell` в буфере. Возвращает `this`.
-
-&nbsp;
-
-<a name="apply"></a>
-```js
-apply(): CellBuffer
-```
-Передаёт на сервер значения всех клеток для присваивания в модели и очищает буфер. Перед присваиванием сервер может их обработать и выставить другие значение, например, после установки в ячейку формата даты строки `'2019-03-01'` впоследствии из неё будет считана строка `'1 Mar 19'`. Возвращает `this`.
-
-&nbsp;
-
-```js
-count(): number
-```
-Возвращает количество ячеек в буфере.
-
-&nbsp;
-
-```js
-canLoadCellsValues(value: boolean): CellBuffer
-```
-Устанавливает значение `value`, указывающее, нужно ли перезагружать значения клеток в буфере, если они изменятся. Возвращает `this`.
-
-По умолчанию: `true`. Однако такое поведение сохранено лишь для обратной совместимости, оно приводит к деградации производительности. Поэтому рекомендуется сразу после инициализации объекта вызывать эту функцию и передавать `false`.
-
-&nbsp;
 
 ### Интерфейс ExportObfuscationState<a name="export-obfuscation-state"></a>
 ```ts
@@ -219,9 +223,15 @@ export(): boolean
 ```ts
 interface ModelInfo {
 	id(): string;
+	
 	name(): string;
+	async nameAsync(): Promise<string>;
+	
 	lastSyncDate(): number;
+	
 	autoCalcStatus(): boolean;
+	async autoCalcStatusAsync(): Promise<boolean>;
+	
 	setModelCalculationMode(status: boolean): boolean;
 	repair(): boolean;
 	recalculate(): boolean;
@@ -230,6 +240,8 @@ interface ModelInfo {
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -242,6 +254,7 @@ id(): string
 
 ```js
 name(): string
+async nameAsync(): Promise<string>
 ```
 Возвращает имя модели.
 
@@ -258,6 +271,7 @@ lastSyncDate(): number
 
 ```js
 autoCalcStatus(): boolean
+async autoCalcStatusAsync(): Promise<boolean>
 ```
 Возвращает признак режима автоматического пересчёта модели.
 

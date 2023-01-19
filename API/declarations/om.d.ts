@@ -19,7 +19,11 @@ export interface Cell {
 
     columns(): LabelsGroup | undefined;
 
+    async columnsAsync(): Promise<LabelsGroup | undefined>;
+
     rows(): LabelsGroup | undefined;
+
+    async rowsAsync(): Promise<LabelsGroup | undefined>;
 
     dropDown(): Labels;
 
@@ -71,7 +75,11 @@ export interface Labels {
 
     all(): (LabelsGroup | undefined)[];
 
+    async allAsync(): Promise<(LabelsGroup | undefined)[]>;
+
     get(index: number): LabelsGroup | undefined;
+
+    async getAsync(index: number): Promise<LabelsGroup | undefined>;
 
     chunkInstance(): GridRangeChunk;
 
@@ -81,9 +89,15 @@ export interface Labels {
 export interface GridRangeChunk {
     cells(): Cells;
 
+    async cellsAsync(): Promise<Cells>;
+
     rows(): Labels;
 
+    async rowsAsync(): Promise<Labels>;
+
     columns(): Labels;
+
+    async columnsAsync(): Promise<Labels>;
 }
 
 export interface GridRange {
@@ -100,18 +114,15 @@ export interface GridRange {
     generator(size?: number): GridRangeChunk[];
 }
 
-export interface GridDimension
-{
+export interface GridDimension {
     getDimensionEntity(): EntityInfo | undefined;
 }
 
-export interface GridPageSelector extends GridDimension
-{
+export interface GridPageSelector extends GridDimension {
     getSelectedEntity(): EntityInfo | null;
 }
 
-export interface GridDefinitionInfo
-{
+export interface GridDefinitionInfo {
     getPageSelectors(): GridPageSelector[];
 
     getRowDimensions(): GridDimension[];
@@ -178,6 +189,8 @@ export interface Exporter {
 export interface Pivot {
     create(): Grid;
 
+    async createAsync(): Promise<Grid>;
+
     rowsFilter(...data: string[] | number[]): Pivot;
 
     columnsFilter(...data: string[] | number[]): Pivot;
@@ -200,6 +213,7 @@ export interface BaseElementsCreator {
 
     create(): number[];
 }
+
 export interface NumericElementsCreator extends BaseElementsCreator {
     setCount(count: number): this;
 }
@@ -253,8 +267,7 @@ export interface Environment {
     set(name: string, value: unknown): Environment;
 }
 
-export interface CubeCell
-{
+export interface CubeCell {
     definitions(): number[];
 
     getDimensionIds(): number[];
@@ -264,8 +277,7 @@ export interface CubeCell
     getValue(): number | string | null | boolean;
 }
 
-export interface CubeCellSelector
-{
+export interface CubeCellSelector {
     getCubeInfo(): CubeInfo;
 
     getCubeIdentifier(): number;
@@ -282,8 +294,7 @@ export interface CubeCellSelectorBuilder {
     load(): CubeCellSelector;
 }
 
-export interface CubeCellUpdater
-{
+export interface CubeCellUpdater {
     getCount(): number;
 }
 
@@ -329,6 +340,8 @@ export interface MulticubeTab extends Tab {
     cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 
     getCubeInfo(identifier: string | number): CubeInfo;
+    
+    async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>;
 }
 
 export interface MulticubesTab extends Tab {
@@ -441,6 +454,7 @@ export interface ListChildTab extends Tab {
 }
 
 export type ListSubsetsTab = ListChildTab;
+
 export type ListPropertiesTab = ListChildTab;
 
 export interface ListAccessModelTab extends ListChildTab {
@@ -459,6 +473,8 @@ export interface CellBuffer {
     set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
 
     apply(): CellBuffer;
+
+    async applyAsync(): Promise<CellBuffer>;
 
     count(): number;
 
@@ -490,9 +506,13 @@ export interface ModelInfo {
 
     name(): string;
 
+    async nameAsync(): Promise<string>;
+
     lastSyncDate(): number;
 
     autoCalcStatus(): boolean;
+
+    async autoCalcStatusAsync(): Promise<boolean>;
 
     setModelCalculationMode(status: boolean): boolean;
 
@@ -1382,6 +1402,8 @@ export namespace Http {
         headers(): Params;
 
         send(): Response;
+
+        async sendAsync(): Promise<Response>;
     }
 
     export interface HttpManager {

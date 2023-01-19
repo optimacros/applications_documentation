@@ -641,9 +641,12 @@ interface RequestBuilder {
 	cookies(): Params;
 	headers(): Params;
 	send(): Response;
+	async sendAsync(): Promise<Response>;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки и отправки запроса по протоколу [`HTTP`](https://ru.wikipedia.org/wiki/HTTP).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -698,6 +701,7 @@ headers(): Params
 
 ```js
 send(): Response
+async sendAsync(): Promise<Response>
 ```
 Отправляет HTTP-запрос, дожидается ответа и возвращает интерфейс [`Response`](#response) доступа к данным ответа сервера.
 

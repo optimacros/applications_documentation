@@ -79,11 +79,11 @@ OM.connect(https: string, wss: string, token: string, modelId: string, env?: Obj
 
 ```js
 const om = OM.connect(
-    'https://ws116.optimacros.com/',
-    'wss://ws116.optimacros.com/ws',
-    OM.params.token,
-    '3e72d0057138616a1904c69848389ac0',
-    {param1: 1, param2: 'abc'}
+	'https://ws116.optimacros.com/',
+	'wss://ws116.optimacros.com/ws',
+	OM.params.token,
+	'3e72d0057138616a1904c69848389ac0',
+	{param1: 1, param2: 'abc'}
 );
 ```
 В результате в переменную `om` будет записана ссылка на интерфейс модели [`OM`](./API.md#om). В модели будут установлены переменные окружения `param1` и `param2`.
@@ -123,8 +123,8 @@ OM.script(relativePathOrId: string, params: Object): EventPromise
 ### Класс EventPromise<a name="event-promise"></a>
 ```ts
 class EventPromise extends EventEmitter {
-    then(callback: (result: any) => void): this;
-    catch(callback: (error: any) => void): this;
+	then(callback: (result: any) => void): this;
+	catch(callback: (error: any) => void): this;
 }
 ```
 Комбинация возможностей обычного [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) с возможностью подписываться на результат или ожидать с помощью [`await`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/await) и [`EventEmitter`](https://nodejsdev.ru/doc/event-emitter/#eventemitter), генерирующего события из источника.

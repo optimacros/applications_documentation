@@ -121,10 +121,14 @@ interface MulticubeTab extends Tab {
 	cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
 	cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 	cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
+	
 	getCubeInfo(identifier: string | number): CubeInfo;
+	async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>;
 }
 ```
 Вкладка мультикуба. Интерфейс наследуется от [`Tab`](#tab).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -155,6 +159,7 @@ cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder
 
 ```js
 getCubeInfo(identifier: string | number): CubeInfo
+async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>
 ```
 Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`.
 
@@ -164,18 +169,24 @@ getCubeInfo(identifier: string | number): CubeInfo
 ```ts
 interface Pivot {
 	create(): Grid;
+	async createAsync(): Promise<Grid>;
+	
 	rowsFilter(data: string | string[] | number | number[]): Pivot;
 	columnsFilter(data: string | string[] | number | number[]): Pivot;
+	
 	withoutValues(): Pivot;
 	addDependentContext(identifier: number): Pivot;
 }
 ```
 Интерфейс представления (сводной таблицы) мутилькуба. Функции интерфейса настраивают будущее отображение таблицы и ***не*** запрашивают данные мультикуба.
 
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
+
 &nbsp;
 
 ```js
 create(): Grid
+async createAsync(): Promise<Grid>
 ```
 Возвращает ссылку на [`Grid`](#grid) настроенного представления мультикуба.
 
@@ -456,16 +467,24 @@ for (const chunk of range.generator(1000)) {
 ```ts
 interface GridRangeChunk {
 	cells(): Cells;
+	async cellsAsync(): Promise<Cells>;
+	
 	rows(): Labels;
+	async rowsAsync(): Promise<Labels>;
+	
 	columns(): Labels;
+	async columnsAsync(): Promise<Labels>;
 }
 ```
 Интерфейс для обработки куска [`GridRange`](#grid-range).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
 ```js
 cells(): Cells
+async cellsAsync(): Promise<Cells>
 ```
 Возвращает ссылку на набор ячеек [`Cells`](#cells) текущего куска.
 
@@ -473,6 +492,7 @@ cells(): Cells
 
 ```js
 rows(): Labels
+async rowsAsync(): Promise<Labels>
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки строк.
 
@@ -480,6 +500,7 @@ rows(): Labels
 
 ```js
 columns(): Labels
+async columnsAsync(): Promise<Labels>
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки столбцов.
 
@@ -558,13 +579,20 @@ parentLongId(): number
 interface Labels {
 	start(): number;
 	count(): number;
-	all(): LabelsGroup[];
+	
+	all(): (LabelsGroup | undefined)[];
+	async allAsync(): Promise<(LabelsGroup | undefined)[]>;
+	
 	get(index: number): LabelsGroup | null;
+	async getAsync(index: number): Promise<LabelsGroup | undefined>;
+	
 	chunkInstance(): GridRangeChunk;
 	findLabelByLongId(longId: number): Label | null;
 }
 ```
 Интерфейс, представляющий набор интерфейсов [`LabelsGroup`](#labels-group), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#grid-range-chunk).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -587,7 +615,8 @@ count(): number
 &nbsp;
 
 ```js
-all(): LabelsGroup[]
+all(): (LabelsGroup | undefined)[]
+async allAsync(): Promise<(LabelsGroup | undefined)[]>
 ```
 Возвращает массив интерфейсов [`LabelsGroup`](#labels-group) заголовков каждой строки/столбца.
 
@@ -595,6 +624,7 @@ all(): LabelsGroup[]
 
 ```js
 get(index: number): LabelsGroup | null
+async getAsync(index: number): Promise<LabelsGroup | undefined>
 ```
 Аналог `all()[index]`.
 
@@ -658,14 +688,21 @@ interface Cell {
 	getTextValue(): number | string | null;
 	getContextValue(): string | null;
 	definitions(): number[];
+	
 	columns(): LabelsGroup | undefined;
+	async columnsAsync(): Promise<LabelsGroup | undefined>;
+	
 	rows(): LabelsGroup | undefined;
+	async rowsAsync(): Promise<LabelsGroup | undefined>;
+	
 	dropDown(): Labels;
 	getFormatType(): string;
 	isEditable(): boolean;
 }
 ```
 Интерфейс, представляющий клетку таблицы.
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -722,6 +759,7 @@ definitions(): number[]
 
 ```js
 columns(): LabelsGroup | undefined
+async columnsAsync(): Promise<LabelsGroup | undefined>
 ```
 Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретного столбца.
 
@@ -729,6 +767,7 @@ columns(): LabelsGroup | undefined
 
 ```js
 rows(): LabelsGroup | undefined
+async rowsAsync(): Promise<LabelsGroup | undefined>
 ```
 Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретной строки.
 
