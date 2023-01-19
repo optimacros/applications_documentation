@@ -1539,7 +1539,11 @@ export interface OMStatic {
     readonly params: Object;
 
     connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
-    connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+    async connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+
+    close(): void;
+    async closeAsync(): Promise<void>;
+		
     script(relativePathOrId: string, params: Object): EventPromise;
     status(...args: any[]): OM;
     web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
