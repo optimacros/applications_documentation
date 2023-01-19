@@ -76,8 +76,8 @@ interface WebHandlerResponse {
 То есть, сигнатуры функций-аналогов выглядят так:
 
 ```js
-doSomething( [args] ): result;
-async doSomethingAsync( [args] ): Promise<result>;
+doSomething( [args] ): result
+async doSomethingAsync( [args] ): Promise<result>
 ```
 
 Для вызова асинхронных функций можно использовать функционал класса [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) или синтаксис [`async/await`](https://learn.javascript.ru/async-await).
