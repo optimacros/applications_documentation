@@ -186,7 +186,7 @@ interface Pivot {
 
 ```js
 create(): Grid
-async createAsync(): Promise<Grid>;
+async createAsync(): Promise<Grid>
 ```
 Возвращает ссылку на [`Grid`](#grid) настроенного представления мультикуба.
 
@@ -616,7 +616,7 @@ count(): number
 
 ```js
 all(): (LabelsGroup | undefined)[]
-async allAsync(): Promise<(LabelsGroup | undefined)[]>;
+async allAsync(): Promise<(LabelsGroup | undefined)[]>
 ```
 Возвращает набор объектов заголовков каждой строки/столбца[`LabelsGroup`](#labels-group) в виде массива.
 
@@ -624,7 +624,7 @@ async allAsync(): Promise<(LabelsGroup | undefined)[]>;
 
 ```js
 get(index: number): LabelsGroup | null
-async getAsync(index: number): Promise<LabelsGroup | undefined>;
+async getAsync(index: number): Promise<LabelsGroup | undefined>
 ```
 Аналог `all()[index]`.
 
@@ -688,10 +688,13 @@ interface Cell {
 	getTextValue(): number | string | null;
 	getContextValue(): string | null;
 	definitions(): number[];
+	
 	columns(): LabelsGroup | undefined;
 	async columnsAsync(): Promise<LabelsGroup | undefined>;
+	
 	rows(): LabelsGroup | undefined;
 	async rowsAsync(): Promise<LabelsGroup | undefined>;
+	
 	dropDown(): Labels;
 	getFormatType(): string;
 	isEditable(): boolean;
