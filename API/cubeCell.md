@@ -69,7 +69,7 @@ getDimensionEntity(): EntityInfo | null
 
 ## Получение клеток куба с помощью формулы<a name="select"></a>
 
-***Интерфесы этого раздела не реализованы в Application Manager.***
+***Интерфейсы этого раздела не реализованы в Application Manager.***
 
 ### Интерфейс CubeCellSelectorBuilder<a name="cube-cell-selector-builder"></a>
 

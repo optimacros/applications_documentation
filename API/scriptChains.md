@@ -1,6 +1,6 @@
 # Цепочки скриптов
 
-***Интерфесы этого раздела не применимы в Application Manager.***
+***Интерфейсы этого раздела не применимы в Application Manager.***
 
 ### Интерфейс ButtonInfoOptions<a name="button-info-options"></a>
 

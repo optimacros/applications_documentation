@@ -1,6 +1,6 @@
 # Оптимизационные запросы
 
-***Интерфесы этого раздела не реализованы в Application Manager.***
+***Интерфейсы этого раздела не реализованы в Application Manager.***
 
 ### Интерфейс Optimization<a name="optimization"></a>
 ```ts
