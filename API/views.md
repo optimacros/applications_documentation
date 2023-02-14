@@ -226,12 +226,15 @@ withoutValues(): Pivot
 
 &nbsp;
 
+<a name="add-dependent-context"></a>
 ```js
 addDependentContext(identifier: number): Pivot
 ```
 Добавляет в фильтр по строкам весь зависимый контекст переданного [`longId`](#long-id) `identifier`: материнские и дочерние элементы всех уровней.
 
 Если эта функция многократно вызывается с аргументами, один из которых является потомком остальных (порядок вызовов не имеет значения), то это считается уточнением запроса, и результат будет равносилен однократному вызову с этим аргументом.
+
+Если для полученного [`Grid`](#grid) установлен фильтр [`GridPageSelector`](#grid-page-selector), эта функция программно устанавливает его значение, равное `identifier`. 
 
 Возвращает `this`.
 
@@ -368,7 +371,7 @@ interface GridPageSelector extends GridDimension {
 	getSelectedEntity(): EntityInfo | null;
 }
 ```
-Интерфейс предоставляет данные о фильтре мультикуба. (Ранее фильтры назывались `Page`). Интерфейс наследуется от [`GridDimension`](#grid-dimension).
+Интерфейс предоставляет данные о фильтре мультикуба. (Ранее фильтры назывались `Page`). Интерфейс наследуется от [`GridDimension`](#grid-dimension). Программно задать значение фильтра позволяет функция [`Pivot`](#pivot).[`addDependentContext()`](#add-dependent-context).
 
 &nbsp;
 
