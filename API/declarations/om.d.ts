@@ -1,5 +1,7 @@
 /* eslint-disable */
 
+type AsyncOf<T> = (...args: Parameters<T>) => Promise<ReturnType<T>>;
+
 export type ObjectOfStringArray = {
     [key: string]: string[];
 }
@@ -18,12 +20,10 @@ export interface Cell {
     definitions(): number[];
 
     columns(): LabelsGroup | undefined;
-
-    async columnsAsync(): Promise<LabelsGroup | undefined>;
+    columnsAsync: AsyncOf<Cell['columns']>;
 
     rows(): LabelsGroup | undefined;
-
-    async rowsAsync(): Promise<LabelsGroup | undefined>;
+    rowsAsync: AsyncOf<Cell['rows']>;
 
     dropDown(): Labels;
 
@@ -74,12 +74,10 @@ export interface Labels {
     count(): number;
 
     all(): (LabelsGroup | undefined)[];
-
-    async allAsync(): Promise<(LabelsGroup | undefined)[]>;
+    allAsync: AsyncOf<Labels['all']>;
 
     get(index: number): LabelsGroup | undefined;
-
-    async getAsync(index: number): Promise<LabelsGroup | undefined>;
+    getAsync: AsyncOf<Labels['get']>;
 
     chunkInstance(): GridRangeChunk;
 
@@ -88,16 +86,13 @@ export interface Labels {
 
 export interface GridRangeChunk {
     cells(): Cells;
-
-    async cellsAsync(): Promise<Cells>;
+    cellsAsync: AsyncOf<GridRangeChunk['cells']>;
 
     rows(): Labels;
-
-    async rowsAsync(): Promise<Labels>;
+    rowsAsync: AsyncOf<GridRangeChunk['rows']>;
 
     columns(): Labels;
-
-    async columnsAsync(): Promise<Labels>;
+    columnsAsync: AsyncOf<GridRangeChunk['columns']>;
 }
 
 export interface GridRange {
@@ -156,10 +151,39 @@ export interface ExportResult {
     moveToLocal(path: string): this;
 }
 
-export interface Exporter {
-    setEncoding(encoding: string): this;
+export const enum ExporterEncoding {
+    UTF = 'utf',
+    WINDOWS1251 = 'win'
+}
 
-    setFormat(extension: string): this;
+export const enum ExporterFileExtension {
+    CSV = 'csv',
+    XLS = 'xls',
+    XLSX = 'xlsx',
+    TXT = 'txt',
+    ZIP = 'zip'
+}
+
+export const enum ExporterCsvDelimiter {
+    COMMA = ',',
+    SEMICOLON = ';',
+    TAB = '\t'
+}
+
+export const enum ExporterCsvEnclosure {
+    DOUBLE_QUOTE = '"',
+    SINGLE_QUOTE = "'"
+}
+
+export const enum ExporterCsvEscape {
+    BACKSLASH = '\\',
+    DOUBLE_QUOTE = '"'
+}
+
+export interface Exporter {
+    setEncoding(encoding: ExporterEncoding): this;
+
+    setFormat(extension: ExporterFileExtension): this;
 
     setOmitSummaryRows(omitSummaryRows: boolean): this;
 
@@ -173,11 +197,11 @@ export interface Exporter {
 
     setFileName(fileName: string): this;
 
-    setDelimiter(delimiter: string): this;
+    setDelimiter(delimiter: ExporterCsvDelimiter): this;
 
-    setEnclosure(enclosure: string): this;
+    setEnclosure(enclosure: ExporterCsvEnclosure): this;
 
-    setEscape(escape: string): this;
+    setEscape(escape: ExporterCsvEscape): this;
 
     setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): this;
 
@@ -188,8 +212,7 @@ export interface Exporter {
 
 export interface Pivot {
     create(): Grid;
-
-    async createAsync(): Promise<Grid>;
+    createAsync: AsyncOf<Pivot['create']>;
 
     rowsFilter(...data: string[] | number[]): Pivot;
 
@@ -261,6 +284,8 @@ export interface Tab {
 
 export interface Environment {
     load(name: string): Environment;
+    
+    loadFromMulticube(name: string, view?: string | null): Environment;
 
     get(key: string, def?: any): any;
 
@@ -332,6 +357,67 @@ export interface StorageExporter extends Exporter {
     setBooleanCubeIdentifier(booleanCubeIdentifier: number): this;
 }
 
+export interface SyncResult {
+    getReportPath(): string;
+}
+
+export interface SyncBuilder {
+    /**
+     * @param modelId Source model string identifier or name
+     */
+    setSrcModelId(modelId: string): SyncBuilder;
+
+    /**
+     * @param modelId Destination model string identifier or name
+     */
+    setDestModelId(modelId: string): SyncBuilder;
+
+    /**
+     * @param entityId Source entity identifier
+     */
+    setSrcEntityId(entityId: number): SyncBuilder;
+
+    /**
+     * @param entityId Destination entity identifier
+     */
+    setDestEntityId(entityId: number): SyncBuilder;
+
+    setFilters(filters: Record<string, string[]>): SyncBuilder;
+
+    sync(): SyncResult;
+}
+
+export interface SyncMulticubeBuilder extends SyncBuilder {
+    setOmitEmptyRows(status: boolean): SyncMulticubeBuilder;
+
+    setOmitSummaryRows(status: boolean): SyncMulticubeBuilder;
+
+    setUseCodeInsteadLabel(status: boolean): SyncMulticubeBuilder;
+}
+
+export interface SyncListBuilder extends SyncBuilder {
+    setViewId(viewId: number): SyncListBuilder;
+
+    setSrcToDesListMap(map: {
+        srcId: number,
+        destId: number,
+    }[]): SyncListBuilder;
+
+    setProxySrcColumnDataMap(map: {
+        fromName: string;
+        toName: string;
+    }[]): SyncListBuilder;
+
+    /**
+     * @param format Values: XLSX|CSV, Default: CSV
+     */
+    setReportFileFormat(format: string): SyncListBuilder;
+}
+
+export interface CubesTab extends Tab {
+
+}
+
 export interface MulticubeTab extends Tab {
     cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
 
@@ -340,8 +426,9 @@ export interface MulticubeTab extends Tab {
     cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 
     getCubeInfo(identifier: string | number): CubeInfo;
+    getCubeInfoAsync: AsyncOf<MulticubeTab['getCubeInfo']>;
     
-    async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>;
+    cubesTab(): CubesTab;
 }
 
 export interface MulticubesTab extends Tab {
@@ -350,13 +437,15 @@ export interface MulticubesTab extends Tab {
 
 export interface Multicubes {
     multicubesTab(): MulticubesTab;
+    
+    syncMulticube(): SyncMulticubeBuilder;
 }
 
 export interface TimePeriodSubsetTab extends Tab {
+
 }
 
 export interface TimePeriodTab extends Tab {
-
     subsetsTab(): TimePeriodSubsetTab;
 }
 
@@ -377,6 +466,7 @@ export interface VersionsTab extends Tab {
 }
 
 export interface VersionSubsetsTab extends Tab {
+
 }
 
 export interface Versions {
@@ -422,6 +512,8 @@ export interface StorageImporter extends Importer {
     setEncoding(encoding: string): this;
 
     setDateFormat(dateFormat: string): this;
+    
+    setMappings(mappings: object): this;
 }
 
 export interface ListImporter extends Importer {
@@ -440,11 +532,18 @@ export interface ListImporter extends Importer {
     getUpdatedPropertiesOnParentLevels(): boolean;
 }
 
+export interface CustomPropertiesTab extends Tab {
+
+}
+
 export interface ListTab extends Tab {
-    listSubsetTab(): ListSubsetsTab; //OBSOLETE in favor of subsetTab()
     subsetTab(): ListSubsetsTab;
+
     propertiesTab(): ListPropertiesTab;
+
     accessModelTab(): ListAccessModelTab;
+    
+    customPropertiesTab(): CustomPropertiesTab;
 
     importer(): ListImporter;
 }
@@ -466,15 +565,16 @@ export interface ListsTab extends Tab {
 }
 
 export interface Lists {
-    listsTab(): ListsTab
+    listsTab(): ListsTab;
+    
+    syncList(): SyncListBuilder;
 }
 
 export interface CellBuffer {
     set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
 
     apply(): CellBuffer;
-
-    async applyAsync(): Promise<CellBuffer>;
+    applyAsync: AsyncOf<CellBuffer['apply']>;
 
     count(): number;
 
@@ -501,18 +601,30 @@ export interface UserInfo {
     getRole(): EntityInfo;
 }
 
+export interface ExportObfuscationState {
+    setPath(path: string): ExportObfuscationState;
+
+    setEmailWhiteList(emailWhiteList: string[]): ExportObfuscationState;
+
+    /**
+     * Default: BIN
+     * @param type TXT|BIN
+     */
+    setDataArchiveType(type: string): ExportObfuscationState;
+
+    export(): boolean;
+}
+
 export interface ModelInfo {
     id(): string;
 
     name(): string;
-
-    async nameAsync(): Promise<string>;
+    nameAsync: AsyncOf<ModelInfo['name']>;
 
     lastSyncDate(): number;
 
     autoCalcStatus(): boolean;
-
-    async autoCalcStatusAsync(): Promise<boolean>;
+    autoCalcStatusAsync: AsyncOf<ModelInfo['autoCalcStatus']>;
 
     setModelCalculationMode(status: boolean): boolean;
 
@@ -521,6 +633,8 @@ export interface ModelInfo {
     recalculate(): boolean;
 
     backup(path: string): boolean;
+    
+    exportObfuscationState(): ExportObfuscationState;
 }
 
 export interface ButtonInfoOptions {
@@ -545,12 +659,17 @@ export interface ButtonInfo {
 
 export interface ResultBaseAction {
     appendAfter(): this;
+    
+    /**
+     * @param modelId Model string identifier or name
+     */
+    setModelId(modelId: string): this;
 }
 
 export interface EnvironmentInfo {
-    set(key: string, value: any);
+    set(key: string, value: unknown): this;
 
-    get(key: string);
+    get(key: string): unknown;
 }
 
 export interface ResultMacrosAction extends ResultBaseAction {
@@ -660,7 +779,7 @@ export interface Filesystem {
 
     deleteDir(path: string): boolean;
 
-    listContents(path: string, recursive: boolean): Array<FileMeta>;
+    listContents(path: string, recursive: boolean): FileMeta[];
 
     getMetadata(path: string): object;
 
@@ -668,6 +787,8 @@ export interface Filesystem {
 
     download(from: string, to: string): boolean;
 
+    makeLocalFile(hash: string, path?: string): string;
+    
     makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
 
     getPathObj(path: string): PathObj;
@@ -1353,14 +1474,26 @@ export namespace Http {
         headers(): ObjectOfStringArray;
 
         /**
-         * Limit to first 50MB of response data
+         * Limit to first 100MB of response data
+         * @param length Default 100MB
+         * @param catchEof Default true
          */
-        getStringData(): string;
+        getStringData(length?: number, catchEof?: boolean): string;
 
         /**
          * Limit to parse first 50MB of response data
          */
         getStringDataLikeJson(): object | boolean;
+
+        /**
+         * @param length Default 1MB
+         */
+        getStringDataGenerator(length?: number): string[];
+
+        /**
+         * @param length Default 1MB
+         */
+        getBinaryDataGenerator(length?: number): string[];
 
         getStatusCode(): number;
 
@@ -1402,8 +1535,7 @@ export namespace Http {
         headers(): Params;
 
         send(): Response;
-
-        async sendAsync(): Promise<Response>;
+        sendAsync: AsyncOf<RequestBuilder['send']>;
     }
 
     export interface HttpManager {
@@ -1449,20 +1581,112 @@ export namespace WinAgent {
         setDownloadUrl(url: string): this;
 
         auth(): Http.HttpAuth;
+        
+        /**
+         * @param sec Default value is 10 sec
+         */
+        setConnectTimeout(sec: number): this;
+
+        /**
+         * @param sec Default value is 600 sec
+         */
+        setRequestTimeout(sec: number): this;
+
+        /**
+         * @param sec Default value is 150 sec
+         */
+        setOperationTimeout(sec: number): this;
 
         makeRunMacrosAction(): RunMacroAction;
     }
 }
 
+export interface MysqlImportResult {
+    hasErrors(): boolean;
+
+    getErrorOutput(): string;
+
+    getOutput(): string;
+
+    getCommand(): string;
+
+    getConfig(): string;
+
+    getStats(): object;
+}
+
+export interface MysqlImportBuilder {
+    setTable(name: string): this;
+
+    setDelimiter(delimiter: string): this;
+
+    setLineDelimiter(delimiter: string): this;
+
+    setEnclosure(enclosure: string): this;
+
+    setEscape(escape: string): this;
+
+    setThreads(threads: number): this;
+
+    setVerbose(verbose: boolean): this;
+
+    setFirstIgnoreLines(count: number): this;
+
+    setLockTable(status: boolean): this;
+
+    setForce(status: boolean): this;
+
+    setDeleteAllRows(status: boolean): this;
+
+    setCompress(status: boolean): this;
+
+    setIgnoreDuplicates(status: boolean): this;
+
+    setReplace(status: boolean): this;
+
+    setColumns(names: string[]): this;
+
+    setFilePath(path: string): this;
+
+    import(): MysqlImportResult;
+}
+
+export interface MysqlConnectorBuilder extends SqlConnectorBuilder {
+    loadImportBuilder(): this;
+}
+
+export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
+    setAccount(account: string): this;
+
+    setRegion(region: string): this;
+
+    /**
+     * Configuring OCSP Checking
+     * Default is false
+     * @param insecure
+     */
+    setInsecure(insecure: boolean): this;
+
+    setWarehouse(warehouse: string): this;
+
+    setSchema(schema: string): this;
+
+    setRole(role: string): this;
+
+    setProtocol(protocol: string): this;
+}
+
 export interface Connectors {
-    mysql(): SqlConnectorBuilder;
+    mysql(): MysqlConnectorBuilder;
 
     postgresql(): SqlConnectorBuilder;
 
     sqlServer(): MicrosoftSqlConnectorBuilder;
 
     oracle(): OracleConnectorBuilder;
-
+    
+    snowflake(): SnowflakeConnectorBuilder;
+    
     mongodb(): Mongodb.ConnectorBuilder;
 
     http(): Http.HttpManager;
@@ -1539,10 +1763,10 @@ export interface OMStatic {
     readonly params: Object;
 
     connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
-    async connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+    connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
 
     close(): void;
-    async closeAsync(): Promise<void>;
+    closeAsync(): Promise<void>;
 		
     script(relativePathOrId: string, params: Object): EventPromise;
     status(...args: any[]): OM;
