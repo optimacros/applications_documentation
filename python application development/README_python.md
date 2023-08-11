@@ -444,8 +444,8 @@ from ompy.appmanager.communication import run_am_script
 
 script_id = 'child.py'
 script_params = {}
-print(f"Запуск дочерней задачи из скрипта '{script_id}' "
-      f"с параметрами '{script_params}'")
+print(f'Запуск дочерней задачи из скрипта {script_id} '
+      f'с параметрами {script_params}')
 child_pid = run_am_script(script_id, script_params)
 
 print(child_pid)
@@ -492,14 +492,14 @@ import os
 from ompy.appmanager.variables import TASK_PARAMS
 
 def calculate_factorial(number):
-    command = ["python", os.path.join(TASK_PARAMS['applicationPath'], "test_sub.py"), str(number)]
-    result = subprocess.check_output(command).decode("utf-8").strip()
+    command = ['python', os.path.join(TASK_PARAMS['applicationPath'], 'test_sub.py'), str(number)]
+    result = subprocess.check_output(command).decode('utf-8').strip()
     return int(result)
 
 
 input_number = 5
 factorial_result = calculate_factorial(input_number)
-print(f"Factorial of {input_number} is: {factorial_result}")
+print(f'Factorial of {input_number} is: {factorial_result}')
 ```
 
 Здесь использована переменная TASK_PARAMS['applicationPath'], чтобы получить путь к папке с исходными файлами приложения. Затем был запущен скрипт test_sub.py с помощью модуля subprocess и извлечен результат из его вывода консоли.
@@ -532,35 +532,35 @@ import websockets
 async def echo(websocket, path, stop_event):
     try:
         async for message in websocket:
-            print(f"Получено сообщение: {message}")
+            print(f'Получено сообщение: {message}')
             await websocket.send(message)
 
-            if message == "stop":
+            if message == 'stop':
                 print('Получен сигнал остановки сервера')
                 # await websocket.send("Server is stopping...")
                 stop_event.set()
                 break
 
             while not stop_event.is_set():
-                # Send "keep" message to the client every second
-                await websocket.send("keep")
+                # Send 'keep' message to the client every second
+                await websocket.send('keep')
                 await asyncio.sleep(1)
     except websockets.ConnectionClosed:
-        print("Соединение закрыто")
+        print('Соединение закрыто')
 
 async def start_server():
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    ssl_context.load_cert_chain("/certs/bundle.crt", "/certs/crt.key")
+    ssl_context.load_cert_chain('/certs/bundle.crt', '/certs/crt.key')
     
     stop_event = asyncio.Event()
 
-    async with websockets.serve(lambda ws, path: echo(ws, path, stop_event), "0.0.0.0", 18565, ssl=ssl_context) as server:
-        print("Сервер запущен. Ожидание подключений...")
+    async with websockets.serve(lambda ws, path: echo(ws, path, stop_event), '0.0.0.0', 18565, ssl=ssl_context) as server:
+        print('Сервер запущен. Ожидание подключений...')
 
         await stop_event.wait()  # Wait until the stop event is set
-        print("Сервер завершает работу.")
+        print('Сервер завершает работу.')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     asyncio.run(start_server())
 
 ```
@@ -568,14 +568,14 @@ if __name__ == "__main__":
 Пример вэбсокет-клиента (local_websocket_echo_client.py):
 
 ```py
-# !!! RUN IT WITH PARAMS {"venv_name":"websockets_venv"} or make parent loader script in venv!!!
+# !!! RUN IT WITH PARAMS {'venv_name':'websockets_venv'} or make parent loader script in venv!!!
 
 import asyncio
 import ssl
 import websockets
 
 async def main():
-    uri = "wss://0.0.0.0:18565"
+    uri = 'wss://0.0.0.0:18565'
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
     ssl_context.check_hostname = False
     ssl_context.verify_mode = ssl.CERT_NONE
@@ -587,11 +587,11 @@ async def main():
             print(f'Сообщение {message} отправлено')
             if message != 'stop':
                 response = await websocket.recv()
-                print(f"Received response: {response}")
+                print(f'Received response: {response}')
     except Exception as e:
         print(f'Ошибка соединения: {e}')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     asyncio.run(main())
 ```
 
@@ -601,7 +601,7 @@ if __name__ == "__main__":
 from ompy.appmanager.communication import run_am_script
 
 script_id = 'local_websocket_echo_server.py'
-script_params = {"venv_name":"websockets_venv","timeout":-1}
+script_params = {'venv_name':'websockets_venv','timeout':-1}
 child_pid = run_am_script(script_id, script_params)
 print(f'WS server runs with {child_pid} pid')
 ```
@@ -612,7 +612,7 @@ print(f'WS server runs with {child_pid} pid')
 from ompy.appmanager.communication import run_am_script
 
 script_id = 'local_websocket_echo_client.py'
-script_params = {"venv_name":"websockets_venv"}
+script_params = {'venv_name':'websockets_venv'}
 child_pid = run_am_script(script_id, script_params)
 print(f'WS server runs with {child_pid} pid')
 ```
@@ -653,13 +653,13 @@ from ompy.appmanager.variables import TASK_PARAMS
 
 
 async def main():
-    factorial_param = TASK_PARAMS['scriptParams'].get("factorial", None)
+    factorial_param = TASK_PARAMS['scriptParams'].get('factorial', None)
 
     if not factorial_param is None:
         print(f'Рассчет факториала числа {factorial_param} в дочерней задаче')
-        if not TASK_PARAMS["parentPid"] is None:
-            print(f'PID родительской задачи: {TASK_PARAMS["parentPid"]}')
-            WS_URL = f'http://127.0.0.1:18564/{TASK_PARAMS["parentPid"]}'
+        if not TASK_PARAMS['parentPid'] is None:
+            print(f'PID родительской задачи: {TASK_PARAMS['parentPid']}')
+            WS_URL = f'http://127.0.0.1:18564/{TASK_PARAMS['parentPid']}'
             print(f'Адрес вэбсокета сокета родительской задачи: {WS_URL}')
             async with aiohttp.ClientSession() as session:
                 async with session.ws_connect(WS_URL) as ws:
@@ -679,8 +679,8 @@ from ompy.appmanager.observer import read_json_from_observer
 
 script_id = 'test_data_exchange_child.py'
 script_params = {'factorial': 5}
-print(f"Запуск дочерней задачи рассчета факториала из скрипта '{script_id}' "
-      f"с параметрами '{script_params}'")
+print(f'Запуск дочерней задачи рассчета факториала из скрипта {script_id}'
+      f' с параметрами {script_params}')
 child_pid = run_am_script(script_id, script_params)
 
 print('Ожидаем результат от дочерней задачи')
@@ -692,4 +692,4 @@ soc.sync_close()
 print('Завершение родительской задачи')
 ```
 
-Родительская задача запускает дочернюю с параметром {"factorial": 5}, а затем ожидает подключения "к себе" по вэбсокету. Функция wait_for_socket_from_web возвращает экземпляр сокета, из которого могут быть получены данные с помощью синхронного метода sync_read_text_message.
+Родительская задача запускает дочернюю с параметром {'factorial': 5}, а затем ожидает подключения "к себе" по вэбсокету. Функция wait_for_socket_from_web возвращает экземпляр сокета, из которого могут быть получены данные с помощью синхронного метода sync_read_text_message.
