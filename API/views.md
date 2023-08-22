@@ -368,7 +368,7 @@ getDimensionEntity(): EntityInfo
 ### Интерфейс GridPageSelector<a name="grid-page-selector"></a>
 ```ts
 interface GridPageSelector extends GridDimension {
-	getSelectedEntity(): EntityInfo | null;
+	getSelectedEntity(): EntityInfo;
 }
 ```
 Интерфейс предоставляет данные о фильтре мультикуба. (Ранее фильтры назывались `Page`). Интерфейс наследуется от [`GridDimension`](#grid-dimension). Программно задать значение фильтра позволяет функция [`Pivot`](#pivot).[`addDependentContext()`](#add-dependent-context).
@@ -376,9 +376,9 @@ interface GridPageSelector extends GridDimension {
 &nbsp;
 
 ```js
-getSelectedEntity(): EntityInfo | null
+getSelectedEntity(): EntityInfo
 ```
-Возвращает ссылку на [`EntityInfo`](#entity-info) выбранного элемента фильтра или `null`.
+Возвращает ссылку на [`EntityInfo`](#entity-info) выбранного элемента фильтра.
 
 &nbsp;
 
