@@ -115,7 +115,7 @@ export interface GridDimension {
 }
 
 export interface GridPageSelector extends GridDimension {
-  getSelectedEntity(): EntityInfo | null;
+  getSelectedEntity(): EntityInfo;
 }
 
 export interface GridDefinitionInfo {
