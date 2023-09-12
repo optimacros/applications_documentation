@@ -142,7 +142,7 @@ class EventPromise extends EventEmitter {
 ```js
 OM.status(...args: any[]): OM
 ```
-Устанавливает статусное сообщение `args`. Если `args` задано в виде массива, то выводит элементы в заданном порядке, разделяя их пробелом. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ. Аналог метода [`setStatusMessage()`](https://github.com/optimacros/scripts_documentation/blob/main/API/common.md#request-manager.set-status-message) в Скриптах 1.0. ***Не реализовано, выводит подсвеченное зеленым цветом сообщение в терминале вывода.***
+Устанавливает статусное сообщение `args`. Если `args` задано в виде массива, то выводит элементы в заданном порядке, разделяя их пробелом. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ. Аналог метода [`setStatusMessage()`](https://github.com/optimacros/scripts_documentation/blob/main/API/common.md#request-manager.set-status-message) в Скриптах 1.0. ***Не реализовано, выводит подсвеченное зелёным цветом сообщение в терминале вывода.***
 
 &nbsp;
 
@@ -151,7 +151,7 @@ OM.status(...args: any[]): OM
 ```js
 web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
 ```
-Создает веб-обработчик для взаимодействия с другими приложениями. Подробное описание [читать тут](./webHandlers.md).
+Создает веб-хендлер для взаимодействия с другими приложениями. Подробное описание [читать тут](./webHandlers.md).
 
 &nbsp;
 
