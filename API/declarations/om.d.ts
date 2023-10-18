@@ -754,7 +754,7 @@ export interface Filesystem {
 
   read(path: string, encoding?: string): string;
 
-  readAndDelete(path: string): string;
+  readAndDelete(path: string, encoding?: string): string;
 
   write(path: string, contents: string): boolean;
 

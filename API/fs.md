@@ -48,8 +48,8 @@ filesDataManager(): FilesDataManager
 ```ts
 interface Filesystem {
 	has(path: string): boolean;
-	read(path: string): string;
-	readAndDelete(path: string): string;
+	read(path: string, encoding?: string): string;
+	readAndDelete(path: string, encoding?: string): string;
 	write(path: string, contents: string): boolean;
 	delete(path: string): boolean;
 	rename(from: string, to: string): boolean;
@@ -78,16 +78,16 @@ has(path: string): boolean
 &nbsp;
 
 ```js
-read(path: string): string
+read(path: string, encoding?: string): string
 ```
-Читает целиком файл `path` и возвращает его содержимое.
+Читает целиком файл `path` в кодировке `encoding` (по-умолчанию, `utf-8`) и возвращает его содержимое.
 
 &nbsp;
 
 ```js
 readAndDelete(path: string): string
 ```
-Читает целиком файл `path`, удаляет его и возвращает его содержимое.
+Читает целиком файл `path` в кодировке `encoding` (по-умолчанию, `utf-8`), удаляет его и возвращает его содержимое.
 
 &nbsp;
 
