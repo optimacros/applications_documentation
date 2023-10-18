@@ -77,17 +77,18 @@ has(path: string): boolean
 
 &nbsp;
 
+<a name="filesystem.read"></a>
 ```js
 read(path: string, encoding?: string): string
 ```
-Читает целиком файл `path` в кодировке `encoding` (по-умолчанию, `utf-8`) и возвращает его содержимое.
+Читает целиком файл `path` в кодировке `encoding` (допустимые значения: `utf-8`, `win-1251`, значение по умолчанию: `utf-8`) и возвращает его содержимое.
 
 &nbsp;
 
 ```js
 readAndDelete(path: string, encoding?: string): string
 ```
-Читает целиком файл `path` в кодировке `encoding` (по-умолчанию, `utf-8`), удаляет его и возвращает его содержимое.
+Делает то же, что функция [`read()`](#filesystem.read) и удаляет файл `path`.
 
 &nbsp;
 
