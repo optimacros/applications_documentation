@@ -85,7 +85,7 @@ read(path: string, encoding?: string): string
 &nbsp;
 
 ```js
-readAndDelete(path: string): string
+readAndDelete(path: string, encoding?: string): string
 ```
 Читает целиком файл `path` в кодировке `encoding` (по-умолчанию, `utf-8`), удаляет его и возвращает его содержимое.
 
