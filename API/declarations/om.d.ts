@@ -415,9 +415,7 @@ export interface SyncListBuilder extends SyncBuilder {
   setReportFileFormat(format: string): SyncListBuilder;
 }
 
-export interface CubesTab extends Tab {
-
-}
+export type CubesTab = Tab
 
 export interface MulticubeTab extends Tab {
   cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
@@ -442,9 +440,7 @@ export interface Multicubes {
   syncMulticube(): SyncMulticubeBuilder;
 }
 
-export interface TimePeriodSubsetTab extends Tab {
-
-}
+export type TimePeriodSubsetTab = Tab
 
 export interface TimePeriodTab extends Tab {
   subsetsTab(): TimePeriodSubsetTab;
@@ -466,9 +462,7 @@ export interface VersionsTab extends Tab {
   copyVersion(from: string, to: string): any;
 }
 
-export interface VersionSubsetsTab extends Tab {
-
-}
+export type VersionSubsetsTab = Tab
 
 export interface Versions {
   versionsTab(): VersionsTab;
@@ -533,9 +527,7 @@ export interface ListImporter extends Importer {
   getUpdatedPropertiesOnParentLevels(): boolean;
 }
 
-export interface CustomPropertiesTab extends Tab {
-
-}
+export type CustomPropertiesTab = Tab
 
 export interface ListTab extends Tab {
   subsetTab(): ListSubsetsTab;
@@ -760,9 +752,9 @@ export interface FileMeta {
 export interface Filesystem {
   has(path: string): boolean;
 
-  read(path: string): string;
+  read(path: string, encoding?: string): string;
 
-  readAndDelete(path: string): string;
+  readAndDelete(path: string, encoding?: string): string;
 
   write(path: string, contents: string): boolean;
 
@@ -852,7 +844,7 @@ export interface CsvReader {
    */
   changeFileCharset(charset: string): CsvReader;
 
-  generator(): [][];
+  generator(): string[][];
 }
 
 export interface CsvWriter {
