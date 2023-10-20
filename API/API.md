@@ -16,8 +16,8 @@
 export interface OMStatic {
 	readonly params: Object;
 	
-	connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
-	async connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+	connect(https: string, wss: string, token: string, modelId: string, env?: Object, ignoreSslErrors?: boolean): OM;
+	async connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object, ignoreSslErrors?: boolean): Promise<OM>;
 	
 	close(): void;
 	async closeAsync(): Promise<void>;
@@ -57,19 +57,23 @@ OM.params: Object
 ## Соединение с моделью<a name="model-connect"></a>
 
 ```js
-OM.connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM
+connect(https: string, wss: string, token: string, modelId: string, env?: Object, ignoreSslErrors?: boolean): OM
 ```
 Устанавливает соединение с моделью `modelId` по адресу `https`, используя [WebSocket](https://ru.wikipedia.org/wiki/WebSocket) `wss` и токен пользователя `token`, и устанавливает в модели [переменные окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B) `env`. Возвращает ссылку на интерфейс модели [`OM`](./om.md#om), [аналог](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#single-model) глобальной переменной `om: OM` скриптов 1.0.
 
+Обязательные параметры:
 - `https` - URL-адрес воркспейса с указанием протокола HTTP/HTTPS.
 - `wss` - URL-адрес воркспейса с указанием протокола WS/WSS.
 - `token` - токен пользователя для доступа к данным модели. Это уникальная секретная строка, которую можно получить в профиле пользователя через «Логин-центр» (Create Named Token). Токен может быть создан только администратором ЛЦ и имеет ограничение по времени жизни, которое нужно выбрать при его создании.
 - `modelId` - идентификатор модели. Индентификатор можно узнать в адресной строке браузера.
+
+Опциональные параметры:
 - `env` - переменные окружения, которые будут переданы в модель после установки соединения. Доступ к переменным окружения можно получить с помощью интерфейса [`Environment`](./env.md#environment). *Опциональный параметр.*
+- `ignoreSslErrors` - параметр, отключающий проверку [SSL](https://ru.wikipedia.org/wiki/SSL).
 
 **Внимание!** Токен пользователя обязательно должен быть передан в скрипт как [входной параметр](#input-params), иначе ваш личный секретный токен может увидеть любой пользователь, у которого есть доступ к коду вашего приложения!
 
-### Пример установки соединения и получения ссылки на интерфейс модели.
+### Пример установки соединения и получения ссылки на интерфейс модели
 
 1. Получаем URL-адрес воркспейса и идентификатор модели.
 
@@ -99,7 +103,7 @@ const om = OM.connect(
 ### Асинхронная операция соединения <a name="connect-async"></a>
 
 ```js
-async OM.connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>
+async connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object, ignoreSslErrors?: boolean): Promise<OM>
 ```
 Выполняет асинхронную операцию соединения с моделью. Описание параметров соответствует методу [`OM.connect()`](#model-connect). Возвращает ссылку на объект [`Promise`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise). Чтобы получить соединение с моделью, необходимо дождаться, когда `Promise` завершится. 
 
