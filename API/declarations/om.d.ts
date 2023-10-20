@@ -1755,8 +1755,8 @@ export interface OMStatic {
 
   readonly params: Object;
 
-  connect(https: string, wss: string, token: string, modelId: string, env?: Object): OM;
-  connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object): Promise<OM>;
+  connect(https: string, wss: string, token: string, modelId: string, env?: Object, ignoreSslErrors?: boolean): OM;
+  connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object, ignoreSslErrors?: boolean): Promise<OM>;
 
   close(): void;
   closeAsync(): Promise<void>;
