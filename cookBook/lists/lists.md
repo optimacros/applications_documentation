@@ -80,3 +80,7 @@ const deleteListElements = (om, listName, indexes) => {
     return deleter.delete();
 }
 ```
+
+[Курс молодого бойца](../cookBook.md)
+
+[Оглавление](../../README.md)
