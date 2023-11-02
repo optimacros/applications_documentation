@@ -1,6 +1,5 @@
 # API Reference
 
-1. [Интерфейс Application manager (на языке TypeScript)](./declarations/om.d.ts)
 1. [Доступ к входным параметрам](#input-params)
 1. [Соединение с моделью](#model-connect)
 1. [Закрытие соединения с моделью](#model-close)
