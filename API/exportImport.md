@@ -119,6 +119,8 @@ setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter
 ```js
 setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 ```
+***Не реализовано.***
+
 Устанавливает флаг показа кода вместо имён для тех элементов, у которых есть код. По умолчанию: `false`.
 
 &nbsp;
