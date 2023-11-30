@@ -31,9 +31,10 @@ syncList(): SyncListBuilder
 ```ts
 interface ListsTab extends Tab {
 	open(name: string): ListTab;
+	elementsCreator(): ElementsCreator;
 }
 ```
-Интерфейс для получения ссылки на [`ListTab`](#list-tab). Интерфейс наследуется от [`Tab`](./views.md#tab). Несмотря на это, функция `open()` **не реализована**.
+Вкладка `Справочники`. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
@@ -44,12 +45,23 @@ open(name: string): ListTab
 
 &nbsp;
 
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+
+&nbsp;
+
 ### Интерфейс ListTab<a name="list-tab"></a>
 ```ts
 interface ListTab extends Tab {
 	subsetTab(): ListSubsetsTab;
 	propertiesTab(): ListPropertiesTab;
 	accessModelTab(): ListAccessModelTab;
+	
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	
 	importer(): ListImporter;
 }
 ```
@@ -77,6 +89,20 @@ accessModelTab(): ListAccessModelTab
 &nbsp;
 
 ```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+
+&nbsp;
+
+```js
 importer(): ListImporter
 ```
 Возвращает ссылку на интерфейс [`ListImporter`](#list-importer) для импорта данных в справочник.
@@ -87,6 +113,7 @@ importer(): ListImporter
 ```ts
 interface ListChildTab extends Tab {
 	listTab(): ListTab;
+	elementsCreator(): ElementsCreator;
 }
 
 interface ListSubsetsTab = ListChildTab;
@@ -100,6 +127,13 @@ interface ListPropertiesTab = ListChildTab;
 listTab(): ListTab
 ```
 Возвращает интерфейс [`ListTab`](#list-tab) вкладки того справочника, чья дочерняя вкладка представляет собой `this`.
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
 
@@ -213,10 +247,18 @@ versionSubsetsTab(): VersionSubsetsTab
 ### Интерфейс VersionsTab<a name="versions-tab"></a>
 ```ts
 interface VersionsTab extends Tab {
+	elementsCreator(): ElementsCreator;
 	copyVersion(from: string, to: string): Object;
 }
 ```
 Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
 
@@ -232,9 +274,17 @@ copyVersion(from: string, to: string): Object
 ### Интерфейс VersionSubsetsTab<a name="version-subsets-tab"></a>
 ```ts
 interface VersionSubsetsTab extends Tab {
+	elementsCreator(): ElementsCreator;
 }
 ```
 Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
 
@@ -302,14 +352,23 @@ interface TimePeriodTab extends Tab {
 subsetsTab(): TimePeriodSubsetTab
 ```
 Возвращает ссылку на вкладку [`TimePeriodSubsetTab`](#time-period-subset-tab) выборок выбранного измерения времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+
 &nbsp;
 
 ### Интерфейс TimePeriodSubsetTab<a name="time-period-subset-tab"></a>
 ```ts
 interface TimePeriodSubsetTab extends Tab {
+	elementsCreator(): ElementsCreator;
 }
 ```
 Интерфейс доступа к вкладке `Выборки` выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
 

@@ -33,7 +33,7 @@ interface MulticubesTab extends Tab {
 	open(name: string): MulticubeTab;
 }
 ```
-Интерфейс для получения ссылки на [`MulticubeTab`](#multicube-tab). Интерфейс наследуется от [`Tab`](#tab).
+Вкладка `Мультикубы`. Интерфейс наследуется от Tab.
 
 &nbsp;
 
@@ -47,12 +47,7 @@ open(name: string): MulticubeTab
 ### Интерфейс Tab<a name="tab"></a>
 ```ts
 interface Tab {
-	open(name: string): Tab;
 	pivot(viewName?: string): Pivot;
-
-	elementsCreator(): ElementsCreator;
-	elementsDeleter(): ElementsDeleter;
-	elementsReorder(): ElementsReorder;
 
 	importer(): Importer;
 	storageImporter(): StorageImporter;
@@ -62,42 +57,11 @@ interface Tab {
 
 &nbsp;
 
-```js
-open(name: string): Tab
-```
-Возвращает ссылку на [`Tab`](#tab) по имени `name`. В интерфейсе Optimacros аналогично открытию вкладки `name`.
-
-&nbsp;
-
 <a name="tab.pivot"></a>
 ```js
 pivot(viewName?: string): Pivot
 ```
 Возвращает ссылку на интерфейс [`Pivot`](#pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
-
-&nbsp;
-
-```js
-elementsCreator(): ElementsCreator
-```
-***Не реализовано.***
-
-Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
-
-&nbsp;
-
-```js
-elementsDeleter(): ElementsDeleter
-```
-Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
-
-&nbsp;
-
-```js
-elementsReorder(): ElementsReorder
-```
-***Не реализовано.***
-Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
 
 &nbsp;
 

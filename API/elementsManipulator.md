@@ -6,8 +6,6 @@
 
 ## Создание элементов<a name="create"></a>
 
-***Не реализовано.***
-
 ### Интерфейс ElementsCreator<a name="elements-creator"></a>
 
 ```ts
