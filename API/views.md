@@ -59,7 +59,6 @@ importer(): MulticubeImporter
 interface Tab {
 	pivot(viewName?: string): Pivot;
 
-	importer(): Importer;
 	storageImporter(): StorageImporter;
 }
 ```
@@ -72,13 +71,6 @@ interface Tab {
 pivot(viewName?: string): Pivot
 ```
 Возвращает ссылку на интерфейс [`Pivot`](#pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
-
-&nbsp;
-
-```js
-importer(): Importer
-```
-Возвращает ссылку на базовый интерфейс импорта [`Importer`](./exportImport.md#importer).
 
 &nbsp;
 
