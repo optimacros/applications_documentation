@@ -468,6 +468,16 @@ getUpdatedPropertiesOnParentLevels(): boolean
 
 &nbsp;
 
+### Интерфейс MulticubeImporter<a name="multicube-importer"></a>
+
+```ts
+interface MulticubeImporter extends Importer {
+}
+```
+Интерфейс импорта в мультикуб. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
 ### Интерфейс VersionsImporter<a name="versions-importer"></a>
 
 ```ts
@@ -475,7 +485,7 @@ interface VersionsImporter extends Importer {
 }
 ```
 ***Не реализовано.***
-Интерфейс импорта в справочник версий. Интерфейс наследуется от [`Importer`](#importer).
+Интерфейс импорта в системный справочник версий. Интерфейс наследуется от [`Importer`](#importer).
 
 &nbsp;
 

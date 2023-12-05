@@ -31,6 +31,8 @@ syncMulticube(): SyncMulticubeBuilder
 ```ts
 interface MulticubesTab extends Tab {
 	open(name: string): MulticubeTab;
+	
+	importer(): MulticubeImporter;
 }
 ```
 Вкладка `Мультикубы`. Интерфейс наследуется от Tab.
@@ -41,6 +43,14 @@ interface MulticubesTab extends Tab {
 open(name: string): MulticubeTab
 ```
 Возвращает ссылку на [`MulticubeTab`](#multicube-tab) куба `name`. Если такой мультикуб отсутствует, бросает исключение. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
+
+&nbsp;
+
+```js
+importer(): MulticubeImporter
+```
+
+Возвращает интерфейс [`MulticubeImporter`](./exportImport.md#multicube-importer) для импорта данных в мультикуб.
 
 &nbsp;
 
@@ -88,6 +98,8 @@ interface MulticubeTab extends Tab {
 	
 	getCubeInfo(identifier: string | number): CubeInfo;
 	async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>;
+	
+	importer(): MulticubeImporter;
 }
 ```
 Вкладка мультикуба. Интерфейс наследуется от [`Tab`](#tab).
@@ -126,6 +138,13 @@ getCubeInfo(identifier: string | number): CubeInfo
 async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>
 ```
 Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`.
+
+&nbsp;
+
+```js
+importer(): MulticubeImporter
+```
+Возвращает интерфейс [`MulticubeImporter`](./exportImport.md#multicube-importer) для импорта данных в мультикуб.
 
 &nbsp;
 
