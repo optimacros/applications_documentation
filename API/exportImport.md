@@ -468,6 +468,17 @@ getUpdatedPropertiesOnParentLevels(): boolean
 
 &nbsp;
 
+### Интерфейс VersionsImporter<a name="versions-importer"></a>
+
+```ts
+interface VersionsImporter extends Importer {
+}
+```
+***Не реализовано.***
+Интерфейс импорта в справочник версий. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
 [API Reference](API.md)
 
 [Оглавление](../README.md)

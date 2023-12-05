@@ -184,11 +184,21 @@ versionSubsetsTab(): VersionSubsetsTab
 ### Интерфейс VersionsTab<a name="versions-tab"></a>
 ```ts
 interface VersionsTab extends Tab {
-	elementsCreator(): ElementsCreator;
 	copyVersion(from: string, to: string): Object;
+	elementsCreator(): ElementsCreator;
+	importer(): VersionsImporter;
 }
 ```
 Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab).
+
+&nbsp;
+
+```js
+copyVersion(from: string, to: string): Object
+```
+***Не реализовано.***
+
+Копирует срез по версии `from` в срез по версии `to` во всех мультикубах модели, которые имеют измерение версий, включающее обе эти версии. Возвращает объект вида `{"success": true}`.
 
 &nbsp;
 
@@ -200,11 +210,10 @@ elementsCreator(): ElementsCreator
 &nbsp;
 
 ```js
-copyVersion(from: string, to: string): Object
+importer(): VersionsImporter
 ```
 ***Не реализовано.***
-
-Копирует срез по версии `from` в срез по версии `to` во всех мультикубах модели, которые имеют измерение версий, включающее обе эти версии. Возвращает объект вида `{"success": true}`.
+Возвращает интерфейс [`VersionsImporter`](./exportImport.md#versions-importer) для импорта данных в системный справочник версий.
 
 &nbsp;
 
