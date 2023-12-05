@@ -31,8 +31,6 @@ syncMulticube(): SyncMulticubeBuilder
 ```ts
 interface MulticubesTab extends Tab {
 	open(name: string): MulticubeTab;
-	
-	importer(): MulticubeImporter;
 }
 ```
 Вкладка `Мультикубы`. Интерфейс наследуется от Tab.
@@ -46,20 +44,10 @@ open(name: string): MulticubeTab
 
 &nbsp;
 
-```js
-importer(): MulticubeImporter
-```
-
-Возвращает интерфейс [`MulticubeImporter`](./exportImport.md#multicube-importer) для импорта данных в мультикуб.
-
-&nbsp;
-
 ### Интерфейс Tab<a name="tab"></a>
 ```ts
 interface Tab {
 	pivot(viewName?: string): Pivot;
-
-	storageImporter(): StorageImporter;
 }
 ```
 Базовый интерфейс для вкладок.
@@ -74,13 +62,6 @@ pivot(viewName?: string): Pivot
 
 &nbsp;
 
-```js
-storageImporter(): StorageImporter
-```
-Возвращает ссылку на быстрый интерфейс импорта [`StorageImporter`](./exportImport.md#storage-importer).
-
-&nbsp;
-
 ### Интерфейс MulticubeTab<a name="multicube-tab"></a>
 ```ts
 interface MulticubeTab extends Tab {
@@ -92,11 +73,10 @@ interface MulticubeTab extends Tab {
 	async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>;
 	
 	importer(): MulticubeImporter;
+	storageImporter(): StorageImporter;
 }
 ```
 Вкладка мультикуба. Интерфейс наследуется от [`Tab`](#tab).
-
-Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -131,12 +111,21 @@ async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>
 ```
 Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`.
 
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
+
 &nbsp;
 
 ```js
 importer(): MulticubeImporter
 ```
 Возвращает интерфейс [`MulticubeImporter`](./exportImport.md#multicube-importer) для импорта данных в мультикуб.
+
+&nbsp;
+
+```js
+storageImporter(): StorageImporter
+```
+Возвращает ссылку на интерфейс быстрого импорта [`StorageImporter`](./exportImport.md#storage-importer).
 
 &nbsp;
 
