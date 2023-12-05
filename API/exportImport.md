@@ -1,7 +1,8 @@
 # Экспорт и импорт
 
 1. [Экспорт из мультикубов и справочников](#export)
-1. [Импорт в мультикубы и справочники](#import)
+1. [Импорт в мультикубы, справочники и системные измерения](#import)
+1. [Быстрый импорт в мультикубы](#om-import)
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 
@@ -238,7 +239,7 @@ moveToLocal(path: string): ExportResult
 
 &nbsp;
 
-## Импорт в мультикубы и справочники<a name="import"></a>
+## Импорт в мультикубы, справочники и системные измерения<a name="import"></a>
 
 ### Интерфейс CSVParams<a name="csv-params"></a>
 ```ts
@@ -362,47 +363,6 @@ import(): Importer
 
 &nbsp;
 
-### Интерфейс StorageImporter<a name="storage-importer"></a>
-```ts
-interface StorageImporter extends Importer {
-	setMaxFailures(maxFailures: number): StorageImporter;
-	setIsCompressed(isCompressed: boolean): StorageImporter;
-	setEncoding(encoding: string): StorageImporter;
-	setDateFormat(dateFormat: string): StorageImporter;
-}
-```
-Интерфейс быстрого импорта. Доступен только в мультикубах. Интерфейс наследуется от [`Importer`](#importer). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции возвращают `this`.
-
-&nbsp;
-
-```js
-setMaxFailures(maxFailures: number): StorageImporter
-```
-Устанавливает количество ошибок, после которых попытка импорта прекращается. Уже импортированные значения при этом сохранятся. Значение по умолчанию: `0` (т. е. бесконечность).
-
-&nbsp;
-
-```js
-setIsCompressed(isCompressed: boolean): StorageImporter
-```
-Устанавливает флаг `isCompressed`. Если он равен `true`, во время импорта будет происходить поточная деархивация упакованного в ZIP файла. Значение по умолчанию: `false`.
-
-&nbsp;
-
-```js
-setEncoding(encoding: string): StorageImporter
-```
-Устанавливает кодировку. По умолчанию: `'UTF-8'`.
-
-&nbsp;
-
-```js
-setDateFormat(dateFormat: string): StorageImporter
-```
-Устанавливает формат дат. Аналогично функции [`StorageExporter.setDateFormat()`](#storage-exporter.set-date-format).
-
-&nbsp;
-
 ### Интерфейс ListImporter<a name="list-importer"></a>
 ```ts
 interface ListImporter extends Importer {
@@ -488,6 +448,48 @@ interface VersionsImporter extends Importer {
 Интерфейс импорта в системный справочник версий. Интерфейс наследуется от [`Importer`](#importer).
 
 &nbsp;
+
+## Быстрый импорт в мультикубы<a name="om-import"></a>
+
+### Интерфейс StorageImporter<a name="storage-importer"></a>
+```ts
+interface StorageImporter extends Importer {
+	setMaxFailures(maxFailures: number): StorageImporter;
+	setIsCompressed(isCompressed: boolean): StorageImporter;
+	setEncoding(encoding: string): StorageImporter;
+	setDateFormat(dateFormat: string): StorageImporter;
+}
+```
+Интерфейс быстрого импорта. Доступен только в мультикубах. Интерфейс наследуется от [`Importer`](#importer). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции возвращают `this`.
+
+&nbsp;
+
+```js
+setMaxFailures(maxFailures: number): StorageImporter
+```
+Устанавливает количество ошибок, после которых попытка импорта прекращается. Уже импортированные значения при этом сохранятся. Значение по умолчанию: `0` (т. е. бесконечность).
+
+&nbsp;
+
+```js
+setIsCompressed(isCompressed: boolean): StorageImporter
+```
+Устанавливает флаг `isCompressed`. Если он равен `true`, во время импорта будет происходить поточная деархивация упакованного в ZIP файла. Значение по умолчанию: `false`.
+
+&nbsp;
+
+```js
+setEncoding(encoding: string): StorageImporter
+```
+Устанавливает кодировку. По умолчанию: `'UTF-8'`.
+
+&nbsp;
+
+```js
+setDateFormat(dateFormat: string): StorageImporter
+```
+Устанавливает формат дат. Аналогично функции [`StorageExporter.setDateFormat()`](#storage-exporter.set-date-format).
+
 
 [API Reference](API.md)
 
