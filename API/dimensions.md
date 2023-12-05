@@ -288,6 +288,7 @@ applyForm(): Object
 ```ts
 interface TimePeriodTab extends Tab {
 	subsetsTab(): TimePeriodSubsetTab;
+	importer(): TimePeriodImporter;
 }
 ```
 Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
@@ -298,6 +299,14 @@ interface TimePeriodTab extends Tab {
 subsetsTab(): TimePeriodSubsetTab
 ```
 Возвращает ссылку на вкладку [`TimePeriodSubsetTab`](#time-period-subset-tab) выборок выбранного измерения времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+
+&nbsp;
+
+```js
+importer(): TimePeriodImporter
+```
+***Не реализовано.***
+Возвращает ссылку на интерфейс импорта [`TimePeriodImporter`](./exportImport.md#time-period-importer).
 
 &nbsp;
 

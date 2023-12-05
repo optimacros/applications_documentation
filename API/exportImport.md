@@ -449,6 +449,16 @@ interface VersionsImporter extends Importer {
 
 &nbsp;
 
+### Интерфейс TimePeriodImporter<a name="time-period-importer"></a>
+```ts
+interface TimePeriodImporter extends Importer {
+}
+```
+***Не реализовано.***
+Интерфейс импорта в системный справочник времени. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
 ## Быстрый импорт в мультикубы<a name="om-import"></a>
 
 ### Интерфейс StorageImporter<a name="storage-importer"></a>
