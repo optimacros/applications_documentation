@@ -48,6 +48,7 @@ open(name: string): ListTab
 ```js
 elementsCreator(): ElementsCreator
 ```
+
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
@@ -91,6 +92,7 @@ accessModelTab(): ListAccessModelTab
 ```js
 elementsCreator(): ElementsCreator
 ```
+
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
@@ -251,7 +253,7 @@ interface VersionsTab extends Tab {
 	copyVersion(from: string, to: string): Object;
 }
 ```
-Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
+Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
@@ -277,7 +279,7 @@ interface VersionSubsetsTab extends Tab {
 	elementsCreator(): ElementsCreator;
 }
 ```
-Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
+Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
@@ -320,7 +322,7 @@ interface TimeOptionsTab extends Tab {
 	applyForm(): Object;
 }
 ```
-Вкладка `Время`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. Является [`плоской таблицей`](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#flat-table). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
+Вкладка `Время`. Интерфейс наследуется от [`Tab`](./views.md#tab) Является [`плоской таблицей`](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#flat-table). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
 
 &nbsp;
 
@@ -344,7 +346,7 @@ interface TimePeriodTab extends Tab {
 	subsetsTab(): TimePeriodSubsetTab;
 }
 ```
-Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
+Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
 
 &nbsp;
 
@@ -361,13 +363,15 @@ interface TimePeriodSubsetTab extends Tab {
 	elementsCreator(): ElementsCreator;
 }
 ```
-Интерфейс доступа к вкладке `Выборки` выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+Интерфейс доступа к вкладке `Выборки` выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
 
 &nbsp;
 
 ```js
 elementsCreator(): ElementsCreator
 ```
+***Не реализовано.***
+
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
