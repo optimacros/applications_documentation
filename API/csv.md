@@ -44,8 +44,6 @@ save(name: string, charset?: string): string
 
 ### Интерфейс CsvReader<a name="csv-reader"></a>
 
-***Не реализовано.***
-
 ```ts
 interface CsvReader {
 	params(): CSVParams;
