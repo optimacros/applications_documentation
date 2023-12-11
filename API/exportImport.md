@@ -202,7 +202,9 @@ interface ExportResult {
 	mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult;
 	getHash(): string | null;
 	copyToLocal(path: string): ExportResult;
+	
 	moveToLocal(path: string): ExportResult;
+	async moveToLocalAsync(path: string): Promise<ExportResult>;
 }
 ```
 Интерфейс для работы с результатом экспорта.
@@ -236,10 +238,12 @@ copyToLocal(path: string): ExportResult
 
 ```js
 moveToLocal(path: string): ExportResult
+async moveToLocalAsync(path: string): Promise<ExportResult>
 ```
-***Не реализовано.***
 
 Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) и убирает его из [`глобального реестра`](../appendix/glossary.md#global-file-registry). Возвращает `this`.
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
