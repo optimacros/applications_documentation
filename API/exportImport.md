@@ -21,10 +21,12 @@ interface Exporter {
 	setEscape(escape: string): Exporter;
 	setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter;
 	setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter;
+	
 	export(): ExportResult;
+	async exportAsync(): Promise<ExportResult>;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый экспорт таблицы. Доступен для всех [`Grid`](./views.md#grid). Все функции, кроме [`export()`](#exporter.export), возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый экспорт таблицы. Доступен для всех [`Grid`](./views.md#grid). Все функции, кроме [`export()`](#exporter.export)/[`exportAsync()`](#exporter.export), возвращают `this`.
 
 &nbsp;
 
@@ -126,8 +128,11 @@ setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 <a name="exporter.export"></a>
 ```js
 export(): ExportResult
+async exportAsync(): Promise<ExportResult>
 ```
 Производит экспорт представления в соответствии с настройками, регистрирует файл в [`глобальном реестре`](../appendix/glossary.md#global-file-registry) и возвращает ссылку на [`ExportResult`](#export-result).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
