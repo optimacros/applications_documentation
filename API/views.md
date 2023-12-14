@@ -352,14 +352,18 @@ getColumnDimensions(): GridDimension[]
 ```ts
 interface GridDimension {
 	getDimensionEntity(): EntityInfo;
+	async getDimensionEntityAsync(): Promise<EntityInfo>;
 }
 ```
 Интерфейс предоставляет данные об измерении мультикуба.
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
 ```js
 getDimensionEntity(): EntityInfo
+async getDimensionEntityAsync(): Promise<EntityInfo>
 ```
 Возвращает ссылку на сущность [`EntityInfo`](#entity-info) измерения мультикуба.
 
