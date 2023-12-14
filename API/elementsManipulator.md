@@ -2,7 +2,7 @@
 
 1. [Создание элементов](#create)
 1. [Удаление элементов](#delete)
-1. [Сортировка элементов](#reorder)
+1. [Тасование элементов](#reorder)
 
 ## Создание элементов<a name="create"></a>
 
@@ -161,7 +161,7 @@ async deleteAsync(): Promise<ElementsDeleter>
 
 &nbsp;
 
-## Сортировка элементов<a name="reorder"></a>
+## Тасование элементов<a name="reorder"></a>
 
 ***Не реализовано.***
 
