@@ -6,8 +6,6 @@
 
 ## Создание элементов<a name="create"></a>
 
-***Не реализовано.***
-
 ### Интерфейс ElementsCreator<a name="elements-creator"></a>
 
 ```ts
@@ -42,7 +40,9 @@ interface BaseElementsCreator {
 	setPositionStart(): BaseElementsCreator;
 	setPositionEnd(): BaseElementsCreator;
 	setPositionChildOf(parentLongId: number): BaseElementsCreator;
+	
 	create(): number[];
+	async createAsync(): Promise<number[]>;
 }
 ```
 Базовый интерфейс для добавления новых элементов.
@@ -87,8 +87,11 @@ setPositionChildOf(parentLongId: number): BaseElementsCreator
 
 ```js
 create(): number[]
+async createAsync(): Promise<number[]>
 ```
 Добавляет элементы и возвращает массив их [`longId`](./views.md#long-id).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -132,7 +135,9 @@ setElementNames(names: string[]): NamedElementsCreator
 ```ts
 interface ElementsDeleter {
 	appendIdentifier(identifier: number): ElementsDeleter;
+	
 	delete(): ElementsDeleter;
+	async deleteAsync(): Promise<ElementsDeleter>;
 }
 ```
 Интерфейс позволяет удалить элементы таблицы. Аналог кнопки "Удалить" в интерфейсе Optimacros.
@@ -148,8 +153,11 @@ appendIdentifier(identifier: number): ElementsDeleter
 
 ```js
 delete(): ElementsDeleter
+async deleteAsync(): Promise<ElementsDeleter>
 ```
 Фактически удаляет все элементы в буфере из таблицы. Возвращает `this`.
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 

@@ -31,9 +31,10 @@ syncList(): SyncListBuilder
 ```ts
 interface ListsTab extends Tab {
 	open(name: string): ListTab;
+	elementsCreator(): ElementsCreator;
 }
 ```
-Интерфейс для получения ссылки на [`ListTab`](#list-tab). Интерфейс наследуется от [`Tab`](./views.md#tab). Несмотря на это, функция `open()` **не реализована**.
+Вкладка `Справочники`. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
@@ -44,12 +45,24 @@ open(name: string): ListTab
 
 &nbsp;
 
+```js
+elementsCreator(): ElementsCreator
+```
+
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+
+&nbsp;
+
 ### Интерфейс ListTab<a name="list-tab"></a>
 ```ts
 interface ListTab extends Tab {
 	subsetTab(): ListSubsetsTab;
 	propertiesTab(): ListPropertiesTab;
 	accessModelTab(): ListAccessModelTab;
+	
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	
 	importer(): ListImporter;
 }
 ```
@@ -77,9 +90,24 @@ accessModelTab(): ListAccessModelTab
 &nbsp;
 
 ```js
+elementsCreator(): ElementsCreator
+```
+
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+
+&nbsp;
+
+```js
 importer(): ListImporter
 ```
-Возвращает ссылку на интерфейс [`ListImporter`](#list-importer) для импорта данных в справочник.
+Возвращает ссылку на интерфейс [`ListImporter`](./exportImport.md#list-importer) для импорта данных в справочник.
 
 &nbsp;
 
@@ -87,6 +115,7 @@ importer(): ListImporter
 ```ts
 interface ListChildTab extends Tab {
 	listTab(): ListTab;
+	elementsCreator(): ElementsCreator;
 }
 
 interface ListSubsetsTab = ListChildTab;
@@ -100,6 +129,13 @@ interface ListPropertiesTab = ListChildTab;
 listTab(): ListTab
 ```
 Возвращает интерфейс [`ListTab`](#list-tab) вкладки того справочника, чья дочерняя вкладка представляет собой `this`.
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
 
@@ -117,71 +153,6 @@ interface ListAccessModelTab extends ListChildTab {
 isEnabled(): boolean
 ```
 Возвращает признак того, что доступ по МДП включен и вкладка доступна.
-
-&nbsp;
-
-### Интерфейс ListImporter<a name="list-importer"></a>
-```ts
-interface ListImporter extends Importer {
-	setFilePath(path: string): ListImporter;
-	setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter;
-	getObligatoryListCodes(): boolean;
-	setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
-	getImportToChildListOnly(): boolean;
-	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
-	getUpdatedPropertiesOnParentLevels(): boolean;
-}
-```
-Интерфейс импорта в справочник. Интерфейс наследуется от [`Importer`](./exportImport.md#importer).
-
-&nbsp;
-
-```js
-setFilePath(path: string): ListImporter
-```
-Устанавливает имя импортируемого файла. Возвращает `this`.
-
-&nbsp;
-
-```js
-setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
-```
-Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществуещие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getObligatoryListCodes(): boolean
-```
-Возвращает признак режима обязательных кодов.
-
-&nbsp;
-
-```js
-setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
-```
-Устанавливает режим обновления свойств `Parent` и `Code` для элементов только текущего справочника. Если аргумент `importToChildListOnly === false`, эти свойства будут обновляться также и у родительских справочников любого уровня. Значение по умолчанию: `false`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getImportToChildListOnly(): boolean
-```
-Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
-
-&nbsp;
-
-```js
-setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
-```
-Устанавливает режим обновления собственных свойств для элементов родительских справочников. Значение по умолчанию: `true`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getUpdatedPropertiesOnParentLevels(): boolean
-```
-Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
 
 &nbsp;
 
@@ -214,9 +185,11 @@ versionSubsetsTab(): VersionSubsetsTab
 ```ts
 interface VersionsTab extends Tab {
 	copyVersion(from: string, to: string): Object;
+	elementsCreator(): ElementsCreator;
+	importer(): VersionsImporter;
 }
 ```
-Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
+Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
@@ -229,12 +202,35 @@ copyVersion(from: string, to: string): Object
 
 &nbsp;
 
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+
+&nbsp;
+
+```js
+importer(): VersionsImporter
+```
+***Не реализовано.***
+Возвращает интерфейс [`VersionsImporter`](./exportImport.md#versions-importer) для импорта данных в системный справочник версий.
+
+&nbsp;
+
 ### Интерфейс VersionSubsetsTab<a name="version-subsets-tab"></a>
 ```ts
 interface VersionSubsetsTab extends Tab {
+	elementsCreator(): ElementsCreator;
 }
 ```
-Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
+Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#tab).
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
 
@@ -270,7 +266,7 @@ interface TimeOptionsTab extends Tab {
 	applyForm(): Object;
 }
 ```
-Вкладка `Время`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. Является [`плоской таблицей`](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#flat-table). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
+Вкладка `Время`. Интерфейс наследуется от [`Tab`](./views.md#tab) Является [`плоской таблицей`](https://github.com/optimacros/scripts_documentation/blob/main/appendix/constraints.md#flat-table). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
 
 &nbsp;
 
@@ -292,9 +288,10 @@ applyForm(): Object
 ```ts
 interface TimePeriodTab extends Tab {
 	subsetsTab(): TimePeriodSubsetTab;
+	importer(): TimePeriodImporter;
 }
 ```
-Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
+Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
 
 &nbsp;
 
@@ -302,14 +299,33 @@ interface TimePeriodTab extends Tab {
 subsetsTab(): TimePeriodSubsetTab
 ```
 Возвращает ссылку на вкладку [`TimePeriodSubsetTab`](#time-period-subset-tab) выборок выбранного измерения времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+
+&nbsp;
+
+```js
+importer(): TimePeriodImporter
+```
+***Не реализовано.***
+Возвращает ссылку на интерфейс импорта [`TimePeriodImporter`](./exportImport.md#time-period-importer).
+
 &nbsp;
 
 ### Интерфейс TimePeriodSubsetTab<a name="time-period-subset-tab"></a>
 ```ts
 interface TimePeriodSubsetTab extends Tab {
+	elementsCreator(): ElementsCreator;
 }
 ```
-Интерфейс доступа к вкладке `Выборки` выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+Интерфейс доступа к вкладке `Выборки` выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+***Не реализовано.***
+
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
 
