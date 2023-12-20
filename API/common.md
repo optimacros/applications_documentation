@@ -238,7 +238,10 @@ interface ModelInfo {
 	
 	repair(): boolean;
 	recalculate(): boolean;
-	backup(path: string): boolean;
+	
+	backup(): boolean;
+	async backupAsync(): Promise<boolean>;
+	
 	exportObfuscationState(): ExportObfuscationState;
 }
 ```
@@ -308,11 +311,11 @@ recalculate(): boolean
 &nbsp;
 
 ```js
-backup(path: string): boolean
+backup(): boolean
+async backupAsync(): Promise<boolean>
 ```
-***Не реализовано.***
 
-Сохраняет резервную копию в [`рабочую директорию`](../appendix/glossary.md#script-dir) скрипта по пути `path`. Возвращает `true`.
+Сохраняет резервную копию модели. Посмотреть лог резервных копий в интерфейсе Optimacros можно так: Центр безопастности `->` Логи `->` Резервные копии. Возвращает признак успешного выполнения.
 
 &nbsp;
 
