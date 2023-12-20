@@ -237,6 +237,8 @@ interface ModelInfo {
 	async setModelCalculationModeAsync(status: boolean): Promise<boolean>;
 	
 	repair(): boolean;
+	async repairAsync(): Promise<boolean>;
+	
 	recalculate(): boolean;
 	
 	backup(): boolean;
@@ -294,8 +296,8 @@ async setModelCalculationModeAsync(status: boolean): Promise<boolean>
 
 ```js
 repair(): boolean
+async repairAsync(): Promise<boolean>
 ```
-***Не реализовано.***
 
 Делает резервную копию модели, останавливает все [`процессы`](https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81_(%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)) ОС, которые обслуживают модель, запускает их заново и восстанавливает модель из копии. Аналог в интерфейсе Optimacros: меню пользователя -> `Перезапустить модель`. Возвращает `true`.
 
