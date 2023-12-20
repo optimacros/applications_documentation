@@ -228,6 +228,7 @@ interface ModelInfo {
 	async nameAsync(): Promise<string>;
 	
 	lastSyncDate(): number;
+	async lastSyncDateAsync(): Promise<number>;
 	
 	autoCalcStatus(): boolean;
 	async autoCalcStatusAsync(): Promise<boolean>;
@@ -262,8 +263,8 @@ async nameAsync(): Promise<string>
 
 ```js
 lastSyncDate(): number
+async lastSyncDateAsync(): Promise<number>
 ```
-***Не реализовано.***
 
 Возвращает дату и время в формате [`UNIX`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F) последнего пересчёта модели в ручном режиме.
 
