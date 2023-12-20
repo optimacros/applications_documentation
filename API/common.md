@@ -240,6 +240,7 @@ interface ModelInfo {
 	async repairAsync(): Promise<boolean>;
 	
 	recalculate(): boolean;
+	async recalculateAsync(): Promise<boolean>;
 	
 	backup(): boolean;
 	async backupAsync(): Promise<boolean>;
@@ -305,9 +306,8 @@ async repairAsync(): Promise<boolean>
 
 ```js
 recalculate(): boolean
+async recalculateAsync(): Promise<boolean>
 ```
-***Не реализовано.***
-
 Выполняет пересчёт модели в ручном режиме. Не останавливает процессы модели, за счёт чего выполняется значительно быстрее, чем `repair()`. Аналог в интерфейсе Optimacros: меню пользователя -> `Пересчитать модель`. Возвращает `true`.
 
 &nbsp;
