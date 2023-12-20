@@ -72,6 +72,8 @@ interface MulticubeTab extends Tab {
 	getCubeInfo(identifier: string | number): CubeInfo;
 	async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>;
 	
+	cubesTab(): CubesTab;
+	
 	importer(): MulticubeImporter;
 	storageImporter(): StorageImporter;
 }
@@ -116,6 +118,13 @@ async getCubeInfoAsync(identifier: string | number): Promise<CubeInfo>
 &nbsp;
 
 ```js
+cubesTab(): CubesTab
+```
+Возвращает интерфейс [`CubesTab`](#cubes-tab) доступа к режиму редактирования мультикуба.
+
+&nbsp;
+
+```js
 importer(): MulticubeImporter
 ```
 Возвращает интерфейс [`MulticubeImporter`](./exportImport.md#multicube-importer) для импорта данных в мультикуб.
@@ -126,6 +135,33 @@ importer(): MulticubeImporter
 storageImporter(): StorageImporter
 ```
 Возвращает ссылку на интерфейс быстрого импорта [`StorageImporter`](./exportImport.md#storage-importer).
+
+&nbsp;
+
+### Интерфейс CubesTab<a name="cubes-tab"></a>
+```ts
+interface CubesTab extends Tab {
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+}
+```
+Интерфейс доступа к кубам мультикуба. В интерфейсе Optimacros аналогично открытию вкладки `Режим редактирования` мультикуба. Наследуется от интерфейса [`Tab`](#tab).
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления кубов.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+***Не реализовано.***
+
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления кубов.
 
 &nbsp;
 
