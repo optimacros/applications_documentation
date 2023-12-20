@@ -234,6 +234,8 @@ interface ModelInfo {
 	async autoCalcStatusAsync(): Promise<boolean>;
 	
 	setModelCalculationMode(status: boolean): boolean;
+	async setModelCalculationModeAsync(status: boolean): Promise<boolean>;
+	
 	repair(): boolean;
 	recalculate(): boolean;
 	backup(path: string): boolean;
@@ -280,8 +282,8 @@ async autoCalcStatusAsync(): Promise<boolean>
 
 ```js
 setModelCalculationMode(status: boolean): boolean
+async setModelCalculationModeAsync(status: boolean): Promise<boolean>
 ```
-***Не реализовано.***
 
 Устанавливает признак режима автоматического пересчёта модели. Аналог в интерфейсе Optimacros: меню пользователя -> `Параметры` -> `Расширенные` -> `Режим ручного пересчёта модели`. Возвращает `true`.
 
