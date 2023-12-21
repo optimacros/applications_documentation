@@ -48,6 +48,8 @@ setFormat(format: string): Exporter
 ```js
 setOmitSummaryRows(omitSummaryRows: boolean): Exporter
 ```
+***Не реализовано.***
+
 Устанавливает флаг пропуска итоговых строк. По умолчанию: `false`.
 
 &nbsp;
@@ -240,6 +242,7 @@ copyToLocal(path: string): ExportResult
 moveToLocal(path: string): ExportResult
 async moveToLocalAsync(path: string): Promise<ExportResult>
 ```
+***Не реализовано.***
 
 Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) и убирает его из [`глобального реестра`](../appendix/glossary.md#global-file-registry). Возвращает `this`.
 
