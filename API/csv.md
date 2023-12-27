@@ -38,13 +38,11 @@ writeRows(rows: string[][]): CsvWriter
 ```js
 save(name: string, charset?: string): string
 ```
-Сохраняет файл в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) под именем `{name}.csv` в кодировке `charset` (допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`). Возвращает имя файла с расширением: `{name}.csv`.
+Сохраняет файл в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) под именем `'{name}.csv'` в кодировке `charset` (допустимые значения: `'UTF-8'`, `'WINDOWS-1251'`, значение по умолчанию: `'UTF-8'`). Возвращает имя файла с расширением: `'{name}.csv'`.
 
 &nbsp;
 
 ### Интерфейс CsvReader<a name="csv-reader"></a>
-
-***Не реализовано.***
 
 ```ts
 interface CsvReader {
@@ -67,7 +65,7 @@ params(): CSVParams
 ```js
 changeFileCharset(charset: string): CsvReader
 ```
-Устанавливает кодировку файла. Допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`. Возвращает `this`.
+Устанавливает кодировку файла. Допустимые значения: `'UTF-8'`, `'WINDOWS-1251'`, значение по умолчанию: `'UTF-8'`. Возвращает `this`.
 
 &nbsp;
 

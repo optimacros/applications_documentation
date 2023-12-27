@@ -22,10 +22,12 @@ interface Exporter {
 	setEscape(escape: string): Exporter;
 	setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter;
 	setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter;
+	
 	export(): ExportResult;
+	async exportAsync(): Promise<ExportResult>;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый экспорт таблицы. Доступен для всех [`Grid`](./views.md#grid). Все функции, кроме [`export()`](#exporter.export), возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый экспорт таблицы. Доступен для всех [`Grid`](./views.md#grid). Все функции, кроме [`export()`](#exporter.export)/[`exportAsync()`](#exporter.export), возвращают `this`.
 
 &nbsp;
 
@@ -47,6 +49,8 @@ setFormat(format: string): Exporter
 ```js
 setOmitSummaryRows(omitSummaryRows: boolean): Exporter
 ```
+***Не реализовано.***
+
 Устанавливает флаг пропуска итоговых строк. По умолчанию: `false`.
 
 &nbsp;
@@ -129,8 +133,11 @@ setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 <a name="exporter.export"></a>
 ```js
 export(): ExportResult
+async exportAsync(): Promise<ExportResult>
 ```
 Производит экспорт представления в соответствии с настройками, регистрирует файл в [`глобальном реестре`](../appendix/glossary.md#global-file-registry) и возвращает ссылку на [`ExportResult`](#export-result).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
@@ -200,7 +207,9 @@ interface ExportResult {
 	mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult;
 	getHash(): string | null;
 	copyToLocal(path: string): ExportResult;
+	
 	moveToLocal(path: string): ExportResult;
+	async moveToLocalAsync(path: string): Promise<ExportResult>;
 }
 ```
 Интерфейс для работы с результатом экспорта.
@@ -234,10 +243,13 @@ copyToLocal(path: string): ExportResult
 
 ```js
 moveToLocal(path: string): ExportResult
+async moveToLocalAsync(path: string): Promise<ExportResult>
 ```
 ***Не реализовано.***
 
 Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) и убирает его из [`глобального реестра`](../appendix/glossary.md#global-file-registry). Возвращает `this`.
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
