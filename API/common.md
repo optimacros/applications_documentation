@@ -228,14 +228,23 @@ interface ModelInfo {
 	async nameAsync(): Promise<string>;
 	
 	lastSyncDate(): number;
+	async lastSyncDateAsync(): Promise<number>;
 	
 	autoCalcStatus(): boolean;
 	async autoCalcStatusAsync(): Promise<boolean>;
 	
 	setModelCalculationMode(status: boolean): boolean;
+	async setModelCalculationModeAsync(status: boolean): Promise<boolean>;
+	
 	repair(): boolean;
+	async repairAsync(): Promise<boolean>;
+	
 	recalculate(): boolean;
-	backup(path: string): boolean;
+	async recalculateAsync(): Promise<boolean>;
+	
+	backup(): boolean;
+	async backupAsync(): Promise<boolean>;
+	
 	exportObfuscationState(): ExportObfuscationState;
 }
 ```
@@ -262,8 +271,8 @@ async nameAsync(): Promise<string>
 
 ```js
 lastSyncDate(): number
+async lastSyncDateAsync(): Promise<number>
 ```
-***Не реализовано.***
 
 Возвращает дату и время в формате [`UNIX`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F) последнего пересчёта модели в ручном режиме.
 
@@ -279,8 +288,8 @@ async autoCalcStatusAsync(): Promise<boolean>
 
 ```js
 setModelCalculationMode(status: boolean): boolean
+async setModelCalculationModeAsync(status: boolean): Promise<boolean>
 ```
-***Не реализовано.***
 
 Устанавливает признак режима автоматического пересчёта модели. Аналог в интерфейсе Optimacros: меню пользователя -> `Параметры` -> `Расширенные` -> `Режим ручного пересчёта модели`. Возвращает `true`.
 
@@ -288,8 +297,8 @@ setModelCalculationMode(status: boolean): boolean
 
 ```js
 repair(): boolean
+async repairAsync(): Promise<boolean>
 ```
-***Не реализовано.***
 
 Делает резервную копию модели, останавливает все [`процессы`](https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81_(%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)) ОС, которые обслуживают модель, запускает их заново и восстанавливает модель из копии. Аналог в интерфейсе Optimacros: меню пользователя -> `Перезапустить модель`. Возвращает `true`.
 
@@ -297,19 +306,18 @@ repair(): boolean
 
 ```js
 recalculate(): boolean
+async recalculateAsync(): Promise<boolean>
 ```
-***Не реализовано.***
-
 Выполняет пересчёт модели в ручном режиме. Не останавливает процессы модели, за счёт чего выполняется значительно быстрее, чем `repair()`. Аналог в интерфейсе Optimacros: меню пользователя -> `Пересчитать модель`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-backup(path: string): boolean
+backup(): boolean
+async backupAsync(): Promise<boolean>
 ```
-***Не реализовано.***
 
-Сохраняет резервную копию в [`рабочую директорию`](../appendix/glossary.md#script-dir) скрипта по пути `path`. Возвращает `true`.
+Сохраняет резервную копию модели. Посмотреть лог резервных копий в интерфейсе Optimacros можно так: Центр безопастности `->` Логи `->` Резервные копии. Возвращает признак успешного выполнения.
 
 &nbsp;
 
