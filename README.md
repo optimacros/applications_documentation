@@ -9,3 +9,4 @@ Application Manager API частично совместим с [`API Cкрипт
 1. [API Reference](./API/API.md)
 1. [Отличия от Скриптов 1.0](./diff.md)
 1. [Приложения](./appendix/appendix.md)
+1. [История изменений документации](https://htmlpreview.github.io/?https://gitlab.optimacros.com/am/application_manager_documentation/-/blob/main/changelog.html)
