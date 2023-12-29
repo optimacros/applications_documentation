@@ -31,9 +31,12 @@ syncMulticube(): SyncMulticubeBuilder
 ```ts
 interface MulticubesTab extends Tab {
 	open(name: string): MulticubeTab;
+   
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
 }
 ```
-Вкладка `Мультикубы`. Интерфейс наследуется от Tab.
+Вкладка `Мультикубы`. Интерфейс наследуется от [`Tab`](#tab).
 
 &nbsp;
 
@@ -44,7 +47,22 @@ open(name: string): MulticubeTab
 
 &nbsp;
 
+```js
+elementsCreator(): ElementsCreator
+```
+
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для создания мультикубов.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления мультикубов.
+
 ### Интерфейс Tab<a name="tab"></a>
+
 ```ts
 interface Tab {
 	pivot(viewName?: string): Pivot;
