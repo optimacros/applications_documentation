@@ -33,7 +33,7 @@ interface MulticubesTab extends Tab {
 	open(name: string): MulticubeTab;
 }
 ```
-Вкладка `Мультикубы`. Интерфейс наследуется от Tab.
+Вкладка `Мультикубы`. Интерфейс наследуется от [`Tab`](#Tab).
 
 &nbsp;
 
