@@ -562,9 +562,6 @@ type RowFullItem = {
 };
 
 interface ChunkRawData {
-	refreshData(): ChunkRawData;
-	async refreshDataAsync(): Promise<ChunkRawData>;
-	
 	columnsHeaders(): RawHeaderData[][];
 	rowsHeaders(): RawHeaderData[][];
 	
@@ -581,14 +578,6 @@ interface ChunkRawData {
 }
 ```
 Интерфейс быстрого чтения данных куска [`GridRangeChunk`](#grid-range-chunk). ***Не*** позволяет записывать данные.
-
-&nbsp;
-
-```js
-refreshData(): ChunkRawData
-async refreshDataAsync(): Promise<ChunkRawData>
-```
-Обновляет данные куска запросом на Middle-Work.
 
 &nbsp;
 
