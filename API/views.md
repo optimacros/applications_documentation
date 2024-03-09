@@ -540,6 +540,8 @@ interface Label {
 	alias(): string | null;
 	label(): string | null;
 	parentLongId(): number;
+	
+	toJSON(): Object;
 }
 
 interface EntityInfo = Label;
@@ -596,6 +598,13 @@ parentLongId(): number
 Если сущность является элементом, у которого есть родительский элемент, то возвращает [`longId`](#long-id) сущности родителя.
 
 Если родительской сущности нет, возвращает `-1`.
+
+&nbsp;
+
+```js
+toJSON(): Object
+```
+Возвращает представление `EntityInfo` в виде простого объекта со свойствами, названия которых совпадают с названиями функций этого интерфейса, кроме самой `toJSON()`. Непосредственно вызывать эту функцию нет необходимости — она вызывается неявно функцией [`JSON.stringify()`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) и реализована для предотвращения ошибки `'TypeError: Converting circular structure to JSON'` при выводе `EntityInfo`.
 
 &nbsp;
 
