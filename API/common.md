@@ -57,8 +57,6 @@ resultInfo(): ResultInfo
 ```js
 entitiesInfo(): EntitiesInfo
 ```
-***Не реализовано.***
-
 Возвращает ссылку на интерфейс [`EntitiesInfo`](#entities-info).
 
 &nbsp;
@@ -426,24 +424,42 @@ setProperty(name: string, value: any): ResultInfo
 ```ts
 interface EntitiesInfo {
 	get(longId: number): EntityInfo | null;
-	getCollection(longId: number[]): EntityInfo[];
+	async getAsync(longId: number): Promise<EntityInfo | null>;
+	
+	getCollection(longIds: number[]): EntityInfo[] | null;
+	async getCollectionAsync(longIds: number[]): Promise<EntityInfo[] | null>;
+	
+	getItems(longIds: number[]): (EntityInfo | null)[];
+	async getItemsAsync(longIds: number[]): Promise<(EntityInfo | null)[]>;
 }
 ```
-Интерфейс для получения сущности по [`longId`](./views.md#long-id).
+Интерфейс для получения сущности [`EntityInfo`](./views.md#entity-info) по [`longId`](./views.md#long-id).
+
+Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
 
 &nbsp;
 
 ```js
 get(longId: number): EntityInfo | null
+async getAsync(longId: number): Promise<EntityInfo | null>
 ```
-Возвращает сущность [`EntityInfo`](./views.md#entity-info) по её [`longId`](./views.md#long-id).
+Возвращает сущность [`EntityInfo`](./views.md#entity-info) по её [`longId`](./views.md#long-id), либо `null`, если идентификатор некорректный.
 
 &nbsp;
 
 ```js
-getCollection(longId: number[]): EntityInfo[]
+getCollection(longIds: number[]): EntityInfo[] | null
+async getCollectionAsync(longIds: number[]): Promise<EntityInfo[] | null>
 ```
-Возвращает массив сущностей [`EntityInfo`](./views.md#entity-info) по массиву их [`longId`](./views.md#long-id).
+Возвращает массив сущностей [`EntityInfo`](./views.md#entity-info) по массиву их [`longId`](./views.md#long-id). Данные запрашиваются однократно, и возвращается либо массив гарантированно верных значений, либо `null` при хотя бы одном неверном идентификаторе в массиве `longIds`.
+
+&nbsp;
+
+```js
+getItems(longIds: number[]): (EntityInfo | null)[]
+async getItemsAsync(longIds: number[]): Promise<(EntityInfo | null)[]>
+```
+Возвращает массив сущностей [`EntityInfo`](./views.md#entity-info) по массиву их [`longId`](./views.md#long-id). Данные запрашиваются столько раз, сколько элементов в массиве `longIds`. Это увеличивает время ожидания, но при наличии некорректных идентификаторов на их местах в возвращаемом массиве будут стоять `null`, а на месте корректных – соответствующие им `EntityInfo`.
 
 &nbsp;
 
