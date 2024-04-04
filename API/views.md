@@ -499,6 +499,9 @@ interface GridRangeChunk {
 	
 	columns(): Labels;
 	async columnsAsync(): Promise<Labels>;
+	
+	rawData(): ChunkRawData;
+	async rawDataAsync(): Promise<ChunkRawData>;
 }
 ```
 Интерфейс для обработки куска [`GridRange`](#grid-range).
@@ -528,6 +531,126 @@ columns(): Labels
 async columnsAsync(): Promise<Labels>
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки столбцов.
+
+&nbsp;
+
+```js
+rawData(): ChunkRawData
+async rawDataAsync(): Promise<ChunkRawData>
+```
+Возвращает интерфейс [`ChunkRawData`](#chunk-raw-data) для быстрого чтения текущего куска данных.
+
+
+### Интерфейс ChunkRawData<a name="chunk-raw-data"></a>
+```ts
+type RawHeaderData = {
+  label: string | number | null;
+  id: string | number | null;
+  longId: number;
+  parentLongId: number;
+  name?: string | number | null;
+  code?: string | number | null;
+};
+
+type RawHeaderKey = 'label' | 'id' | 'longId';
+
+type RawRow = Record<string | number, string | number | null>;
+
+type RowFullItem = {
+  headers: RawHeaderData[];
+  values: RawRow;
+};
+
+interface ChunkRawData {
+	columnsHeaders(): RawHeaderData[][];
+	rowsHeaders(): RawHeaderData[][];
+	
+	getColumnKey(): RawHeaderKey;
+	getRowKey(): RawHeaderKey;
+	
+	setColumnKey(value: RawHeaderKey): ChunkRawData;
+	setRowKey(value: RawHeaderKey): ChunkRawData;
+	
+	getRawValues(): (string | number | null)[][];
+	getRowsAsArray(): RawRow[];
+	getRowsAsObject(): Record<string | number, RawRow>;
+	getRowsAsItems(): RowFullItem[];
+}
+```
+Интерфейс быстрого чтения данных куска [`GridRangeChunk`](#grid-range-chunk). ***Не*** позволяет записывать данные.
+
+&nbsp;
+
+```js
+columnsHeaders(): RawHeaderData[][]
+```
+Возвращает описание заголовков столбцов в виде массива, каждым элементом которого является массив объектов заголовков очередного столбца.
+
+&nbsp;
+
+```js
+rowsHeaders(): RawHeaderData[][]
+```
+Возвращает описание заголовков строк в виде массива, каждым элементом которого является массив объектов заголовков очередной строки.
+
+&nbsp;
+
+```js
+getColumnKey(): RawHeaderKey
+```
+Возвращает текущее значение ключа для формирования заголовка ячейки при получении строки в виде объекта, что используется в функциях [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array), [`getRowsAsObject()`](#chunk-raw-data.get-rows-as-object) и [`getRowsAsItems()`](#chunk-raw-data.get-rows-as-items). Допустимые значения: `'label'`, `'id'`, `'longId'`. Значение по умолчанию: `'label'`.
+
+&nbsp;
+
+```js
+getRowKey(): RawHeaderKey
+```
+Аналог `getColumnKey()` для строк.
+
+&nbsp;
+
+```js
+setColumnKey(value: RawHeaderKey): ChunkRawData
+```
+Устанавливает значение ключа для столбцов. См. описание `getColumnKey()`. Возвращает `this`.
+
+&nbsp;
+
+```js
+setRowKey(value: RawHeaderKey): ChunkRawData
+```
+Устанавливает значение ключа для строк. См. описание `getColumnKey()`. Возвращает `this`.
+
+&nbsp;
+
+```js
+getRawValues(): (string | number | null)[][]
+```
+Возвращает сырое содержимое куска [`GridRangeChunk`](#grid-range-chunk). Каждый внутренний массив соответствует одной строке и содержит значения ячеек этой строки.
+
+&nbsp;
+
+<a name="chunk-raw-data.get-rows-as-array"></a>
+```js
+getRowsAsArray(): RawRow[]
+```
+Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде массива объектов, где каждый элемент является объектом, представляющим строку, где ключом является установленное поле заголовка столбца. Если заголовков несколько, они объединяются в строку с разделителем `'.'`.
+
+&nbsp;
+
+<a name="chunk-raw-data.get-rows-as-object"></a>
+```js
+getRowsAsObject(): Record<string | number, RawRow>
+```
+Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде объекта, где ключом является установленное поле заголовка строки (если заголовков несколько, они объединяются в строку с разделителем `'.'`), а значением — такой же объект строки, какой возращает [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array).
+
+&nbsp;
+
+<a name="chunk-raw-data.get-rows-as-items"></a>
+```js
+getRowsAsItems(): RowFullItem[]
+```
+Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде массива объектов, где в свойстве `headers` содержится массив заголовков строки, а в свойстве `values` — такой же объект строки, какой возращает [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array).
 
 &nbsp;
 
