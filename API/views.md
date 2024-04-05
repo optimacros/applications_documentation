@@ -544,17 +544,17 @@ async rawDataAsync(): Promise<ChunkRawData>
 ### Интерфейс ChunkRawData<a name="chunk-raw-data"></a>
 ```ts
 type RawHeaderData = {
-  label: string | number | null;
-  id: string | number | null;
+  label: string | null;
+  id: string | null;
   longId: number;
   parentLongId: number;
-  name?: string | number | null;
-  code?: string | number | null;
+  name?: string | null;
+  code?: string | null;
 };
 
 type RawHeaderKey = 'label' | 'id' | 'longId';
 
-type RawRow = Record<string | number, string | number | null>;
+type RawRow = Record<string, string | number | null>;
 
 type RowFullItem = {
   headers: RawHeaderData[];
@@ -631,6 +631,7 @@ getRawValues(): (string | number | null)[][]
 &nbsp;
 
 <a name="chunk-raw-data.get-rows-as-array"></a>
+
 ```js
 getRowsAsArray(): RawRow[]
 ```
