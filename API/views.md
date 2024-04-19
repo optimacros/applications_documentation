@@ -589,14 +589,14 @@ interface ChunkRawData {
 &nbsp;
 
 ```js
-columnsHeaders(): RawHeaderData[][]
+columnsHeaders(): RawHeaderData[][];
 ```
 Возвращает описание заголовков столбцов в виде массива, каждым элементом которого является массив объектов заголовков очередного столбца.
 
 &nbsp;
 
 ```js
-rowsHeaders(): RawHeaderData[][]
+rowsHeaders(): RawHeaderData[][];
 ```
 Возвращает описание заголовков строк в виде массива, каждым элементом которого является массив объектов заголовков очередной строки.
 
@@ -604,7 +604,7 @@ rowsHeaders(): RawHeaderData[][]
 
 <a name="chunk-raw-data.get-column-key"></a>
 ```js
-getColumnKey(): RawHeaderKey
+getColumnKey(): RawHeaderKey;
 ```
 Возвращает текущее значение ключа для формирования заголовка ячейки при получении строки в виде объекта, что используется в функциях [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array), [`getRowsAsObject()`](#chunk-raw-data.get-rows-as-object) и [`getRowsAsItems()`](#chunk-raw-data.get-rows-as-items). Допустимые значения: `'label'`, `'id'`, `'longId'`. Значение по умолчанию: `'label'`.
 
@@ -612,21 +612,21 @@ getColumnKey(): RawHeaderKey
 
 <a name="chunk-raw-data.get-row-key"></a>
 ```js
-getRowKey(): RawHeaderKey
+getRowKey(): RawHeaderKey;
 ```
 Аналог `getColumnKey()` для строк.
 
 &nbsp;
 
 ```js
-setColumnKey(value: RawHeaderKey): ChunkRawData
+setColumnKey(value: RawHeaderKey): ChunkRawData;
 ```
 Устанавливает значение ключа для столбцов. См. описание `getColumnKey()`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setRowKey(value: RawHeaderKey): ChunkRawData
+setRowKey(value: RawHeaderKey): ChunkRawData;
 ```
 Устанавливает значение ключа для строк. См. описание `getColumnKey()`. Возвращает `this`.
 
@@ -634,35 +634,35 @@ setRowKey(value: RawHeaderKey): ChunkRawData
 
 <a name="chunk-raw-data.get-mode"></a>
 ```js
-getMode(): string
+getMode(): string;
 ```
 Возвращает режим представления ячеек, используемый функциями [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array), [`getRowsAsObject()`](#chunk-raw-data.get-rows-as-object) и [`getRowsAsItems()`](#chunk-raw-data.get-rows-as-items). Допустимые значения: `'Text'`, `'NativeValue'`. В зависимости от этого режима представления ячеек будут соответствовать тому, что возвращают функции: [`Сell.getTextValue()`](#cell.get-text-value), [`Сell.getNativeValue()`](#cell.get-native-value). Значение по умолчанию: `'Text'`.
 
 &nbsp;
 
 ```js
-setModeText(): ChunkRawData
+setModeText(): ChunkRawData;
 ```
 Устанавливает значение режима представления ячеек в `'Text'`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setModeNativeValue(): ChunkRawData
+setModeNativeValue(): ChunkRawData;
 ```
 Устанавливает значение режима представления ячеек в `'NativeValue'`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getRawTexts(): (string | null)[][]
+getRawTexts(): (string | null)[][];
 ```
 Возвращает сырое содержимое куска [`GridRangeChunk`](#grid-range-chunk). Каждый внутренний массив соответствует одной строке и содержит *текст* ячеек этой строки. От значения [режима представления](#chunk-raw-data.get-mode) поведение функции не зависит.
 
 &nbsp;
 
 ```js
-getRawNativeValues(): (string | number | null)[][]
+getRawNativeValues(): (string | number | null)[][];
 ```
 Возвращает сырое содержимое куска [`GridRangeChunk`](#grid-range-chunk). Каждый внутренний массив соответствует одной строке и содержит *значения* ячеек этой строки. От значения [режима представления](#chunk-raw-data.get-mode) поведение функции не зависит.
 
@@ -671,7 +671,7 @@ getRawNativeValues(): (string | number | null)[][]
 <a name="chunk-raw-data.get-rows-as-array"></a>
 
 ```js
-getRowsAsArray(): RawRow[]
+getRowsAsArray(): RawRow[];
 ```
 Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде массива объектов, где каждый элемент является объектом, представляющим строку, где ключом является установленное поле заголовка столбца. Если заголовков несколько, они объединяются в строку с разделителем `'.'`. Представление ячеек зависит от значения [режима представления](#chunk-raw-data.get-mode).
 
@@ -679,7 +679,7 @@ getRowsAsArray(): RawRow[]
 
 <a name="chunk-raw-data.get-rows-as-object"></a>
 ```js
-getRowsAsObject(): Record<string | number, RawRow>
+getRowsAsObject(): Record<string | number, RawRow>;
 ```
 Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде объекта, где ключом является установленное поле заголовка строки (если заголовков несколько, они объединяются в строку с разделителем `'.'`), а значением — такой же объект строки, какой возращает [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array). Представление ячеек зависит от значения [режима представления](#chunk-raw-data.get-mode).
 
@@ -687,7 +687,7 @@ getRowsAsObject(): Record<string | number, RawRow>
 
 <a name="chunk-raw-data.get-rows-as-items"></a>
 ```js
-getRowsAsItems(): RowFullItem[]
+getRowsAsItems(): RowFullItem[];
 ```
 Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде массива объектов, где в свойстве `headers` содержится массив заголовков строки, а в свойстве `values` — такой же объект строки, какой возращает [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array). Представление ячеек зависит от значения [режима представления](#chunk-raw-data.get-mode).
 
