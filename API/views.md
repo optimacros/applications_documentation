@@ -569,12 +569,12 @@ interface ChunkRawData {
 	getColumnKey(): RawHeaderKey;
 	getRowKey(): RawHeaderKey;
 	
-	setColumnKey(value: RawHeaderKey): ChunkRawData;
-	setRowKey(value: RawHeaderKey): ChunkRawData;
+	setColumnKey(value: RawHeaderKey): this;
+	setRowKey(value: RawHeaderKey): this;
 	
 	getMode(): string;
-	setModeText(): ChunkRawData;
-	setModeNativeValue(): ChunkRawData;
+	setModeText(): this;
+	setModeNativeValue(): this;
 	
 	getRawTexts(): (string | null)[][];
 	getRawNativeValues(): (string | number | null)[][];
@@ -619,14 +619,14 @@ getRowKey(): RawHeaderKey;
 &nbsp;
 
 ```js
-setColumnKey(value: RawHeaderKey): ChunkRawData;
+setColumnKey(value: RawHeaderKey): this;
 ```
 Устанавливает значение ключа для столбцов. См. описание `getColumnKey()`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setRowKey(value: RawHeaderKey): ChunkRawData;
+setRowKey(value: RawHeaderKey): this;
 ```
 Устанавливает значение ключа для строк. См. описание `getColumnKey()`. Возвращает `this`.
 
@@ -641,14 +641,14 @@ getMode(): string;
 &nbsp;
 
 ```js
-setModeText(): ChunkRawData;
+setModeText(): this;
 ```
 Устанавливает значение режима представления ячеек в `'Text'`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setModeNativeValue(): ChunkRawData;
+setModeNativeValue(): this;
 ```
 Устанавливает значение режима представления ячеек в `'NativeValue'`. Возвращает `this`.
 
