@@ -669,7 +669,6 @@ getRawNativeValues(): (string | number | null)[][];
 &nbsp;
 
 <a name="chunk-raw-data.get-rows-as-array"></a>
-
 ```js
 getRowsAsArray(): RawRow[];
 ```
