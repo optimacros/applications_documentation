@@ -580,7 +580,7 @@ interface ChunkRawData {
 	getRawNativeValues(): (string | number | null)[][];
 	
 	getRowsAsArray(): RawRow[];
-	getRowsAsObject(): Record<string | number, RawRow>;
+	getRowsAsObject(): Record<string, RawRow>;
 	getRowsAsItems(): RowFullItem[];
 }
 ```
@@ -678,9 +678,9 @@ getRowsAsArray(): RawRow[];
 
 <a name="chunk-raw-data.get-rows-as-object"></a>
 ```js
-getRowsAsObject(): Record<string | number, RawRow>;
+getRowsAsObject(): Record<string, RawRow>;
 ```
-Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде объекта, где ключом является установленное поле заголовка строки (если заголовков несколько, они объединяются в строку с разделителем `'.'`), а значением — такой же объект строки, какой возращает [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array). Представление ячеек зависит от значения [режима представления](#chunk-raw-data.get-mode).
+Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде объекта, где ключом является установленное поле заголовка строки (если заголовков несколько, они объединяются с разделителем `'.'`), а значением — такой же объект строки, какой возращает [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array). Представление ячеек зависит от значения [режима представления](#chunk-raw-data.get-mode).
 
 &nbsp;
 
