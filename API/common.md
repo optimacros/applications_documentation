@@ -74,10 +74,10 @@ copyData(): CopyData
 &nbsp;
 
 ```js
-scriptsTab(): ScriptsTab
+scriptsTab(): ScriptsTab;
 ```
 
-Возвращает ссылку на интерфейс [`ScriptsTab`](#scripts-tab).
+Возвращает ссылку на интерфейс [`ScriptsTab`](scriptsTab.md#scripts-tab).
 
 &nbsp;
 
@@ -521,121 +521,6 @@ setMulticubeByNames(names: string[]): CopyData
 copy(): CopyData
 ```
 Выполняет копирование.
-
-&nbsp;
-
-### Интерфейс ScriptsTab<a name="scripts-tab"></a>
-```ts
-interface ScriptsTab {
-	scriptNames(): string[];
-	
-	withCode(): ScriptsTab;
-	async withCodeAsync(): Promise<ScriptsTab>;
-	
-	openScript(name: string): Script;
-	
-	addScript(name: string, position?: PositionType): number;
-	async addScriptAsync(name: string, position?: PositionType): Promise<number>;
-	
-	deleteScript(name: string): ScriptsTab;
-	async deleteScriptAsync(name: string): Promise<ScriptsTab>;
-}
-```
-Вкладка `Скрипты`. Вопреки названию интерфейс **не** наследуется от [`Tab`](./views.md#tab) и **не** реализует функцию [`pivot()`](./views.md#tab.pivot). В интерфейсе Optimacros аналогично открытию вкладки `Макросы` -> `Скрипты`.
-
-Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
-
-&nbsp;
-
-```js
-scriptNames(): string[]
-```
-Возвращает имена всех скриптов модели.
-
-&nbsp;
-
-<a name="scripts-tab.with-code"></a>
-```js
-withCode(): ScriptsTab;
-async withCodeAsync(): Promise<ScriptsTab>;
-```
-Запрашивает у модели код всех скриптов модели и сохраняет их в приватном свойстве. См. функцию [`Script.getCode()`](#script.get-code). Возвращает `this`.
-
-&nbsp;
-
-```js
-openScript(name: string): Script
-```
-Возвращает интерфейс [`Script`](#script) для скрипта `name`.
-
-&nbsp;
-
-```js
-addScript(name: string, position?: PositionType): number
-async addScriptAsync(name: string, position?: PositionType): Promise<number>
-```
-Создаёт новый скрипт с именем `name`. Возвращает его [`longId`](./views.md#long-id).
-
-&nbsp;
-
-```js
-deleteScript(name: string): ScriptsTab
-async deleteScriptAsync(name: string): Promise<ScriptsTab>
-```
-Удаляет скрипт `name`. Возвращает `this`.
-
-&nbsp;
-
-### Интерфейс Script<a name="script"></a>
-```ts
-interface Script {
-	name(): string;
-	
-	getCode(force?: boolean): string;
-	async getCodeAsync(force?: boolean): Promise<string>;
-	
-	setCode(code: string): boolean;
-	async setCodeAsync(code: string): Promise<boolean>;
-
-	runScript(): boolean;
-	async runScriptAsync(): boolean;
-}
-```
-Интерфейс скрипта как объекта модели Optimacros.
-
-Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
-
-&nbsp;
-
-```js
-name(): string
-```
-Возвращает имя скрипта.
-
-&nbsp;
-
-<a name="script.get-code"></a>
-```js
-getCode(force?: boolean): string
-async getCodeAsync(force?: boolean): Promise<string>
-```
-Возвращает код скрипта. Если `force === true`, или код скрипта не получен предварительно вызовом функции [`withCode()`](#scripts-tab.with-code), то выполняется повторный запрос кода всех скриптов с помощью этой функции. В противном случае код скрипта извлекается из приватного свойства без обращения к модели.
-
-&nbsp;
-
-```js
-setCode(code: string): boolean
-async setCodeAsync(code: string): Promise<boolean>
-```
-Устанавливает код скрипта. Возвращает признак успешной записи.
-
-&nbsp;
-
-```js
-runScript(): boolean
-async runScriptAsync(): boolean
-```
-Запускает скрипт. Возвращает признак успешного запуска. **Не** возвращает его вывод. **Не** возвращает никаких результатов его работы.
 
 &nbsp;
 
