@@ -28,7 +28,7 @@ type ModelScriptItem = {
   Comments: string | null;
 };
 ```
-Тит объекта скрипта, возвращаемый MiddleWork.
+Тип объекта скрипта, возвращаемый MiddleWork.
 
 &nbsp;
 
@@ -43,8 +43,8 @@ interface ScriptsTab {
 	items(): ModelScriptItem[];
 	async itemsAsync(): Promise<ModelScriptItem[]>;
 
-	openScript(scriptName: string): ScriptApi | null;
-	async openScriptAsync(scriptName: string): Promise<ScriptApi | null>;
+	openScript(scriptName: string): Script | null;
+	async openScriptAsync(scriptName: string): Promise<Script | null>;
 
 	addScript(scriptName: string, position?: string): this;
 	async addScriptAsync(scriptName: string, position?: string): Promise<this>;
@@ -92,8 +92,8 @@ async itemsAsync(): Promise<ModelScriptItem[]>;
 &nbsp;
 
 ```js
-openScript(scriptName: string): ScriptApi | null;
-async openScriptAsync(scriptName: string): Promise<ScriptApi | null>;
+openScript(scriptName: string): Script | null;
+async openScriptAsync(scriptName: string): Promise<Script | null>;
 ```
 Возвращает интерфейс [`Script`](#script) для скрипта `scriptName`. Если скрипта с таким именем нет в модели, возвращает `null`.
 
@@ -134,7 +134,7 @@ toJSON(): Object;
 ```ts
 interface Script {
 	name(): string;
-	longId(): string;
+	longId(): number;
 	isModified(): boolean;
 	
 	getMacros(): string;
@@ -182,7 +182,7 @@ name(): string;
 &nbsp;
 
 ```js
-longId(): string;
+longId(): number;
 ```
 Возвращает [`longId`](./views.md#long-id) скрипта.
 
@@ -288,7 +288,7 @@ getCustomOffset(): number;
 ```js
 setCustomOffset(customOffset: number): this;
 ```
-Готовит для записи значение столбца `Custom Offset` — смещение в пикселах имени скрипта в первом столбце от левого края. Фактическую запись в модель производит функция [`save()/saveAsync()`](#script.save). Возвращает `this`.
+Готовит для записи значение столбца `Custom Offset` — количество пробелов перед именем скрипта в первом столбце. Фактическую запись в модель производит функция [`save()/saveAsync()`](#script.save). Возвращает `this`.
 
 &nbsp;
 
