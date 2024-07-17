@@ -10,6 +10,7 @@ interface Common {
 	resultInfo(): ResultInfo;
 	entitiesInfo(): EntitiesInfo;
 	copyData(): CopyData;
+	scriptsTab(): ScriptsTab;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
@@ -67,6 +68,14 @@ copyData(): CopyData
 ***Не реализовано.***
 
 Возвращает ссылку на интерфейс [`CopyData`](#copy-data).
+
+&nbsp;
+
+```js
+scriptsTab(): ScriptsTab;
+```
+
+Возвращает ссылку на интерфейс [`ScriptsTab`](scriptsTab.md#scripts-tab).
 
 &nbsp;
 
