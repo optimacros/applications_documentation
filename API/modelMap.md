@@ -193,8 +193,8 @@ toJSON(): Object;
 	subsets: subsets().items,
 	viewsOfLists: viewsOfLists(),
 	propertiesOfLists: propertiesOfLists(),
-	subsetsOfLists: subsetsOfLists()
-	listsOfSubsets: listsOfSubsets(),
+	subsetsOfLists: subsetsOfLists(),
+	subsetToParentListMap: subsetToParentListMap()
 }.
 ```
 
