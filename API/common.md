@@ -11,6 +11,7 @@ interface Common {
 	entitiesInfo(): EntitiesInfo;
 	copyData(): CopyData;
 	scriptsTab(): ScriptsTab;
+	modelMap(): ModelMap;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
@@ -76,6 +77,14 @@ scriptsTab(): ScriptsTab;
 ```
 
 Возвращает ссылку на интерфейс [`ScriptsTab`](scriptsTab.md#scripts-tab).
+
+&nbsp;
+
+```js
+modelMap(): ModelMap;
+```
+
+Возвращает ссылку на интерфейс [`ModelMap`](modelMap.md#model-map).
 
 &nbsp;
 
