@@ -260,7 +260,7 @@ toJSON(): Object;
 ### Интерфейс VersionsMap<a name="versions-map"></a>
 ```ts
 interface VersionsMap {
-  versions(): ModelItems;
+	versions(): ModelItems;
 	subsets(): ModelItems;
 	toJSON(): Object;
 }
