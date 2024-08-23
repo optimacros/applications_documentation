@@ -18,8 +18,8 @@ type TreeItem = {
 type ModelFolderItem = {
 	name: string | null;
 	longId: number;
-  'Parent Folder': string | null;
-  Comments: string | null;
+	'Parent Folder': string | null;
+	Comments: string | null;
 };
 ```
 Тип объекта папки.
@@ -29,20 +29,20 @@ type ModelFolderItem = {
 ### Интерфейс FoldersTab<a name="folders-tab"></a>
 ```ts
 interface FoldersTab {
-	folderNames(): string[];
-	folderTree(): TreeItem;
+	names(): string[];
+	tree(): TreeItem;
 	
 	items(): ModelFolderItem[];
 	async itemsAsync(): Promise<ModelFolderItem[]>;
 
-	# addScript(scriptName: string, position?: string): this;
-	# async addScriptAsync(scriptName: string, position?: string): Promise<this>;
+	addFolder(folderName: string, position: string): boolean;
+	async addFolderAsync(folderName: string, position: string): Promise<boolean>;
 	
-	deleteFolder(folderName: string): this;
-	async deleteFolderAsync(folderName: string): Promise<this>;
+	deleteFolder(folderName: string): boolean;
+	async deleteFolderAsync(folderName: string): Promise<boolean>;
 	
-	setFolderParent(folderName: string, parentName: StringOrNull): boolean;
-	async setFolderParentAsync(folderName: string, parentName: StringOrNull): Promise<boolean>;
+	setParentFolder(folderName: string, parentName: StringOrNull): boolean;
+	async setParentFolderAsync(folderName: string, parentName: StringOrNull): Promise<boolean>;
 	
 	toJSON(): Object;
 }
@@ -52,14 +52,14 @@ interface FoldersTab {
 &nbsp;
 
 ```js
-folderNames(): string[];
+names(): string[];
 ```
 Возвращает имена папок модели. Не требует дополнительных запросов к MiddleWork.
 
 &nbsp;
 
 ```js
-folderTree(): TreeItem;
+tree(): TreeItem;
 ```
 Возвращает корень дерева структуры папок модели в виде типа [`TreeItem`](#tree-item).
 
@@ -74,33 +74,38 @@ async itemsAsync(): Promise<ModelFolderItem[]>;
 &nbsp;
 
 ```js
-# addScript(scriptName: string, position?: string): this;
-# async addScriptAsync(scriptName: string, position?: string): Promise<this>;
+addFolder(folderName: string, position: string): boolean;
+async addFolderAsync(folderName: string, position: string): Promise<boolean>;
 ```
-Создаёт новый скрипт с именем `scriptName`. Аргумент `position` определяет позицию скрипта в таблице скриптов. Он может принимать значения `"Start"` и `"End"`. Значение по умолчанию: `"End"`. Возвращает `this`.
+Создаёт новую папку  с именем `folderName`. Аргумент `position` определяет её позицию в списке папок верхнего уровня. Допустимые значения: `'Start'` и `'End'`. Значение по умолчанию: `'End'`. Возвращает результат выполнения.
 
 &nbsp;
 
 ```js
-deleteFolder(folderName: string): this;
-async deleteFolderAsync(folderName: string): Promise<this>;
+deleteFolder(folderName: string): boolean;
+async deleteFolderAsync(folderName: string): Promise<boolean>;
 ```
-Удаляет папку `folderName`. Возвращает `this`.
+Удаляет папку `folderName`. Возвращает результат выполнения.
 
 &nbsp;
 
 ```js
-runScript(scriptName: string): RunScriptResult;
-async runScriptAsync(scriptName: string): Promise<RunScriptResult>;
+setParentFolder(folderName: string, parentName: StringOrNull): boolean;
+async setParentFolderAsync(folderName: string, parentName: StringOrNull): Promise<boolean>;
 ```
-Запускает скрипт. Возвращает объект типа [`RunScriptResult`](#run-script-result).
+Устанавливает папку `parentName` в качестве родительской папки для `folderName`. Возвращает результат выполнения.
 
 &nbsp;
 
 ```js
 toJSON(): Object;
 ```
-Возвращает объект `{ scripts: this.scriptNames() }`.
+Возвращает объект 
+`{
+	names: names(),
+	tree:  tree()
+}`.
+
 
 &nbsp;
 
