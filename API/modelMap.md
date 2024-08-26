@@ -17,9 +17,9 @@ type ModelItem {
 ### Тип ModelItems<a name="model-items"></a>
 ```ts
 type ModelItems {
-  items: ModelItem[];
-  count: number;
-  nestingCount: number;
+	items: ModelItem[];
+	count: number;
+	nestingCount: number;
 }
 ```
 Коллекция элементов одного типа:
