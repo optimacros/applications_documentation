@@ -4,6 +4,7 @@
 ```ts
 interface System {
 	scriptsTab(): ScriptsTab;
+	modelMap(): ModelMap;
 }
 ```
 Интерфейс, группирующий системные интерфейсы.
@@ -13,8 +14,14 @@ interface System {
 ```js
 scriptsTab(): ScriptsTab;
 ```
-
 Возвращает ссылку на интерфейс [`ScriptsTab`](scriptsTab.md#scripts-tab).
+
+&nbsp;
+
+```js
+modelMap(): ModelMap;
+```
+Возвращает ссылку на интерфейс [`ModelMap`](./modelMap.md#model-map).
 
 &nbsp;
 

@@ -252,10 +252,12 @@ optionsTab(): TimeOptionsTab
 
 &nbsp;
 
+
+<a name="times.time-period-tab"></a>
 ```js
 timePeriodTab(identifier: string | number): TimePeriodTab
 ```
-Возвращает ссылку на вкладку [`TimePeriodTab`](#time-period-tab) измерения времени `identifier`. Доступны измерения `Days`, `Weeks`, `Periods`, `Months`, `Quarters`, `Half Years`, `Years`. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
+Возвращает ссылку на вкладку [`TimePeriodTab`](#time-period-tab) измерения времени `identifier`. Доступны измерения `'Days'`, `'Weeks'`, `'Periods'`, `'Months'`, `'Quarters'`, `'Half Years'`, `'Years'`. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
 
 &nbsp;
 
