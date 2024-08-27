@@ -41,8 +41,8 @@ interface FoldersTab {
 	deleteFolder(folderName: string): boolean;
 	async deleteFolderAsync(folderName: string): Promise<boolean>;
 	
-	setParentFolder(folderName: string, parentName: StringOrNull): boolean;
-	async setParentFolderAsync(folderName: string, parentName: StringOrNull): Promise<boolean>;
+	setParentFolder(folderName: string, parentName: string | null): boolean;
+	async setParentFolderAsync(folderName: string, parentName: string | null): Promise<boolean>;
 	
 	toJSON(): Object;
 }
@@ -85,15 +85,15 @@ async addFolderAsync(folderName: string, position: string): Promise<boolean>;
 deleteFolder(folderName: string): boolean;
 async deleteFolderAsync(folderName: string): Promise<boolean>;
 ```
-Удаляет папку `folderName`. Возвращает результат выполнения.
+Удаляет папку `folderName`. Если папка является родительской, её содержимое попадает в корень, даже если папка лежала в другой папке: папки становятся папками верхнего уровня, остальное содержимое попадает в виртуальную папку `'Other contents'`. Возвращает результат выполнения.
 
 &nbsp;
 
 ```js
-setParentFolder(folderName: string, parentName: StringOrNull): boolean;
-async setParentFolderAsync(folderName: string, parentName: StringOrNull): Promise<boolean>;
+setParentFolder(folderName: string, parentName: string | null): boolean;
+async setParentFolderAsync(folderName: string, parentName: string | null): Promise<boolean>;
 ```
-Устанавливает папку `parentName` в качестве родительской папки для `folderName`. Возвращает результат выполнения.
+Устанавливает папку `parentName` в качестве родительской папки для `folderName`. Допускается 2 уровня вложенности: если папка уже имеет родительскую, она не сможет стать родительской сама. Возвращает результат выполнения.
 
 &nbsp;
 
