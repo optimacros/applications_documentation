@@ -37,9 +37,6 @@ type ModelScriptItem = {
 interface ScriptsTab {
 	scriptNames(): string[];
 	
-	folderNames(): string[];
-	folderTree(): TreeItem;
-	
 	items(): ModelScriptItem[];
 	async itemsAsync(): Promise<ModelScriptItem[]>;
 
@@ -66,20 +63,6 @@ interface ScriptsTab {
 scriptNames(): string[];
 ```
 Возвращает имена всех скриптов модели. Не требует дополнительных запросов к MiddleWork.
-
-&nbsp;
-
-```js
-folderNames(): string[];
-```
-Возвращает имена папок модели. Не требует дополнительных запросов к MiddleWork.
-
-&nbsp;
-
-```js
-folderTree(): TreeItem;
-```
-Возвращает корень дерева структуры папок модели в виде типа [`TreeItem`](#tree-item).
 
 &nbsp;
 
