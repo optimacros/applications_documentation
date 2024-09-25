@@ -1,34 +1,33 @@
 # Вкладка скриптов
 
-### Тип TreeItem<a name="tree-item"></a>
-```ts
-type TreeItem = {
-	name: string | null;
-	longId: number;
-	parentEntityLongId: number;
-	subItems: TreeItem[];
-};
-```
-Элемент древовидной структуры папок модели.
-
-&nbsp;
-
 ### Тип ModelScriptItem<a name="model-script-item"></a>
 ```ts
 type ModelScriptItem = {
-  name: string;
-  longId: number;
-  Macros: string;
-  Folder: string | null;
-  Scheduler: string;
-  'Lock Mode': 'Unique' | 'Shared' | 'Custom';
-  'Memory Limit, MB': number;
-  'Time Limit, sec': number;
-  'Custom Offset': number;
-  Comments: string | null;
+	name: string;
+	longId: number;
+	Macros: string;
+	Folder: string | null;
+	Scheduler: string;
+	'Lock Mode': 'Unique' | 'Shared' | 'Custom';
+	'Memory Limit, MB': number;
+	'Time Limit, sec': number;
+	'Custom Offset': number;
+	Comments: string | null;
 };
 ```
 Тип объекта скрипта, возвращаемый MiddleWork.
+
+&nbsp;
+
+### Тип RunScriptResult<a name="run-script-result"></a>
+```ts
+type RunScriptResult {
+	output: string;
+	success?: boolean;
+	files: string[];
+}
+```
+Тип, возвращаемый после выполнения скрипта. Поле `output` содержит вывод скрипта, поле `success` — признак успешного выполнения, `files` – массив хэшей файлов, которые скрипт отдаст пользователю на скачивание в браузере.
 
 &nbsp;
 
@@ -313,14 +312,33 @@ toJSON(): ModelScriptItem;
 
 &nbsp;
 
-### Тип RunScriptResult<a name="run-script-result"></a>
+### Тип FileBase64Info <a name="file-base64-info"></a>
 ```ts
-type RunScriptResult {
-  output: string;
-  success?: boolean;
+type FileBase64Info {
+	name: string;
+	content: string;
 }
 ```
-Тип, возвращаемый после выполнения скрипта. Поле `output` содержит вывод скрипта, а поле `success` — признак успешного выполнения.
+Объект, содержащий информацию о файле: поле `name` – его имя, поле `content` — содержимое, зашифрованное по схеме [`base64`](https://ru.wikipedia.org/wiki/Base64).
+
+&nbsp;
+
+### Тип FilesContent <a name="files-content"></a>
+```ts
+interface FilesContent {
+	getFiles(...files: string[]): FileBase64Info[];
+	getFilesAsync(...files: string[]): Promise<FileBase64Info[]>;
+}
+```
+Интерфейс для получения файлов из скриптов модели.
+
+&nbsp;
+
+```js
+getFiles(...files: string[]): FileBase64Info[];
+getFilesAsync(...files: string[]): Promise<FileBase64Info[]>;
+```
+Принимает список хэшей файлов, которые могут быть получены в скрипте, как правило, функцией скриптов 1.0 `Filesystem`.[`makeGlobalFile()`](https://github.com/optimacros/scripts_documentation/blob/main/API/fs.md#filesystem.make-global-file). Возвращает массив объектов [`FileBase64Info`](#file-base64-info) с информацией об этих файлах.
 
 &nbsp;
 

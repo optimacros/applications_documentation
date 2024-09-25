@@ -4,6 +4,7 @@
 ```ts
 interface System {
 	scriptsTab(): ScriptsTab;
+	filesContent(): FilesContent;
 	foldersTab(): FoldersTab;
 	modelMap(): ModelMap;
 }
@@ -16,6 +17,13 @@ interface System {
 scriptsTab(): ScriptsTab;
 ```
 Возвращает ссылку на интерфейс [`ScriptsTab`](./scriptsTab.md#scripts-tab).
+
+&nbsp;
+
+```js
+filesContent(): FilesContent;
+```
+Возвращает ссылку на интерфейс [`FilesContent`](./scriptsTab.md#files-content).
 
 &nbsp;
 
