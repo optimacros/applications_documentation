@@ -323,7 +323,7 @@ type FileBase64Info {
 
 &nbsp;
 
-### Тип FilesContent <a name="files-content"></a>
+### Интерфейс FilesContent <a name="files-content"></a>
 ```ts
 interface FilesContent {
 	getFiles(...files: string[]): FileBase64Info[];
