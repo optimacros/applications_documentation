@@ -1,4 +1,4 @@
-# Интерфейсы модели OM
+# Интерфейс OM
 
 1. [Интерфейс Common](common.md)
 1. [Интерфейс System](system.md)
@@ -37,9 +37,10 @@ interface OM {
 	readonly optimization: Optimization;
 	readonly connectors: Connectors;
 	readonly notifications: Notifications.Manager;
+	readonly workspace: Workspace;
 }
 ```
-Интерфейс `OM` являет собой набор интерфейсов, предоставляющих API доступа к модели.
+Интерфейс `OM` являет собой набор интерфейсов, предоставляющих API доступа к модели и воркспейсу.
 
 &nbsp;
 
@@ -117,6 +118,13 @@ readonly connectors: Connectors;
 readonly notifications: Notifications.Manager;
 ```
 Ссылка на интерфейс [`Notifications.Manager`](./notifications.md#manager).
+
+&nbsp;
+
+```js
+readonly workspace: Workspace;
+```
+Ссылка на интерфейс [`Workspace`](./workspace.md#workspace).
 
 &nbsp;
 
