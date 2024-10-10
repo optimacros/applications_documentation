@@ -261,6 +261,8 @@ addDependentContext(identifier: number): Pivot
 ### Интерфейс Grid<a name="grid"></a>
 ```ts
 interface Grid {
+	rawData(): RawData;
+	
 	range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange;
 
 	rowCount(): number;
@@ -273,6 +275,13 @@ interface Grid {
 }
 ```
 Интерфейс таблицы.
+
+&nbsp;
+
+```js
+rawData(): RawData;
+```
+Возвращает интерфейс [`RawData`](./rawData.md#raw-data) прямого доступа к данным таблицы.
 
 &nbsp;
 
@@ -416,6 +425,7 @@ interface GridRange {
 	cellCount(): number;
 
 	generator(size?: number): GridRangeChunk[];
+	rawData(): RawData;
 }
 ```
 Интерфейс, представляющий прямоугольный диапазон ячеек в таблице [`Grid`](#grid).
@@ -488,6 +498,13 @@ for (const chunk of range.generator(1000)) {
 
 &nbsp;
 
+```js
+rawData(): RawData;
+```
+Возвращает интерфейс [`RawData`](./rawData.md#raw-data) прямого доступа к данным диапазона таблицы.
+
+&nbsp;
+
 ### Интерфейс GridRangeChunk<a name="grid-range-chunk"></a>
 ```ts
 interface GridRangeChunk {
@@ -501,7 +518,6 @@ interface GridRangeChunk {
 	async columnsAsync(): Promise<Labels>;
 	
 	rawData(): ChunkRawData;
-	async rawDataAsync(): Promise<ChunkRawData>;
 }
 ```
 Интерфейс для обработки куска [`GridRange`](#grid-range).
@@ -535,10 +551,9 @@ async columnsAsync(): Promise<Labels>
 &nbsp;
 
 ```js
-rawData(): ChunkRawData
-async rawDataAsync(): Promise<ChunkRawData>
+rawData(): RawData;
 ```
-Возвращает интерфейс [`ChunkRawData`](#chunk-raw-data) для быстрого чтения текущего куска данных.
+Возвращает интерфейс [`RawData`](./rawData.md#raw-data) прямого доступа к данным куска таблицы.
 
 &nbsp;
 
