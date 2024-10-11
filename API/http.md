@@ -745,7 +745,7 @@ urlDecode(value: string): string
 ```js
 base64Encode(value: string): string
 ```
-Возвращает строку `value`, закодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64).
+Возвращает строку `value`, закодированную по схеме [`base64`](https://ru.wikipedia.org/wiki/Base64).
 
 
 &nbsp;
@@ -753,7 +753,7 @@ base64Encode(value: string): string
 ```js
 base64Decode(value: string): string | boolean
 ```
-Возвращает строку `value`, раскодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64), или `false` в случае ошибки.
+Возвращает строку `value`, раскодированную по схеме [`base64`](https://ru.wikipedia.org/wiki/Base64), или `false` в случае ошибки.
 
 &nbsp;
 
