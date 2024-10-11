@@ -4,6 +4,7 @@
 ```ts
 interface Multicubes {
 	multicubesTab(): MulticubesTab;
+	modelCubesTab(): ModelCubesTab;
 	syncMulticube(): SyncMulticubeBuilder;
 }
 ```
@@ -15,6 +16,13 @@ interface Multicubes {
 multicubesTab(): MulticubesTab
 ```
 Возвращает ссылку на интерфейс [`MulticubesTab`](#multicubes-tab). В интерфейсе Optimacros аналогично открытию вкладки `Данные` -> `Мультикубы`.
+
+&nbsp;
+
+```js
+modelCubesTab(): ModelCubesTab;
+```
+Возвращает ссылку на интерфейс всех кубов модели [`ModelCubesTab`](#model-cubes-tab). В интерфейсе Optimacros аналогично открытию вкладки `Данные` -> `Кубы`.
 
 &nbsp;
 
@@ -36,7 +44,7 @@ interface MulticubesTab extends Tab {
 	elementsDeleter(): ElementsDeleter;
 }
 ```
-Вкладка `Мультикубы`. Интерфейс наследуется от [`Tab`](#tab).
+Вкладка `Данные` -> `Мультикубы`. Интерфейс наследуется от [`Tab`](#tab).
 
 &nbsp;
 
@@ -50,7 +58,6 @@ open(name: string): MulticubeTab
 ```js
 elementsCreator(): ElementsCreator
 ```
-
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для создания мультикубов.
 
 &nbsp;
@@ -58,8 +65,22 @@ elementsCreator(): ElementsCreator
 ```js
 elementsDeleter(): ElementsDeleter
 ```
-
 Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления мультикубов.
+
+&nbsp;
+
+### Интерфейс ModelCubesTab<a name="model-cubes-tab"></a>
+```ts
+interface ModelCubesTab extends Tab {
+}
+```
+Интерфейс вкладки `Данные` -> `Кубы`, где перечислены все кубы (и агрегирующие их мультикубы) модели. Интерфейс [`CubesTab`](#cubes-tab) вкладки кубов конкретного мультикуба можно получить функцией [`MulticubeTab`](#multicube-tab).`cubesTab()`. Интерфейс наследуется от [`Tab`](#tab).
+
+**Важно!**
+В интерфейсе [`Pivot`](#pivot) для данного интерфейса отсутствуют функции `withoutValues()` и `addDependentContext()`.
+
+&nbsp;
+
 
 ### Интерфейс Tab<a name="tab"></a>
 
