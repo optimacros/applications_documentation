@@ -10,7 +10,7 @@ interface RawData {
 	async writerAsync(): Promise<RawDataWriter>;
 }
 ```
-Интерфейс прямого доступа к данным таблицы [`Grid`](./views.md#grid).
+Интерфейс прямого доступа к данным таблицы [`Grid`](./views.md#grid) или её диапазона – [`GridRange`](./views.md#grid-range) или [`GridRangeChunk`](./views.md#grid-range-chunk).
 
 &nbsp;
 
@@ -56,10 +56,10 @@ interface RawDataReader {
 	firstEmptyRowIndex(): number;
 
 	refresh(): this;
-	refreshAsync(): Promise<this>;
+	async refreshAsync(): Promise<this>;
 }
 ```
-Интерфейс прямого доступа к данным на чтение. Варианты представления данных довольно разнообразные, и для осознания получаемых результатов нужно понимать, что они зависят от: [ключа строк](#raw-data-reader.get-column-key), [ключа столбцов](#raw-data-reader.get-row-key) и [режима представления ячеек](#raw-data-reader.get-mode).
+Интерфейс прямого доступа к данным на чтение. Варианты представления данных довольно разнообразны, и для осознания получаемых результатов нужно понимать, что они зависят от [ключа столбцов](#raw-data-reader.get-column-key), [ключа строк](#raw-data-reader.get-row-key)  и [режима представления ячеек](#raw-data-reader.get-mode).
 
 &nbsp;
 
@@ -139,7 +139,7 @@ getRawTexts(): (string | null)[][];
 ```js
 getRawNativeValues(): (string | number | null)[][];
 ```
-Возвращает содержимое таблицы в виде двумерного массива. Каждый внутренний массив соответствует одной строке и содержит *самородные значения* ячеек этой строки. От значения [режима представления](#raw-data-reader.get-mode) поведение функции не зависит.
+Возвращает содержимое таблицы в виде двумерного массива. Каждый внутренний массив соответствует одной строке и содержит [*самородные значения*](./views.md#cell.get-native-value) ячеек этой строки. От значения [режима представления](#raw-data-reader.get-mode) поведение функции не зависит.
 
 &nbsp;
 
@@ -163,24 +163,173 @@ getRowsAsObject(): Record<string, RawRow>;
 ```js
 getRowsAsItems(): RowFullItem[];
 ```
-Возвращает содержимое таблицы в виде массива объектов [`RowFullItem`](#row-full-item), где в свойстве `headers` содержится массив заголовков строки, а в свойстве `values` — такой же объект строки [`RawRow`](#raw-row), какой возвращает [`getRowsAsArray()`](#raw-data-reader.get-rows-as-array).
+Возвращает содержимое таблицы в виде массива объектов [`RowFullItem`](#row-full-item).
+
+&nbsp;
+
+```js
+firstEmptyRowIndex(): number;
+```
+Возвращает номер номер первой пустой строки таблицы. Если пустых строк нет, возвращает `-1`.
+
+&nbsp;
+
+<a name="raw-data-reader.refresh"></a>
+```js
+refresh(): this;
+async refreshAsync(): Promise<this>;
+```
+Обновляет **заголовки** и **данные** таблицы. Если инициализирован соответствующий [`RawDataWriter`](#raw-data-writer), вызывает его функцию [`refresh()`](#raw-data-writer.refresh). Возвращает `this`.
 
 &nbsp;
 
 ### Интерфейс RawDataWriter<a name="raw-data-writer"></a>
 ```ts
 interface RawDataWriter {
+	columns(): GridDataHeader;
+	rows(): GridDataHeader;
+
+	set(rowIds: number[], columnIds: number[], value: string | number | bool | null): this;
+
+	apply(): this;
+	async applyAsync(): Promise<this>;
+
+	refresh(): this;
+	async refreshAsync(): Promise<this>;
 }
 ```
-Интерфейс прямого доступа к данным.
+Интерфейс прямого доступа к данным на запись.
 
 &nbsp;
 
 ```js
-reader(): RawDataReader;
-async readerAsync(): Promise<RawDataReader>;
+columns(): RawDataHeader;
 ```
-Возвращает имена папок модели
+Возвращает интерфейс [`RawDataHeader`](#raw-data-header) заголовков столбцов.
+
+&nbsp;
+
+```js
+rows(): RawDataHeader;
+```
+Возвращает интерфейс [`RawDataHeader`](#raw-data-header) заголовков строк.
+
+&nbsp;
+
+<a name="raw-data-writer.set"></a>
+```js
+set(rowIds: number[], columnIds: number[], value: string | number | bool | null): this;
+```
+Устанавливает значение `value` для будущей записи в ячейку по адресу, определяемому через набор заголовков строки `rowIds` и столбца `columnIds`. Функция работает по принципу [`CellBuffer`](./common.md#cell-buffer) и **не** записывает данные в ячейку — это делает функция [`apply()`](#raw-data-writer.apply). Возвращает `this`.
+
+&nbsp;
+
+<a name="raw-data-writer.apply"></a>
+```js
+apply(): this;
+async applyAsync(): Promise<this>;
+```
+Применяет все изменения, заданные функцией [`set()`](#raw-data-writer.set). Возвращает `this`.
+
+&nbsp;
+
+<a name="raw-data-writer.refresh"></a>
+
+```js
+refresh(): this;
+async refreshAsync(): Promise<this>;
+```
+Обновляет **только заголовки** таблицы. Если инициализирован соответствующий [`RawDataReader`](#raw-data-reader), вызывает его функцию [`refresh()`](#raw-data-reader.refresh). Возвращает `this`.
+
+&nbsp;
+
+### Интерфейс RawDataHeader<a name="raw-data-header"></a>
+```ts
+interface RawDataHeader {
+	count(): number;
+	
+	gluedHeaderIdentifiers(field: string, delim?: string): string[];
+
+	dimensions(): HeaderDimension[];
+	elementNamesByDimension(): Record<string, string[]>;
+
+	getHeaderByIndex(index: number): RawHeaderData[] | null;
+	getGluedHeaderIdentifiersByIndex(index: number, field: string, delim?: string): string | null;
+	
+	getLongIdsByIndex(index: number): number[] | null;
+	getLongIdsByLabels(labels: string[]): number[] | null;
+	
+	areHeaderLongIdsValid(longIds: number[]): boolean;
+}
+```
+Интерфейс заголовков строк или столбцов таблицы.
+
+&nbsp;
+
+```js
+count(): number;
+```
+Возвращает количество заголовков – количество строк/столбцов.
+
+&nbsp;
+
+```js
+gluedHeaderIdentifiers(field: string, delim?: string): string[];
+```
+Возвращает массив идентификаторов заголовков, сформированных по полю, указанному в аргументе `field`, который может принимать значение названия одного из полей [`RawHeaderData`](#raw-header-data). Если у заголовка несколько измерений, то заголовки объединяются с помощью разделителя, указанного в аргументе `delim` (по умолчанию: `'.'`). В случае некорретного значения `field` выбрасывает исключение.
+
+**Баг!** В текущей реализации исключение не выбрасывается.
+
+&nbsp;
+
+```js
+dimensions(): HeaderDimension[];
+```
+Возвращает данные измерений заголовков в виде массива объектов [`HeaderDimension`](#header-dimension).
+
+&nbsp;
+
+```js
+elementNamesByDimension(): Record<string, string[]>;
+```
+Возвращает допустимые уникальные имена для каждого измерения в виде объекта, где ключами являются имена измерений.
+
+&nbsp;
+
+```js
+getHeaderByIndex(index: number): RawHeaderData[] | null;
+```
+Возвращает заголовок в виде массива [`RawHeaderData`](#raw-header-data) со всеми измерениями, или `null`, если индекс некорректный.
+
+&nbsp;
+
+```js
+getGluedHeaderIdentifiersByIndex(index: number, field: string, delim?: string): string | null;
+```
+То же, что и `gluedHeaderIdentifiers(field, delim)[index]`.
+
+**Баг!** В текущей реализации позволяет не указывать или указывать некорректное поле `field`.
+
+&nbsp;
+
+```js
+getLongIdsByIndex(index: number): number[] | null;
+```
+Возвращает заголовок по индексу `index` в виде массива [`longId`](./views.md#long-id) всех измерений, или `null`, если индекс некорректный.
+
+&nbsp;
+
+```js
+getLongIdsByLabels(labels: string[]): number[] | null;
+```
+Возвращает заголовок в виде массива [`longId`](./views.md#long-id) по переданным полям `label` (из объекта [`RawHeaderData`](#raw-header-data)) каждого измерения, или `null`, если заголовок не найден.
+
+&nbsp;
+
+```js
+areHeaderLongIdsValid(longIds: number[]): boolean;
+```
+Проверяет, является ли переданный массив `longIds` корректным определителем одного из заголовков таблицы.
 
 &nbsp;
 
@@ -188,7 +337,7 @@ async readerAsync(): Promise<RawDataReader>;
 
 ### Тип RawHeaderData<a name="raw-header-data"></a>
 ```ts
-type RawHeaderData {
+type RawHeaderData = {
 	label: string | null;
 	id: string | null;
 	longId: number;
@@ -232,20 +381,20 @@ parentLongId: number;
 ```js
 name?: string | null;
 ```
-Имя заголовка.
+Имя заголовка. Если измерением на заголовке является справочник, это поле `'Item Name'`.
 
 &nbsp;
 
 ```js
 code?: string | null;
 ```
-Код заголовка.
+Код заголовка – поле `'code'`.
 
 &nbsp;
 
 ### Тип HeaderDimension<a name="header-dimension"></a>
 ```ts
-type HeaderDimension {
+type HeaderDimension = {
 	name: string;
 	longId: number;
 };
@@ -264,7 +413,7 @@ label: string | null;
 ```js
 id: string | null;
 ```
-Неизвестно что.
+То же, что и `label`.
 
 &nbsp;
 
@@ -280,12 +429,12 @@ type RawHeaderKey = 'label' | 'id' | 'longId';
 ```ts
 type RawRow = Record<string, string | number | null>;
 ```
-Объект, соответствующий строке таблицы. [Ключом](#raw-data-reader.get-column-key) является установленное поле заголовка столбца. Если заголовков несколько, они объединяются в строку с разделителем `'.'`. Представление ячеек зависит от значения [режима представления](#raw-data-reader.get-mode).
+Объект, соответствующий строке таблицы. [Ключом](#raw-data-reader.get-column-key) является установленное поле заголовка столбца. Если заголовков несколько, они объединяются в строку с разделителем `'.'`. Значением является значение ячейки, которое зависит от [режима представления](#raw-data-reader.get-mode).
 
 &nbsp;
 
 ### Тип RowFullItem<a name="row-full-item"></a>
-```ks
+```ts
 type RowFullItem = {
 	headers: RawHeaderData[];
 	values: RawRow;
@@ -306,23 +455,6 @@ headers: RawHeaderData[];
 values: RawRow;
 ```
 Значения строки в виде объекта [`RawRow`](#raw-row).
-
-&nbsp;
-
-### Интерфейс RawDataHeader<a name="raw-data-header"></a>
-```ts
-interface RawDataHeader {
-}
-```
-Интерфейс прямого доступа к данным.
-
-&nbsp;
-
-```js
-reader(): RawDataReader;
-async readerAsync(): Promise<RawDataReader>;
-```
-Возвращает имена папок модели
 
 &nbsp;
 

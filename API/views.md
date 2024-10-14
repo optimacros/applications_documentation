@@ -31,7 +31,7 @@ syncMulticube(): SyncMulticubeBuilder
 ```ts
 interface MulticubesTab extends Tab {
 	open(name: string): MulticubeTab;
-   
+
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
 }
@@ -262,7 +262,6 @@ addDependentContext(identifier: number): Pivot
 ```ts
 interface Grid {
 	rawData(): RawData;
-	
 	range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange;
 
 	rowCount(): number;
@@ -416,6 +415,9 @@ getSelectedEntity(): EntityInfo
 ### Интерфейс GridRange<a name="grid-range"></a>
 ```ts
 interface GridRange {
+	rawData(): RawData;
+	generator(size?: number): GridRangeChunk[];
+
 	rowStart(): number;
 	rowCount(): number;
 
@@ -423,12 +425,46 @@ interface GridRange {
 	columnCount(): number;
 
 	cellCount(): number;
-
-	generator(size?: number): GridRangeChunk[];
-	rawData(): RawData;
 }
 ```
 Интерфейс, представляющий прямоугольный диапазон ячеек в таблице [`Grid`](#grid).
+
+&nbsp;
+
+```js
+rawData(): RawData;
+```
+Возвращает интерфейс [`RawData`](./rawData.md#raw-data) прямого доступа к данным диапазона таблицы.
+
+&nbsp;
+
+<a name="generator"></a>
+```js
+generator(size?: number): GridRangeChunk[]
+```
+Возвращает генератор, при каждом обращении возвращающий интерфейс [`GridRangeChunk`](#grid-range-chunk) размером *не более* `size` ячеек, позволяющий обрабатывать `GridRange` покусочно.
+
+Каждый возвращаемый [`GridRangeChunk`](#grid-range-chunk) содержит целое количество строк, т. е. все колонки `GridRange`, а количество строк в нём определяется по формуле `size / columnCount()`. Здесь используется целочисленное деление. Например, если в таблице `7` столбцов, а параметр `size` равен `100`, то генератор вернёт [`GridRangeChunk`](#grid-range-chunk) из `100 / 7 = 14` строк, в котором будет `7 * 14 = 98` ячеек.
+
+Значение аргумента `size` ограничено снизу значением `500` и сверху значением `5000`, поэтому в скриптах 1.0 [`невозможно`](../appendix/constraints.md#generator) работать с `GridRange` с б*О*льшим количеством столбцов. Значение по умолчанию: `500`.
+
+Типичный пример использования:
+
+```js
+let rowIndex = 0;
+
+for (const chunk of range.generator(1000)) {
+	chunk.rows().all().forEach(labelGroup => {
+		const rowLabels = [];
+		labelGroup.all().forEach(label => {
+			rowLabels.push(label.label());
+		});
+
+		console.log(`Row index ${rowIndex} (${rowLabels.join(', ')})\n`);
+		rowIndex++;
+	});
+}
+```
 
 &nbsp;
 
@@ -468,46 +504,11 @@ cellCount(): number
 
 &nbsp;
 
-<a name="generator"></a>
-```js
-generator(size?: number): GridRangeChunk[]
-```
-Возвращает генератор, при каждом обращении возвращающий интерфейс [`GridRangeChunk`](#grid-range-chunk) размером *не более* `size` ячеек, позволяющий обрабатывать `GridRange` покусочно.
-
-Каждый возвращаемый [`GridRangeChunk`](#grid-range-chunk) содержит целое количество строк, т. е. все колонки `GridRange`, а количество строк в нём определяется по формуле `size / columnCount()`. Здесь используется целочисленное деление. Например, если в таблице `7` столбцов, а параметр `size` равен `100`, то генератор вернёт [`GridRangeChunk`](#grid-range-chunk) из `100 / 7 = 14` строк, в котором будет `7 * 14 = 98` ячеек.
-
-Значение аргумента `size` ограничено снизу значением `500` и сверху значением `5000`, поэтому в скриптах 1.0 [`невозможно`](../appendix/constraints.md#generator) работать с `GridRange` с б*О*льшим количеством столбцов. Значение по умолчанию: `500`.
-
-Типичный пример использования:
-
-```js
-let rowIndex = 0;
-
-for (const chunk of range.generator(1000)) {
-    chunk.rows().all().forEach(labelGroup => {
-        const rowLabels = [];
-        labelGroup.all().forEach(label => {
-            rowLabels.push(label.label());
-        });
-
-        console.log(`Row index ${rowIndex} (${rowLabels.join(', ')})\n`);
-        rowIndex++;
-    });
-}
-```
-
-&nbsp;
-
-```js
-rawData(): RawData;
-```
-Возвращает интерфейс [`RawData`](./rawData.md#raw-data) прямого доступа к данным диапазона таблицы.
-
-&nbsp;
-
 ### Интерфейс GridRangeChunk<a name="grid-range-chunk"></a>
 ```ts
 interface GridRangeChunk {
+	rawData(): RawData;
+	
 	cells(): Cells;
 	async cellsAsync(): Promise<Cells>;
 	
@@ -516,13 +517,18 @@ interface GridRangeChunk {
 	
 	columns(): Labels;
 	async columnsAsync(): Promise<Labels>;
-	
-	rawData(): ChunkRawData;
 }
 ```
 Интерфейс для обработки куска [`GridRange`](#grid-range).
 
 Работа асинхронных функций описана [`здесь`](./webHandlers.md#async).
+
+&nbsp;
+
+```js
+rawData(): RawData;
+```
+Возвращает интерфейс [`RawData`](./rawData.md#raw-data) прямого доступа к данным куска таблицы.
 
 &nbsp;
 
@@ -547,163 +553,6 @@ columns(): Labels
 async columnsAsync(): Promise<Labels>
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки столбцов.
-
-&nbsp;
-
-```js
-rawData(): RawData;
-```
-Возвращает интерфейс [`RawData`](./rawData.md#raw-data) прямого доступа к данным куска таблицы.
-
-&nbsp;
-
-### Интерфейс ChunkRawData<a name="chunk-raw-data"></a>
-```ts
-type RawHeaderData = {
-  label: string | null;
-  id: string | null;
-  longId: number;
-  parentLongId: number;
-  name?: string | null;
-  code?: string | null;
-};
-
-type RawHeaderKey = 'label' | 'id' | 'longId';
-
-type RawRow = Record<string, string | number | null>;
-
-type RowFullItem = {
-  headers: RawHeaderData[];
-  values: RawRow;
-};
-
-interface ChunkRawData {
-	columnsHeaders(): RawHeaderData[][];
-	rowsHeaders(): RawHeaderData[][];
-	
-	getColumnKey(): RawHeaderKey;
-	getRowKey(): RawHeaderKey;
-	
-	setColumnKey(value: RawHeaderKey): this;
-	setRowKey(value: RawHeaderKey): this;
-	
-	getMode(): string;
-	setModeText(): this;
-	setModeNativeValue(): this;
-	
-	getRawTexts(): (string | null)[][];
-	getRawNativeValues(): (string | number | null)[][];
-	
-	getRowsAsArray(): RawRow[];
-	getRowsAsObject(): Record<string, RawRow>;
-	getRowsAsItems(): RowFullItem[];
-}
-```
-Интерфейс быстрого чтения данных куска [`GridRangeChunk`](#grid-range-chunk). Варианты представления данных довольно разнообразные, и для осознания получаемых результатов нужно понимать, что они зависят от: [ключа строк](#chunk-raw-data.get-column-key), [ключа столбцов](#chunk-raw-data.get-row-key) и [режима представления ячеек](#chunk-raw-data.get-mode). ***Не*** позволяет записывать данные.
-
-&nbsp;
-
-```js
-columnsHeaders(): RawHeaderData[][];
-```
-Возвращает описание заголовков столбцов в виде массива, каждым элементом которого является массив объектов заголовков очередного столбца.
-
-&nbsp;
-
-```js
-rowsHeaders(): RawHeaderData[][];
-```
-Возвращает описание заголовков строк в виде массива, каждым элементом которого является массив объектов заголовков очередной строки.
-
-&nbsp;
-
-<a name="chunk-raw-data.get-column-key"></a>
-```js
-getColumnKey(): RawHeaderKey;
-```
-Возвращает текущее значение ключа для формирования заголовка ячейки при получении строки в виде объекта, что используется в функциях [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array), [`getRowsAsObject()`](#chunk-raw-data.get-rows-as-object) и [`getRowsAsItems()`](#chunk-raw-data.get-rows-as-items). Допустимые значения: `'label'`, `'id'`, `'longId'`. Значение по умолчанию: `'label'`.
-
-&nbsp;
-
-<a name="chunk-raw-data.get-row-key"></a>
-```js
-getRowKey(): RawHeaderKey;
-```
-Аналог `getColumnKey()` для строк.
-
-&nbsp;
-
-```js
-setColumnKey(value: RawHeaderKey): this;
-```
-Устанавливает значение ключа для столбцов. См. описание `getColumnKey()`. Возвращает `this`.
-
-&nbsp;
-
-```js
-setRowKey(value: RawHeaderKey): this;
-```
-Устанавливает значение ключа для строк. См. описание `getColumnKey()`. Возвращает `this`.
-
-&nbsp;
-
-<a name="chunk-raw-data.get-mode"></a>
-```js
-getMode(): string;
-```
-Возвращает режим представления ячеек, используемый функциями [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array), [`getRowsAsObject()`](#chunk-raw-data.get-rows-as-object) и [`getRowsAsItems()`](#chunk-raw-data.get-rows-as-items). Допустимые значения: `'Text'`, `'NativeValue'`. В зависимости от этого режима представления ячеек будут соответствовать тому, что возвращают функции: [`Сell.getTextValue()`](#cell.get-text-value), [`Сell.getNativeValue()`](#cell.get-native-value). Значение по умолчанию: `'Text'`.
-
-&nbsp;
-
-```js
-setModeText(): this;
-```
-Устанавливает значение режима представления ячеек в `'Text'`. Возвращает `this`.
-
-&nbsp;
-
-```js
-setModeNativeValue(): this;
-```
-Устанавливает значение режима представления ячеек в `'NativeValue'`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getRawTexts(): (string | null)[][];
-```
-Возвращает сырое содержимое куска [`GridRangeChunk`](#grid-range-chunk). Каждый внутренний массив соответствует одной строке и содержит *текст* ячеек этой строки. От значения [режима представления](#chunk-raw-data.get-mode) поведение функции не зависит.
-
-&nbsp;
-
-```js
-getRawNativeValues(): (string | number | null)[][];
-```
-Возвращает сырое содержимое куска [`GridRangeChunk`](#grid-range-chunk). Каждый внутренний массив соответствует одной строке и содержит *значения* ячеек этой строки. От значения [режима представления](#chunk-raw-data.get-mode) поведение функции не зависит.
-
-&nbsp;
-
-<a name="chunk-raw-data.get-rows-as-array"></a>
-```js
-getRowsAsArray(): RawRow[];
-```
-Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде массива объектов, где каждый элемент является объектом, представляющим строку, где ключом является установленное поле заголовка столбца. Если заголовков несколько, они объединяются в строку с разделителем `'.'`. Представление ячеек зависит от значения [режима представления](#chunk-raw-data.get-mode).
-
-&nbsp;
-
-<a name="chunk-raw-data.get-rows-as-object"></a>
-```js
-getRowsAsObject(): Record<string, RawRow>;
-```
-Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде объекта, где ключом является установленное поле заголовка строки (если заголовков несколько, они объединяются с разделителем `'.'`), а значением — такой же объект строки, какой возращает [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array). Представление ячеек зависит от значения [режима представления](#chunk-raw-data.get-mode).
-
-&nbsp;
-
-<a name="chunk-raw-data.get-rows-as-items"></a>
-```js
-getRowsAsItems(): RowFullItem[];
-```
-Возвращает содержимое куска [`GridRangeChunk`](#grid-range-chunk) в виде массива объектов, где в свойстве `headers` содержится массив заголовков строки, а в свойстве `values` — такой же объект строки, какой возращает [`getRowsAsArray()`](#chunk-raw-data.get-rows-as-array). Представление ячеек зависит от значения [режима представления](#chunk-raw-data.get-mode).
 
 &nbsp;
 
