@@ -360,7 +360,7 @@ label: string | null;
 ```js
 id: string | null;
 ```
-Неизвестно что.
+То же, что и `label`.
 
 &nbsp;
 
@@ -404,16 +404,16 @@ type HeaderDimension = {
 &nbsp;
 
 ```js
-label: string | null;
+name: string;
 ```
-Отображаемое название.
+Отображаемое название строки/столбца.
 
 &nbsp;
 
 ```js
-id: string | null;
+longId: number;
 ```
-То же, что и `label`.
+[`Long id`](./views.md#long-id) заголовка.
 
 &nbsp;
 
