@@ -454,15 +454,15 @@ generator(size?: number): GridRangeChunk[]
 let rowIndex = 0;
 
 for (const chunk of range.generator(1000)) {
-	chunk.rows().all().forEach(labelGroup => {
-		const rowLabels = [];
-		labelGroup.all().forEach(label => {
-			rowLabels.push(label.label());
-		});
+    chunk.rows().all().forEach(labelGroup => {
+        const rowLabels = [];
+        labelGroup.all().forEach(label => {
+            rowLabels.push(label.label());
+        });
 
-		console.log(`Row index ${rowIndex} (${rowLabels.join(', ')})\n`);
-		rowIndex++;
-	});
+        console.log(`Row index ${rowIndex} (${rowLabels.join(', ')})\n`);
+        rowIndex++;
+    });
 }
 ```
 
