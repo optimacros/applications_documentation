@@ -388,7 +388,7 @@ name?: string | null;
 ```js
 code?: string | null;
 ```
-Код заголовка – поле `'code'`.
+Код заголовка – поле `'Code'`.
 
 &nbsp;
 
