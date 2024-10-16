@@ -179,7 +179,7 @@ firstEmptyRowIndex(): number;
 refresh(): this;
 async refreshAsync(): Promise<this>;
 ```
-Обновляет **заголовки** и **данные** таблицы. Если инициализирован соответствующий [`RawDataWriter`](#raw-data-writer), вызывает его функцию [`refresh()`](#raw-data-writer.refresh). Возвращает `this`.
+Обновляет **заголовки** и **данные** таблицы после возможного изменения извне. Если инициализирован соответствующий [`RawDataWriter`](#raw-data-writer), вызывает его функцию [`refresh()`](#raw-data-writer.refresh). Возвращает `this`.
 
 &nbsp;
 
@@ -189,7 +189,7 @@ interface RawDataWriter {
 	columns(): GridDataHeader;
 	rows(): GridDataHeader;
 
-	set(rowIds: number[], columnIds: number[], value: string | number | bool | null): this;
+	set(rowLongIds: number[], columnLongIds: number[], value: string | number | bool | null): this;
 
 	apply(): this;
 	async applyAsync(): Promise<this>;
@@ -218,9 +218,9 @@ rows(): RawDataHeader;
 
 <a name="raw-data-writer.set"></a>
 ```js
-set(rowIds: number[], columnIds: number[], value: string | number | bool | null): this;
+set(rowLongIds: number[], columnLongIds: number[], value: string | number | bool | null): this;
 ```
-Устанавливает значение `value` для будущей записи в ячейку по адресу, определяемому через набор заголовков строки `rowIds` и столбца `columnIds`. Функция работает по принципу [`CellBuffer`](./common.md#cell-buffer) и **не** записывает данные в ячейку — это делает функция [`apply()`](#raw-data-writer.apply). Возвращает `this`.
+Устанавливает значение `value` для будущей записи в ячейку по адресу, определяемому через набор заголовков строки `rowLongIds` и столбца `columnLongIds`. Функция работает по принципу [`CellBuffer`](./common.md#cell-buffer) и **не** записывает данные в ячейку — это делает функция [`apply()`](#raw-data-writer.apply). Возвращает `this`.
 
 &nbsp;
 
@@ -239,7 +239,7 @@ async applyAsync(): Promise<this>;
 refresh(): this;
 async refreshAsync(): Promise<this>;
 ```
-Обновляет **только заголовки** таблицы. Если инициализирован соответствующий [`RawDataReader`](#raw-data-reader), вызывает его функцию [`refresh()`](#raw-data-reader.refresh). Возвращает `this`.
+Обновляет **только заголовки** таблицы после возможного изменения извне. Если инициализирован соответствующий [`RawDataReader`](#raw-data-reader), вызывает его функцию [`refresh()`](#raw-data-reader.refresh). Возвращает `this`.
 
 &nbsp;
 
@@ -315,14 +315,14 @@ getGluedHeaderIdentifiersByIndex(index: number, field: string, delim?: string): 
 ```js
 getLongIdsByIndex(index: number): number[] | null;
 ```
-Возвращает заголовок по индексу `index` в виде массива [`longId`](./views.md#long-id) всех измерений, или `null`, если индекс некорректный.
+Возвращает заголовок по индексу `index` в виде массива [`longId`](./views.md#long-id) элементов всех измерений, или `null`, если индекс некорректный.
 
 &nbsp;
 
 ```js
 getLongIdsByLabels(labels: string[]): number[] | null;
 ```
-Возвращает заголовок в виде массива [`longId`](./views.md#long-id) по переданным полям `label` (из объекта [`RawHeaderData`](#raw-header-data)) каждого измерения, или `null`, если заголовок не найден.
+Возвращает заголовок в виде массива [`longId`](./views.md#long-id) по переданным полям `label` (из объекта [`RawHeaderData`](#raw-header-data)) элементов каждого измерения, или `null`, если заголовок не найден.
 
 &nbsp;
 
