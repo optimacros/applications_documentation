@@ -360,7 +360,7 @@ label: string | null;
 ```js
 id: string | null;
 ```
-То же, что и `label`.
+Нативное название.
 
 &nbsp;
 
