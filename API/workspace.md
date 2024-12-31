@@ -21,7 +21,7 @@ files(): WorkspaceFiles;
 ```js
 ftpAsync(options: FTPOptions): FTPAsyncApi;
 ```
-Принимает на вход объект [`FTPOptions`](fs.md#ftp-async-api). Возвращает ссылку на интерфейс [`FTPAsyncApi`](fs.md#ftp-async-api-interface).
+Принимает на вход объект [`FTPOptions`](fs.md#ftp-async-api-options). Возвращает ссылку на интерфейс [`FTPAsyncApi`](fs.md#ftp-async-api-interface).
 
 &nbsp;
 

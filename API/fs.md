@@ -677,7 +677,7 @@ async listContentsAsync(path: string, recursive: boolean): Promise<FileMeta[]>;
 ```js
 async createDirAsync(path: string, recursive?: boolean): Promise<true>;
 ```
-Создаёт папку `path`. Если задан флаг `recursive`, создаёт промежуточные папки при необходимости. Возвращает признак успешного выполнения.
+Создаёт папку `path`. Если включен флаг `recursive`, создаёт промежуточные папки при необходимости. Возвращает признак успешного выполнения.
 
 &nbsp;
 
