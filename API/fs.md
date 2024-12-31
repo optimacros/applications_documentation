@@ -1,5 +1,10 @@
 # Файловые системы
 
+1. [Синхронные методы для работы с файловыми системами](#fs-sync)
+1. [Асинхронные методы для работы с FTP](#ftp-async-api)
+
+## Синхронные методы для работы с файловыми системами<a name="fs-sync"></a>
+
 ### Интерфейс Filesystems<a name="filesystems"></a>
 ```ts
 interface Filesystems {
@@ -14,7 +19,7 @@ interface Filesystems {
 &nbsp;
 
 ```js
-ftp(): FTPAdapter
+ftp(): FTPAdapter;
 ```
 Возвращает ссылку на интерфейс [`FTPAdapter`](#ftp-adapter) доступа к FTP.
 
@@ -22,14 +27,14 @@ ftp(): FTPAdapter
 
 <a name="local"></a>
 ```js
-local(): Filesystem
+local(): Filesystem;
 ```
 Возвращает ссылку на интерфейс [`Filesystem`](#filesystem) доступа к локальной файловой системе. Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***НЕ*** может выйти за её пределы.
 
 &nbsp;
 
 ```js
-sharedFolder(id: string): Filesystem
+sharedFolder(id: string): Filesystem;
 ```
 ***Не применимо в Application Manager.***
 
@@ -38,7 +43,7 @@ sharedFolder(id: string): Filesystem
 &nbsp; 
 
 ```js
-filesDataManager(): FilesDataManager
+filesDataManager(): FilesDataManager;
 ```
 Возвращает интерфейс [`FilesDataManager`](./csv.md#files-data-manager) работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
@@ -71,7 +76,7 @@ interface Filesystem {
 &nbsp;
 
 ```js
-has(path: string): boolean
+has(path: string): boolean;
 ```
 Возвращает признак существования файла/папки по адресу `path`.
 
@@ -79,98 +84,98 @@ has(path: string): boolean
 
 <a name="filesystem.read"></a>
 ```js
-read(path: string, encoding?: string): string
+read(path: string, encoding?: string): string;
 ```
 Читает целиком файл `path` в кодировке `encoding` (допустимые значения: `utf-8`, `win-1251`, значение по умолчанию: `utf-8`) и возвращает его содержимое.
 
 &nbsp;
 
 ```js
-readAndDelete(path: string, encoding?: string): string
+readAndDelete(path: string, encoding?: string): string;
 ```
 Делает то же, что функция [`read()`](#filesystem.read) и удаляет файл `path`.
 
 &nbsp;
 
 ```js
-write(path: string, contents: string): boolean
+write(path: string, contents: string): boolean;
 ```
 Если файла `path` не существует, создаёт его; при необходимости создаёт промежуточные папки. Затем записывает текст `contents` в файл `path` и возвращает признак успешного выполнения. 
 
 &nbsp;
 
 ```js
-delete(path: string): boolean
+delete(path: string): boolean;
 ```
 Удаляет файл `path`. Возвращает признак успешного выполнения. Если файл не существует, выбрасывает исключение.
 
 &nbsp;
 
 ```js
-rename(from: string, to: string): boolean
+rename(from: string, to: string): boolean;
 ```
 Переименовывает объект `from` в `to`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-copy(from: string, to: string): boolean
+copy(from: string, to: string): boolean;
 ```
 Копирует файл `from` в путь `to`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-getTimestamp(path: string): string
+getTimestamp(path: string): string;
 ```
 Возвращает время последнего изменения в формате [`Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
 &nbsp;
 
 ```js
-getSize(path: string): number | boolean
+getSize(path: string): number | boolean;
 ```
 Возвращает размер файла в байтах. Если `path` является папкой, возвращает `false`.
 
 &nbsp;
 
 ```js
-createDir(path: string): boolean
+createDir(path: string): boolean;
 ```
 Создаёт папку `path`; при необходимости создаёт промежуточные папки. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-deleteDir(path: string): boolean
+deleteDir(path: string): boolean;
 ```
 Удаляет папку `path`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-listContents(path: string, recursive: boolean): FileMeta[]
+listContents(path: string, recursive: boolean): FileMeta[];
 ```
 Возвращает массив интерфейсов [`FileMeta`](#file-meta), содержащих информацию об объектах внутри папки `path`. Если включен флаг `recursive`, возвращается также информация и о вложенных объектах.
 
 &nbsp;
 
 ```js
-getMetadata(path: string): Object
+getMetadata(path: string): Object;
 ```
 Возвращает объект с метаданными о файле/папке, аналогичный [`FileMeta`](#file-meta), однако часть полей может отсутствовать.
 
 &nbsp;
 
 ```js
-upload(from: string, to: string): boolean
+upload(from: string, to: string): boolean;
 ```
 Копирует файл `from` с [`локальной`](#local) файловой системы в путь `to` файловой системы `this`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-download(from: string, to: string): boolean
+download(from: string, to: string): boolean;
 ```
 Копирует файл `from` с файловой системы `this` в путь `to` [`локальной`](#local) файловой системы. Возвращает признак успешного выполнения.
 
@@ -178,7 +183,7 @@ download(from: string, to: string): boolean
 
 <a name="filesystem.make-global-file"></a>
 ```js
-makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string
+makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
 ```
 ***Не реализовано.***
 
@@ -187,7 +192,7 @@ makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): s
 &nbsp;
 
 ```js
-getPathObj(path: string): PathObj
+getPathObj(path: string): PathObj;
 ```
 Возвращает интерфейс [`PathObj`](#path-obj).
 
@@ -212,21 +217,21 @@ interface FileMeta {
 &nbsp;
 
 ```js
-type: string
+type: string;
 ```
 Тип объекта: `file` или `dir`.
 
 &nbsp;
 
 ```js
-path: string
+path: string;
 ```
 Путь к объекту в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
 &nbsp;
 
 ```js
-visibility: string
+visibility: string;
 ```
 ***Не реализовано.***
 
@@ -235,42 +240,42 @@ visibility: string
 &nbsp;
 
 ```js
-size: number
+size: number;
 ```
 У файла: размер в байтах. У папок поле отсутствует.
 
 &nbsp;
 
 ```js
-dirname: string
+dirname: string;
 ```
 Папка, в которой находится объект. Для объектов в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) это пустая строка.
 
 &nbsp;
 
 ```js
-basename: string
+basename: string;
 ```
 Имя объекта *с расширением*.
 
 &nbsp;
 
 ```js
-extension: string
+extension: string;
 ```
 Расширение имени без точки. Если расширения нет, поле отсутствует.
 
 &nbsp;
 
 ```js
-filename: string
+filename: string;
 ```
 Имя объекта (файла или папки) *без последней точки и расширения*.
 
 &nbsp;
 
 ```js
-timestamp: number
+timestamp: number;
 ```
 Время последнего изменения в [`формате Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
@@ -288,14 +293,14 @@ interface PathObj {
 &nbsp;
 
 ```js
-getSystem(): Filesystem
+getSystem(): Filesystem;
 ```
 Возвращает ссылку на файловую систему.
 
 &nbsp;
 
 ```js
-getPath(): string
+getPath(): string;
 ```
 Возвращает путь к файлу.
 
@@ -312,7 +317,7 @@ interface BaseAdapter {
 &nbsp;
 
 ```js
-load(): Filesystem
+load(): Filesystem;
 ```
 Возвращает объект файловой системы [`Filesystem`](#filesystem) с предварительно установленными настройками.
 
@@ -358,91 +363,91 @@ interface FTPAdapter extends BaseAdapter {
 &nbsp;
 
 ```js
-setHost(host: string): FTPAdapter
+setHost(host: string): FTPAdapter;
 ```
 Устанавливает адрес хоста. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getHost(): string
+getHost(): string;
 ```
 Возвращает адрес хоста.
 
 &nbsp;
 
 ```js
-setPort(port: number): FTPAdapter
+setPort(port: number): FTPAdapter;
 ```
 Устанавливает номер порта. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getPort(): number
+getPort(): number;
 ```
 Возвращает номер порта.
 
 &nbsp;
 
 ```js
-setUsername(username: string): FTPAdapter
+setUsername(username: string): FTPAdapter;
 ```
 Устанавливает имя пользователя. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getUsername(): string
+getUsername(): string;
 ```
 Возвращает имя пользователя.
 
 &nbsp;
 
 ```js
-setPassword(password: string): FTPAdapter
+setPassword(password: string): FTPAdapter;
 ```
 Устанавливает пароль. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getPassword(): string
+getPassword(): string;
 ```
 Возвращает пароль.
 
 &nbsp;
 
 ```js
-setRoot(root: string): FTPAdapter
+setRoot(root: string): FTPAdapter;
 ```
 Устанавливает начальный путь для работы с FTP. По умолчанию: `/`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getRoot(): string
+getRoot(): string;
 ```
 Возвращает начальный путь для работы с FTP.
 
 &nbsp;
 
 ```js
-setPassive(passive: boolean): FTPAdapter
+setPassive(passive: boolean): FTPAdapter;
 ```
 Устанавливает активный или пассивный режим соединения. По умолчанию: `true`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getPassive(): boolean
+getPassive(): boolean;
 ```
 Возвращает признак пассивности режима соединения.
 
 &nbsp;
 
 ```js
-setIgnorePassiveAddress(ignore: boolean) : FTPAdapter
+setIgnorePassiveAddress(ignore: boolean) : FTPAdapter;
 ```
 ***Не реализовано.***
 
@@ -452,7 +457,7 @@ setIgnorePassiveAddress(ignore: boolean) : FTPAdapter
 
 
 ```js
-getIgnorePassiveAddress(ignore: boolean) : boolean
+getIgnorePassiveAddress(ignore: boolean) : boolean;
 ```
 ***Не реализовано.***
 
@@ -461,35 +466,35 @@ getIgnorePassiveAddress(ignore: boolean) : boolean
 &nbsp;
 
 ```js
-setSsl(ssl: boolean): FTPAdapter
+setSsl(ssl: boolean): FTPAdapter;
 ```
 Устанавливает признак использования протокола [`SSL`](https://ru.wikipedia.org/wiki/SSL) поверх FTP ([`FTPS`](https://ru.wikipedia.org/wiki/FTPS)). По умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getSsl(): boolean
+getSsl(): boolean;
 ```
 Возвращает признак использования протокола SSL.
 
 &nbsp;
 
 ```js
-setTimeout(timeout: number): FTPAdapter
+setTimeout(timeout: number): FTPAdapter;
 ```
 Устанавливает таймаут подключения к серверу в секундах. По умолчанию: `30`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getTimeout(): number
+getTimeout(): number;
 ```
 Возвращает таймаут подключения к серверу в секундах.
 
 &nbsp;
 
 ```js
-setUseListOptions(useListOptions: boolean): FTPAdapter
+setUseListOptions(useListOptions: boolean): FTPAdapter;
 ```
 ***Не реализовано.***
 
@@ -498,11 +503,195 @@ setUseListOptions(useListOptions: boolean): FTPAdapter
 &nbsp;
 
 ```js
-getUseListOptions(): boolean
+getUseListOptions(): boolean;
 ```
 ***Не реализовано.***
 
 Возвращает признак использования флагов `-aln` у FTP-команды `LIST`.
+
+&nbsp;
+
+## Асинхронные методы для работы с FTP<a name="ftp-async-api"></a>
+
+### Тип FTPOptions<a name="ftp-async-api-options"></a>
+```ts
+type FTPOptions = {
+	host: string;
+	port: string | number;
+	username: string;
+	password: string;
+	useSsl: boolean;
+	timeout: number;
+};
+```
+Объект, содержащий описание параметров подключения к FTP.
+
+&nbsp;
+
+```js
+host: string;
+```
+Адрес хоста.
+
+&nbsp;
+
+```js
+port: string | number;
+```
+Номер порта.
+
+&nbsp;
+
+```js
+username: string;
+```
+Имя пользователя.
+
+&nbsp;
+
+```js
+password: string;
+```
+Пароль.
+
+&nbsp;
+
+```js
+useSsl: boolean;
+```
+Признак использования протокола [`SSL`](https://ru.wikipedia.org/wiki/SSL) поверх FTP ([`FTPS`](https://ru.wikipedia.org/wiki/FTPS)). По умолчанию: `false`.
+
+&nbsp;
+
+```js
+timeout: number;
+```
+Таймаут подключения к серверу в секундах. По умолчанию: `10`. 
+
+&nbsp;
+
+### Интерфейс FTPAsyncApi<a name="ftp-async-api-interface"></a>
+```ts
+interface FTPAsyncApi {
+	async isConnectedAsync(): Promise<boolean>;
+	async connectAsync(): Promise<boolean>;
+
+	async downloadFileAsBase64String(path: string): Promise<string>;
+	async uploadFileAsBase64String(path: string, content: string): Promise<boolean>;
+
+	async deleteAsync(path: string): Promise<true>;
+	async renameAsync(from: string, to: string): Promise<true>;
+
+	async hasAsync(path: string): Promise<boolean>;
+	async getMetadataAsync(path: string): Promise<FileMeta>;
+	async getTimestampAsync(path: string): Promise<number>;
+	async getSizeAsync(path: string): Promise<number>;
+	async listContentsAsync(path: string, recursive: boolean): Promise<FileMeta[]>;
+
+	async createDirAsync(path: string, recursive?: boolean): Promise<true>;
+	async deleteDirAsync(path: string): Promise<true>;
+	async deleteDirRecursiveAsync(path: string): Promise<true>;
+}
+```
+Интерфейс, группирующий асинхронные методы для работы с FTP без использования локальной файловой системы.
+
+&nbsp;
+
+```js
+async isConnectedAsync(): Promise<boolean>;
+```
+Возвращает признак установленного соединения.
+
+&nbsp;
+
+```js
+async connectAsync(): Promise<boolean>;
+```
+Устанавливает соединение с сервером по настройкам, переданным в объекте [`FTPOptions`](#ftp-async-api-options). Возвращает признак успешного соединения.
+
+&nbsp;
+
+```js
+async downloadFileAsBase64String(path: string): Promise<string>;
+```
+Читает бинарный файл, расположенный по пути `path` и возвращает данные в виде строки, закодированной по схеме [`base64`](https://ru.wikipedia.org/wiki/Base64).
+
+&nbsp;
+
+```js
+async uploadFileAsBase64String(path: string, content: string): Promise<boolean>;
+```
+Сохраняет бинарный файл по пути `path` с содержимым, раскодированным по схеме [`base64`](https://ru.wikipedia.org/wiki/Base64) из строки `content`. Если файл по пути `path` существует, он будет перезаписан. Возвращает признак успешного выполнения операции.
+
+&nbsp;
+
+```js
+async deleteAsync(path: string): Promise<true>;
+```
+Удаляет файл по пути `path`. Возвращает признак успешного выполнения. Если файл не существует, выбрасывает исключение.
+
+&nbsp;
+
+```js
+async renameAsync(from: string, to: string): Promise<true>;
+```
+Переименовывает объект `from` в `to`. Возвращает признак успешного выполнения.
+
+&nbsp;
+
+```js
+async hasAsync(path: string): Promise<boolean>;
+```
+Возвращает признак существования файла/папки по пути `path`.
+
+&nbsp;
+
+```js
+async getMetadataAsync(path: string): Promise<FileMeta>;
+```
+Возвращает объект с метаданными о файле/папке, аналогичный [`FileMeta`](#file-meta), однако часть полей может отсутствовать.
+
+&nbsp;
+
+```js
+async getTimestampAsync(path: string): Promise<number>;
+```
+Возвращает время последнего изменения в формате [`Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
+
+&nbsp;
+
+```js
+async getSizeAsync(path: string): Promise<number>;
+```
+Возвращает размер файла/папки в байтах.
+
+&nbsp;
+
+```js
+async listContentsAsync(path: string, recursive: boolean): Promise<FileMeta[]>;
+```
+Возвращает массив интерфейсов [`FileMeta`](#file-meta), содержащих информацию об объектах внутри папки `path`. Если включен флаг `recursive`, возвращается также информация и о вложенных объектах.
+
+&nbsp;
+
+```js
+async createDirAsync(path: string, recursive?: boolean): Promise<true>;
+```
+Создаёт папку `path`. Если задан флаг `recursive`, создаёт промежуточные папки при необходимости. Возвращает признак успешного выполнения.
+
+&nbsp;
+
+```js
+async deleteDirAsync(path: string): Promise<true>;
+```
+Удаляет папку `path`, если она пустая, иначе выбрасывает исключение. Возвращает признак успешного выполнения.
+
+&nbsp;
+
+```js
+async deleteDirRecursiveAsync(path: string): Promise<true>;
+```
+Удаляет папку `path`, рекурсивно удаляя ее содержимое. Возвращает признак успешного выполнения.
 
 &nbsp;
 
