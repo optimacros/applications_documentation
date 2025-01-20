@@ -692,7 +692,7 @@ async deleteDirAsync(path: string): Promise<true>;
 ```js
 async deleteDirRecursiveAsync(path: string): Promise<true>;
 ```
-Удаляет папку `path`, рекурсивно удаляя ее содержимое. Возвращает признак успешного выполнения.
+Удаляет папку `path`, рекурсивно удаляя её содержимое. Возвращает признак успешного выполнения.
 
 &nbsp;
 
