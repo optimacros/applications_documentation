@@ -38,6 +38,9 @@ interface OM {
 	readonly connectors: Connectors;
 	readonly notifications: Notifications.Manager;
 	readonly workspace: Workspace;
+
+	readonly isConnected: boolean;
+	closeAsync(): Promise<void>;
 }
 ```
 Интерфейс `OM` являет собой набор интерфейсов, предоставляющих API доступа к модели и воркспейсу.
@@ -125,6 +128,20 @@ readonly notifications: Notifications.Manager;
 readonly workspace: Workspace;
 ```
 Ссылка на интерфейс [`Workspace`](./workspace.md#workspace).
+
+&nbsp;
+
+```js
+readonly isConnected: boolean;
+```
+Признак установленного соединения с моделью.
+
+&nbsp;
+
+```js
+closeAsync(): Promise<void>;
+```
+Закрывает соединение с моделью.
 
 &nbsp;
 

@@ -1,14 +1,10 @@
 # Файловые системы
 
-1. [Синхронные методы для работы с файловыми системами](#fs-sync)
-1. [Асинхронные методы для работы с FTP](#ftp-async-api)
-
-## Синхронные методы для работы с файловыми системами<a name="fs-sync"></a>
-
 ### Интерфейс Filesystems<a name="filesystems"></a>
 ```ts
 interface Filesystems {
 	ftp(): FTPAdapter;
+	ftpAsync(options: FTPOptions): FTPAsyncApi;
 	local(): Filesystem;
 	sharedFolder(id: string): Filesystem;
 	filesDataManager(): FilesDataManager;
@@ -22,6 +18,13 @@ interface Filesystems {
 ftp(): FTPAdapter;
 ```
 Возвращает ссылку на интерфейс [`FTPAdapter`](#ftp-adapter) доступа к FTP.
+
+&nbsp;
+
+```js
+ftpAsync(options: FTPOptions): FTPAsyncApi;
+```
+Принимает на вход объект [`FTPOptions`](#ftp-async-api-options). Возвращает ссылку на интерфейс [`FTPAsyncApi`](#ftp-async-api), группирующий асинхронные методы для работы с FTP.
 
 &nbsp;
 
@@ -511,8 +514,6 @@ getUseListOptions(): boolean;
 
 &nbsp;
 
-## Асинхронные методы для работы с FTP<a name="ftp-async-api"></a>
-
 ### Тип FTPOptions<a name="ftp-async-api-options"></a>
 ```ts
 type FTPOptions = {
@@ -570,14 +571,14 @@ timeout: number;
 
 &nbsp;
 
-### Интерфейс FTPAsyncApi<a name="ftp-async-api-interface"></a>
+### Интерфейс FTPAsyncApi<a name="ftp-async-api"></a>
 ```ts
 interface FTPAsyncApi {
 	async isConnectedAsync(): Promise<boolean>;
 	async connectAsync(): Promise<boolean>;
 
-	async downloadFileAsBase64String(path: string): Promise<string>;
-	async uploadFileAsBase64String(path: string, content: string): Promise<boolean>;
+	async downloadFileAsBase64StringAsync(path: string): Promise<string>;
+	async uploadFileFromBase64StringAsync(path: string, content: string): Promise<boolean>;
 
 	async deleteAsync(path: string): Promise<true>;
 	async renameAsync(from: string, to: string): Promise<true>;
@@ -612,14 +613,14 @@ async connectAsync(): Promise<boolean>;
 &nbsp;
 
 ```js
-async downloadFileAsBase64String(path: string): Promise<string>;
+async downloadFileAsBase64StringAsync(path: string): Promise<string>;
 ```
 Читает бинарный файл, расположенный по пути `path` и возвращает данные в виде строки, закодированной по схеме [`base64`](https://ru.wikipedia.org/wiki/Base64).
 
 &nbsp;
 
 ```js
-async uploadFileAsBase64String(path: string, content: string): Promise<boolean>;
+async uploadFileFromBase64StringAsync(path: string, content: string): Promise<boolean>;
 ```
 Сохраняет бинарный файл по пути `path` с содержимым, раскодированным по схеме [`base64`](https://ru.wikipedia.org/wiki/Base64) из строки `content`. Если файл по пути `path` существует, он будет перезаписан. Возвращает признак успешного выполнения операции.
 

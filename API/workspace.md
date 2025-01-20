@@ -4,7 +4,6 @@
 ```ts
 interface Workspace {
 	files(): WorkspaceFiles;
-	ftpAsync(options: FTPOptions): FTPAsyncApi;
 }
 ```
 Интерфейс функций воркспейса, не связанных непосредственно с какой-то моделью.
@@ -15,13 +14,6 @@ interface Workspace {
 files(): WorkspaceFiles;
 ```
 Возвращает ссылку на интерфейс [`WorkspaceFiles`](#workspace-files).
-
-&nbsp;
-
-```js
-ftpAsync(options: FTPOptions): FTPAsyncApi;
-```
-Принимает на вход объект [`FTPOptions`](fs.md#ftp-async-api-options). Возвращает ссылку на интерфейс [`FTPAsyncApi`](fs.md#ftp-async-api-interface).
 
 &nbsp;
 
