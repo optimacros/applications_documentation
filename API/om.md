@@ -40,7 +40,8 @@ interface OM {
 	readonly workspace: Workspace;
 
 	readonly isConnected: boolean;
-	closeAsync(): Promise<void>;
+	close(): void;
+	async closeAsync(): Promise<void>;
 }
 ```
 Интерфейс `OM` являет собой набор интерфейсов, предоставляющих API доступа к модели и воркспейсу.
@@ -139,9 +140,10 @@ readonly isConnected: boolean;
 &nbsp;
 
 ```js
-closeAsync(): Promise<void>;
+close(): void
+async closeAsync(): Promise<void>
 ```
-Закрывает соединение с моделью.
+Закрывает соединение с моделью, а также все открытые связанные с ней сетевые соединения: с базами данных, с FTP-серверами.
 
 &nbsp;
 
