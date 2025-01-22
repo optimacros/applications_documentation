@@ -587,7 +587,7 @@ interface FTPAsyncApi {
 	async getMetadataAsync(path: string): Promise<FileMeta>;
 	async getTimestampAsync(path: string): Promise<number>;
 	async getSizeAsync(path: string): Promise<number>;
-	async listContentsAsync(path: string, recursive: boolean): Promise<FileMeta[]>;
+	async listContentsAsync(path: string, recursive?: boolean): Promise<FileMeta[]>;
 
 	async createDirAsync(path: string, recursive?: boolean): Promise<true>;
 	async deleteDirAsync(path: string): Promise<true>;
@@ -650,7 +650,7 @@ async hasAsync(path: string): Promise<boolean>;
 ```js
 async getMetadataAsync(path: string): Promise<FileMeta>;
 ```
-Возвращает объект с метаданными о файле/папке, аналогичный [`FileMeta`](#file-meta), однако часть полей может отсутствовать.
+Возвращает объект с метаданными о файле/папке, аналогичный [`FileMeta`](#file-meta).
 
 &nbsp;
 
@@ -669,7 +669,7 @@ async getSizeAsync(path: string): Promise<number>;
 &nbsp;
 
 ```js
-async listContentsAsync(path: string, recursive: boolean): Promise<FileMeta[]>;
+async listContentsAsync(path: string, recursive?: boolean): Promise<FileMeta[]>;
 ```
 Возвращает массив объектов [`FileMeta`](#file-meta), содержащих информацию об объектах внутри папки `path`. Если включен флаг `recursive` (значение по умолчанию: `false`), возвращается также информация и о вложенных объектах.
 
