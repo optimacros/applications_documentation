@@ -140,8 +140,8 @@ readonly isConnected: boolean;
 &nbsp;
 
 ```js
-close(): void
-async closeAsync(): Promise<void>
+close(): void;
+async closeAsync(): Promise<void>;
 ```
 Закрывает соединение с моделью, а также все открытые связанные с ней сетевые соединения: с базами данных, с FTP-серверами.
 
