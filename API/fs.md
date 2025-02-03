@@ -4,7 +4,7 @@
 ```ts
 interface Filesystems {
 	ftp(): FTPAdapter;
-	ftpAsync(options: FTPOptions): FTPAsyncApi;
+	ftpAsync(options: FTPOptions): FTPAsyncAdapter;
 	local(): Filesystem;
 	sharedFolder(id: string): Filesystem;
 	filesDataManager(): FilesDataManager;
@@ -22,9 +22,9 @@ ftp(): FTPAdapter;
 &nbsp;
 
 ```js
-ftpAsync(options: FTPOptions): FTPAsyncApi;
+ftpAsync(options: FTPOptions): FTPAsyncAdapter;
 ```
-Принимает на вход объект [`FTPOptions`](#ftp-async-api-options). Возвращает ссылку на интерфейс [`FTPAsyncApi`](#ftp-async-api), группирующий асинхронные методы для работы с FTP.
+Принимает на вход объект [`FTPOptions`](#ftp-async-adapter-options). Возвращает ссылку на интерфейс [`FTPAsyncAdapter`](#ftp-async-adapter), группирующий асинхронные методы для работы с FTP.
 
 &nbsp;
 
@@ -571,9 +571,9 @@ timeout: number;
 
 &nbsp;
 
-### Интерфейс FTPAsyncApi<a name="ftp-async-api"></a>
+### Интерфейс FTPAsyncAdapter<a name="ftp-async-adapter"></a>
 ```ts
-interface FTPAsyncApi {
+interface FTPAsyncAdapter {
 	async isConnectedAsync(): Promise<boolean>;
 	async connectAsync(): Promise<boolean>;
 
@@ -608,7 +608,7 @@ async isConnectedAsync(): Promise<boolean>;
 ```js
 async connectAsync(): Promise<boolean>;
 ```
-Устанавливает соединение с сервером по настройкам, переданным в объекте [`FTPOptions`](#ftp-async-api-options). Возвращает признак успешного соединения.
+Устанавливает соединение с сервером по настройкам, переданным в объекте [`FTPOptions`](#ftp-async-adapter-options). Возвращает признак успешного соединения.
 
 &nbsp;
 
