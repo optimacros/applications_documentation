@@ -18,9 +18,6 @@ export interface OMStatic {
 	connect(https: string, wss: string, token: string, modelId: string, env?: Object, ignoreSslErrors?: boolean): OM;
 	async connectAsync(https: string, wss: string, token: string, modelId: string, env?: Object, ignoreSslErrors?: boolean): Promise<OM>;
 	
-	close(): void;
-	async closeAsync(): Promise<void>;
-	
 	script(relativePathOrId: string, params: Object): EventPromise;
 	status(...args: any[]): OM;
 	web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
@@ -112,11 +109,7 @@ async OM.connectAsync(https: string, wss: string, token: string, modelId: string
 
 ### Закрытие соединения с моделью<a name="model-close"></a>
 
-```js
-close(): void
-async closeAsync(): Promise<void>
-```
-Закрывает соединение с моделью, а также все открытые связанные с ней сетевые соединения: с базами данных, с FTP-серверами.
+Методы закрытия соединения с моделью находятся в интерфейсе [`OM`](./om.md#om).
 
 &nbsp;
 
@@ -152,7 +145,7 @@ OM.status(...args: any[]): OM
 ## Веб-интерфейсы<a name="web-handlers"></a>
 
 ```js
-web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
+OM.web(eventName: string, callback: (request: OMWebRequest) => string | WebHandlerResponse): void;
 ```
 Создает веб-хендлер для взаимодействия с другими приложениями. Подробное описание [читать тут](./webHandlers.md).
 
