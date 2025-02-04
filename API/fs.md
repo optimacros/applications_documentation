@@ -24,7 +24,7 @@ ftp(): FTPAdapter;
 ```js
 ftpAsync(options: FTPOptions): FTPAsyncAdapter;
 ```
-Принимает на вход объект [`FTPOptions`](#ftp-async-adapter-options). Возвращает ссылку на интерфейс [`FTPAsyncAdapter`](#ftp-async-adapter), группирующий асинхронные методы для работы с FTP.
+Принимает на вход объект [`FTPOptions`](#ftp-options). Возвращает ссылку на интерфейс [`FTPAsyncAdapter`](#ftp-async-adapter), группирующий асинхронные методы для работы с FTP.
 
 &nbsp;
 
@@ -514,7 +514,7 @@ getUseListOptions(): boolean;
 
 &nbsp;
 
-### Тип FTPOptions<a name="ftp-async-api-options"></a>
+### Тип FTPOptions<a name="ftp-options"></a>
 ```ts
 type FTPOptions = {
 	host: string;
@@ -608,7 +608,7 @@ async isConnectedAsync(): Promise<boolean>;
 ```js
 async connectAsync(): Promise<boolean>;
 ```
-Устанавливает соединение с сервером по настройкам, переданным в объекте [`FTPOptions`](#ftp-async-adapter-options). Возвращает признак успешного соединения.
+Устанавливает соединение с сервером по настройкам, переданным в объекте [`FTPOptions`](#ftp-options). Возвращает признак успешного соединения.
 
 &nbsp;
 
