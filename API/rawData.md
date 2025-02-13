@@ -186,8 +186,8 @@ async refreshAsync(): Promise<this>;
 ### Интерфейс RawDataWriter<a name="raw-data-writer"></a>
 ```ts
 interface RawDataWriter {
-	columns(): GridDataHeader;
-	rows(): GridDataHeader;
+	columns(): RawDataHeader;
+	rows(): RawDataHeader;
 
 	set(rowLongIds: number[], columnLongIds: number[], value: string | number | bool | null): this;
 
