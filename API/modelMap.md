@@ -121,7 +121,7 @@ interface ListsMap {
 	propertiesOfLists(): ModelCollection;
 	subsetsOfLists(): ModelCollection;
 	subsetToParentListMap(): Object;
-	getPropertyFormula(longId: longId): string;
+	getPropertyFormula(longId: number): string;
 	toJSON(): Object;
 }
 ```
