@@ -38,6 +38,7 @@ interface OM {
 	readonly connectors: Connectors;
 	readonly notifications: Notifications.Manager;
 	readonly workspace: Workspace;
+	readonly utils: Utils;
 
 	readonly isConnected: boolean;
 	close(): void;
@@ -129,6 +130,13 @@ readonly notifications: Notifications.Manager;
 readonly workspace: Workspace;
 ```
 Ссылка на интерфейс [`Workspace`](./workspace.md#workspace).
+
+&nbsp;
+
+```js
+readonly utils: Utils;
+```
+Ссылка на интерфейс [`Utils`](./utils.md#utils).
 
 &nbsp;
 
