@@ -13,7 +13,7 @@ interface Utils {
 ```js
 postgreSQL: PostgreSQLConnector;
 ```
-Ссылка на интерфейс [`ScriptsTab`](./scriptsTab.md#scripts-tab).
+Ссылка на интерфейс [`PostgreSQLConnector`](#postgre-sql-connector).
 
 &nbsp;
 
@@ -26,10 +26,10 @@ interface PostgreSQLConnector {
 	setPort(value: number): this;
 	setDatabase(value: string): this;
 
-	async connectAsync(config?: PoolConfig): Promise<boolean>;
+	async connectAsync(config?: Object): Promise<boolean>;
 	async disconnectAsync(): Promise<void>;
 	async queryAsync(text: string, params: unknown[]): Promise<unknown>;
-	async transactionAsync<T>(callback: (client: PoolClient) => T): Promise<T | null>;
+	async transactionAsync<T>(async callback: (client: PoolClient) => T): Promise<T | null>;
 }
 ```
 Интерфейс для соединения с PostgreSQL. Является низкоуровневой обёрткой над официальным клиентом [`node-postgres`](https://node-postgres.com/).
@@ -72,9 +72,9 @@ setDatabase(value: string): this;
 &nbsp;
 
 ```js
-async connectAsync(config?: PoolConfig): Promise<boolean>;
+async connectAsync(config?: Object): Promise<boolean>;
 ```
-Устанавливает соединение с БД. Возвращает признак успешного соединения.
+Устанавливает соединение с БД. Указать настройки соединения можно либо поочерёдным вызовом функций `set...()`, либо передачей объекта `config`, поля которого описаны в [документации](https://node-postgres.com/apis/client) `node-postgres`. Если будут использованы оба способа, данные объекта `config` перезапишут данные, переданные через функции `set...()`. Возвращает признак успешного соединения или бросает исключение с текстом ошибки.
 
 &nbsp;
 
@@ -93,9 +93,9 @@ async queryAsync(text: string, params: unknown[]): Promise<unknown>;
 &nbsp;
 
 ```js
-async transactionAsync<T>(callback: (client: PoolClient) => T): Promise<T | null>;
+async transactionAsync<T>(async callback: (client: PoolClient) => T): Promise<T | null>;
 ```
-Выполняет [транзакцию](https://habr.com/ru/articles/537594/). Принимает в качестве аргумента функцию-колбек `callback` с единственным аргументом `client`, который после запуска `callback` будет содержать объект-аналог `this` с единственной функцией `query()`, почти полностью совпадающей с функцией `queryAsync()`. Единственное отличие заключается в том, что в результирующем JSON функции `PoolClient.query()` окажутся все поля из [документации](https://node-postgres.com/apis/result). Пример использования:
+Выполняет [транзакцию](https://habr.com/ru/articles/537594/). Принимает в качестве аргумента функцию-колбек `callback` с единственным аргументом `client`, который после запуска `callback` будет содержать объект-аналог `this` с единственной функцией `query()`, почти полностью совпадающей с функцией `queryAsync()`. Единственное отличие заключается в том, что в результирующем JSON функции `PoolClient.query()` окажутся все поля из [документации](https://node-postgres.com/apis/result) и, возможно, служебная информация. Пример использования:
 
 ```js
 const createCities = `

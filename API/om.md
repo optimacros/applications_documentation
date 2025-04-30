@@ -22,6 +22,8 @@
 	1. [WinAgent](winAgent.md)
 1. [Уведомление пользователя](notifications.md)
 1. [Цепочки скриптов](scriptChains.md)
+1. [Интерфейс Workspace](workspace.md)
+1. [Интерфейс Utils](utils.md)
 
 ### Интерфейс OM<a name="om"></a>
 ```ts
