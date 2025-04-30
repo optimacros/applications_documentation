@@ -88,7 +88,7 @@ async disconnectAsync(): Promise<void>;
 ```js
 async queryAsync(text: string, params: unknown[]): Promise<unknown>;
 ```
-Выполняет запрос к БД. Тело запроса содержится в параметре `text`, оно может быть параметризовано с помощью `params`. Если запрос успешный, возвращает JSON с тремя ключами: `rows`, `fileds`, `rowCount`, которые описаны в [документации](https://node-postgres.com/apis/result) `node-postgres`. Если запрос безуспешный, бросает исключение с текстом ошибки.
+Выполняет запрос к БД. Тело запроса содержится в параметре `text`, оно может быть параметризовано с помощью `params`. Если запрос успешный, возвращает JSON с тремя ключами: `rows`, `fields`, `rowCount`, которые описаны в [документации](https://node-postgres.com/apis/result) `node-postgres`. Если запрос безуспешный, бросает исключение с текстом ошибки.
 
 &nbsp;
 
