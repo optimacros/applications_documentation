@@ -3,7 +3,7 @@
 ## Интерфейс Utils<a name="utils"></a>
 ```ts
 interface Utils {
-	postgreSQL: PostgreSQLConnector;
+	postgreSQL: PostgreSqlConnector;
 }
 ```
 Интерфейс, группирующий интерфейсы, работающие вне воркспейса.
@@ -11,20 +11,21 @@ interface Utils {
 &nbsp;
 
 ```js
-postgreSQL: PostgreSQLConnector;
+postgreSQL: PostgreSqlConnector;
 ```
-Ссылка на интерфейс [`PostgreSQLConnector`](#postgre-sql-connector).
+Ссылка на интерфейс [`PostgreSqlConnector`](#postgre-sql-connector).
 
 &nbsp;
 
-### Интерфейс PostgreSQLConnector<a name="postgre-sql-connector"></a>
+### Интерфейс PostgreSqlConnector<a name="postgre-sql-connector"></a>
 ```ts
-interface PostgreSQLConnector {
+interface PostgreSqlConnector {
 	setUser(value: string): this;
 	setPassword(value: string): this;
 	setHost(value: string): this;
 	setPort(value: number): this;
 	setDatabase(value: string): this;
+
 
 	async connectAsync(config?: Object): Promise<boolean>;
 	async disconnectAsync(): Promise<void>;
