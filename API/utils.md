@@ -3,7 +3,7 @@
 ## Интерфейс Utils<a name="utils"></a>
 ```ts
 interface Utils {
-	postgreSQL: PostgreSqlConnector;
+	postgreSQL: PostgreSql;
 }
 ```
 Интерфейс, группирующий интерфейсы, работающие вне воркспейса.
@@ -11,9 +11,26 @@ interface Utils {
 &nbsp;
 
 ```js
-postgreSQL: PostgreSqlConnector;
+postgreSQL: PostgreSql;
 ```
-Ссылка на интерфейс [`PostgreSqlConnector`](#postgre-sql-connector).
+Ссылка на интерфейс [`PostgreSql`](#postgre-sql).
+
+&nbsp;
+
+## Интерфейс PostgreSql<a name="postgre-sql"></a>
+```ts
+interface PostgreSql {
+  createConnector(): PostgreSqlConnector;
+}
+```
+Интерфейс для взаимодействия с PostgreSQL.
+
+&nbsp;
+
+```js
+createConnector(): PostgreSqlConnector;
+```
+Возвращает ссылку на интерфейс [`PostgreSqlConnector`](#postgre-sql-connector).
 
 &nbsp;
 
@@ -26,11 +43,17 @@ interface PostgreSqlConnector {
 	setPort(value: number): this;
 	setDatabase(value: string): this;
 
+	showFullQueryResponse(value: boolean): this;
+
+	setTrace(value: boolean): void;
+	getLog(): string;
+	purgeLog(): void;
 
 	async connectAsync(config?: Object): Promise<boolean>;
 	async disconnectAsync(): Promise<void>;
-	async queryAsync(text: string, params: unknown[]): Promise<unknown>;
-	async transactionAsync<T>(async callback: (client: PoolClient) => T): Promise<T | null>;
+	
+	async queryAsync(text: string, params: unknown[], timeout?: number): Promise<QueryAsyncResponse | QueryResult>;
+	async transactionAsync<T>(async callback: (client: PoolClient) => T, timeout?: number): Promise<T>;
 }
 ```
 Интерфейс для соединения с PostgreSQL. Является низкоуровневой обёрткой над официальным клиентом [`node-postgres`](https://node-postgres.com/).
@@ -72,6 +95,35 @@ setDatabase(value: string): this;
 
 &nbsp;
 
+<a name="postgre-sql-connector.show-full-query-response"></a>
+```js
+showFullQueryResponse(value: boolean): this;
+```
+Устанавливает флаг полного показа ответа на запрос к БД функцией [`queryAsync()`](#postgre-sql-connector.query-async). Значение по умолчанию: `false`. Возвращает `this`.
+
+&nbsp;
+
+```js
+setTrace(value: boolean): void;
+```
+Устанавливает флаг ведения лога запросов. Значение по умолчанию: `true`. Возвращает `this`.
+
+&nbsp;
+
+```js
+getLog(): string;
+```
+Возвращает текст лога запросов.
+
+&nbsp;
+
+```js
+purgeLog(): void;
+```
+Очищает лог запросов.
+
+&nbsp;
+
 ```js
 async connectAsync(config?: Object): Promise<boolean>;
 ```
@@ -86,15 +138,16 @@ async disconnectAsync(): Promise<void>;
 
 &nbsp;
 
+<a name="postgre-sql-connector.query-async"></a>
 ```js
-async queryAsync(text: string, params: unknown[]): Promise<unknown>;
+async queryAsync(text: string, params: unknown[], timeout?: number): Promise<QueryAsyncResponse | QueryResult>;
 ```
-Выполняет запрос к БД. Тело запроса содержится в параметре `text`, оно может быть параметризовано с помощью `params`. Если запрос успешный, возвращает JSON с тремя ключами: `rows`, `fields`, `rowCount`, которые описаны в [документации](https://node-postgres.com/apis/result) `node-postgres`. Если запрос безуспешный, бросает исключение с текстом ошибки.
+Выполняет запрос к БД. Тело запроса содержится в параметре `text`, оно может быть параметризовано с помощью `params`. Необязательный параметр `timeout` задаёт количество миллисекунд на выполнение запроса; значение `0` отключает таймаут. Значение по умолчанию: `0`. Если запрос успешный, то в зависимости от [`showFullQueryResponse()`](#postgre-sql-connector.show-full-query-response) возвращает [`QueryAsyncResponse`](#query-async-response) или [`QueryResult`](#query-result). Если запрос безуспешный, бросает исключение с текстом ошибки. 
 
 &nbsp;
 
 ```js
-async transactionAsync<T>(async callback: (client: PoolClient) => T): Promise<T | null>;
+async transactionAsync<T>(async callback: (client: PoolClient) => T, timeout?: number): Promise<T>;
 ```
 Выполняет [транзакцию](https://habr.com/ru/articles/537594/). Принимает в качестве аргумента функцию-колбек `callback` с единственным аргументом `client`, который после запуска `callback` будет содержать объект-аналог `this` с единственной функцией `query()`, почти полностью совпадающей с функцией `queryAsync()`. Единственное отличие заключается в том, что в результирующем JSON функции `PoolClient.query()` окажутся все поля из [документации](https://node-postgres.com/apis/result) и, возможно, служебная информация. Пример использования:
 
@@ -120,6 +173,17 @@ const res = await sqlClient.transactionAsync(async (client) => {
 	return await client.query('SELECT * FROM cities WHERE name = ($1)', [cities[2][0]]);
 });
 ```
+
+&nbsp;
+
+### Интерфейс QueryResult<a name="query-result"></a>
+Интерфейс результата запроса. Соответствует интерфейсу `pg.Result` и описан в [документации](https://node-postgres.com/apis/result) на `node-postgres`.
+
+&nbsp;
+
+### Интерфейс QueryAsyncResponse<a name="query-async-response"></a>
+Интерфейс результата запроса. Соответствует интерфейсу [`QueryResult`](#query-result) без полей `'command'` и `'oid'`.
+
 
 &nbsp;
 
