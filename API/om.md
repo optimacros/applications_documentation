@@ -22,6 +22,8 @@
 	1. [WinAgent](winAgent.md)
 1. [Уведомление пользователя](notifications.md)
 1. [Цепочки скриптов](scriptChains.md)
+1. [Интерфейс Workspace](workspace.md)
+1. [Интерфейс Utils](utils.md)
 
 ### Интерфейс OM<a name="om"></a>
 ```ts
@@ -38,6 +40,7 @@ interface OM {
 	readonly connectors: Connectors;
 	readonly notifications: Notifications.Manager;
 	readonly workspace: Workspace;
+	readonly utils: Utils;
 
 	readonly isConnected: boolean;
 	close(): void;
@@ -129,6 +132,13 @@ readonly notifications: Notifications.Manager;
 readonly workspace: Workspace;
 ```
 Ссылка на интерфейс [`Workspace`](./workspace.md#workspace).
+
+&nbsp;
+
+```js
+readonly utils: Utils;
+```
+Ссылка на интерфейс [`Utils`](./utils.md#utils).
 
 &nbsp;
 
